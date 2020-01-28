@@ -9,11 +9,12 @@ namespace Sevens
     class Game
     {
         private  const int NUMBEROFPLAYERS = 4;
-        private Queue queue;
+
         private Player[] leaderboard;
         private int numberOfRounds;
         private int difficulty;
         private Board board;
+        private int THISISHORRIFICDESIGNCHANGELATER;
 
         public Game(int rounds, int difficultyInput)
         {
@@ -21,13 +22,14 @@ namespace Sevens
             numberOfRounds = rounds;
             difficulty = difficultyInput;
             board = new Board();
-            queue = new Queue();
+            THISISHORRIFICDESIGNCHANGELATER = 0;
+
         }
 
-      public String[] startGame() //deals all cards and returns the users cards
+      public Board startGame() //deals all cards (is this method needed??)
         {
             Deal();
-            return queue.getHumanPlayer().arrayOfCardsToArrayOfStrings(queue.getHumanPlayer().getCards());//player's hand
+            return board;
         }
 
         public void Deal()
@@ -37,20 +39,80 @@ namespace Sevens
  
             while (!deck.isEmpty())
             {
-                    queue.getNextPlayer().addToHand(deck.getNextCard());
+                    board.getQueue().getNextPlayer().addToHand(deck.getNextCard());
                    //loops through players, in order to add a card to each player in the queue's hands in turn
                 
             }
         }
-        public Board firstMove()
+        public Board firstMove() //repetition between here and play, combine into one method
         {
-            queue.findSeven();
-            board.Add(queue.getCurrentPlayer().Move());
-            return board;
+            board.getQueue().findSeven(); //move find seven method into board
+
+            Card cardToBePlayed = board.getQueue().getCurrentPlayer().getCardToBePlayed();
+
+            if (board.validMove(cardToBePlayed).Equals("y"))
+            {
+                board.Add(cardToBePlayed);
+                return board;
+            }
+            else if (board.validMove(cardToBePlayed).Equals("n"))
+            {
+                return board;
+            }
+            else
+            {
+                return null;
+            }
         }
         public Board Play()
         {
-            board.Add(queue.getNextPlayer().Move());
+            Card cardToBePlayed = board.getQueue().getNextPlayer().getCardToBePlayed();
+
+            if (board.validMove(cardToBePlayed).Equals("y")) {
+                board.Add(board.getQueue().getCurrentPlayer().Move());
+                return board;
+            }
+            else  if (board.validMove(cardToBePlayed).Equals("n"))
+            {
+                return board;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public Board humanPlay(String indexOfCard) //shouldn't need this i
+        {
+            board.Add(board.getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(indexOfCard)));
+            return board;
+        }
+
+        public Boolean isOver()
+        {
+            THISISHORRIFICDESIGNCHANGELATER++;
+
+            if (THISISHORRIFICDESIGNCHANGELATER < 1000)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+            //if (!(board.getQueue().isEmpty())) //currently infinite loop
+            //{
+            //    return false;
+            //}
+            //else
+            //{
+            //    return true;
+            //}
+        }
+
+        public Board getBoard()
+        {
             return board;
         }
     }

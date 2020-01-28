@@ -8,64 +8,139 @@ namespace Sevens
 {
     abstract class Player
     {
-        Card[] hand;
-        private const int NUMBEROFCARDS = 13;
-        private int currentsize;
+        List<Card> listOfCards;
 
         public Player()
         {
-            hand = new Card[NUMBEROFCARDS];
-            currentsize = 0; //holds the number of cards currently in hand
+            listOfCards = new List<Card>();
         }
 
         public void addToHand(Card newCard) //adds a card to the end of card queue
         {
-            hand[currentsize] = newCard;
-            currentsize++;
+            listOfCards.Add(newCard);
         }
 
         public Boolean CheckSevenDiamonds() //checks whether player's hand contains the 7 of diamonds
         {
-            for (int i = 0; i < NUMBEROFCARDS; i++)
+            foreach (Card card in listOfCards)
             {
-                if (hand[i].equalsSevenOfDiamonds()) {
+                if ((card.getValue() == 7) && (card.getSuit() == 0))
+                {
                     return true;
                 }
             }
+
             return false;
         }
 
-        public String[] arrayOfCardsToArrayOfStrings(Card[] hand) //returns a string of the user's cards
+        public String[] getStringArrayOfCards() //returns a string of the user's cards
         {
             String[] stringCards = new String[13];
+            int i = 0;
 
-            for (int i = 0; i < 13; i++)
+            foreach (Card card in listOfCards)
             {
-                stringCards[i] = hand[i].getStringSuit() + hand[i].getStringValue();
+                stringCards[i] = card.getStringSuit() + card.getStringValue();
+                i++;
             }
 
             return stringCards;
         }
 
-
-    //    public String[] orderCards()
-      //  {
-        //    HumanPlayer.MergeValue();
-     //   }
-
-        public Card[] getCards() //returns hand
+        public int getCurrentSize()
         {
-            return hand;
+            return listOfCards.Count;
+        }
+
+        //    public String[] orderCards()
+        //  {
+        //    HumanPlayer.MergeValue();
+        //   }
+
+        public List<Card> getCards() //returns hand
+        {
+            return listOfCards;
         }
         public abstract Card Move();
-        
-           
+        public abstract Card getCardToBePlayed();
+
 
         public Boolean CheckWin()
         {
             return false;
         }
 
+        public Card removeCard(Card cardToBeRemoved)
+        {
+            listOfCards.Remove(cardToBeRemoved);
+            return cardToBeRemoved;
+        }
 
+        public Card getCardAt(int index)
+        {
+            return listOfCards.ElementAt(index);
+        }
+
+        public void sortCards()
+        {
+            listOfCards = MergeSort(listOfCards);
+        }
+
+        private static List<Card> MergeSort(List<Card> unsorted)
+        {
+            if (unsorted.Count <= 1)
+                return unsorted;
+
+            List<Card> left = new List<Card>();
+            List<Card> right = new List<Card>();
+
+            int mid = unsorted.Count / 2;
+            for (int i = 0; i < mid; i++)  //Dividing the unsorted list
+            {
+                left.Add(unsorted.ElementAt(i));
+            }
+            for (int i = mid; i < unsorted.Count; i++)
+            {
+                right.Add(unsorted.ElementAt(i));
+            }
+
+            left = MergeSort(left);
+            right = MergeSort(right);
+            return Merge(left, right);
+        }
+
+        private static List<Card> Merge(List<Card> left, List<Card> right)
+        {
+            List<Card> result = new List<Card>();
+
+            while (left.Count > 0 || right.Count > 0)
+            {
+                if (left.Count > 0 && right.Count > 0)
+                {
+                    if (left.First().getValue() <= right.First().getValue())  //Comparing First two elements to see which has smaller value
+                    {
+                        result.Add(left.First());
+                        left.Remove(left.First());      //Rest of the list minus the first element
+                    }
+                    else
+                    {
+                        result.Add(right.First());
+                        right.Remove(right.First());
+                    }
+                }
+                else if (left.Count > 0)
+                {
+                    result.Add(left.First());
+                    left.Remove(left.First());
+                }
+                else if (right.Count > 0)
+                {
+                    result.Add(right.First());
+
+                    right.Remove(right.First());
+                }
+            }
+            return result;
+        }
     }
 }

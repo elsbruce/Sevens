@@ -9,9 +9,9 @@ namespace Sevens
     class Queue
     {
         private Player[] players;
-        private int head = 0;
-        private int tail = 0;
-        private int currentplayer = 0;
+        private int head;
+        private int tail;
+        private int currentplayer;
 
         public Queue()
         {
@@ -24,17 +24,29 @@ namespace Sevens
             }
             head = 0;
             tail = 4;
+            currentplayer = 0;
 
         }
 
-        public Player getNextPlayer()
+        public Player[] getQueue()
         {
-            currentplayer = (currentplayer + 1) % 4;
-            return players[currentplayer];
+            return players;
         }
-        
+
         public Player getCurrentPlayer()
         {
+            return players[currentplayer];
+        }
+
+        public int getCurrentPlayerIndex()
+        {
+            return currentplayer;
+        }
+        
+        public Player getNextPlayer()
+        {
+      //      int temp = currentplayer;
+            currentplayer = (currentplayer + 1) % tail;
             return players[currentplayer];
         }
 
@@ -54,6 +66,11 @@ namespace Sevens
         public Boolean isEmpty() //returns true if no players remain in queue
         {
             return false;
+        }
+
+        public void removePlayer(int positionOfPlayer)
+        {
+            tail = tail - 1;
         }
     }
 }
