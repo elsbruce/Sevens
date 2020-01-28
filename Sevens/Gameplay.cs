@@ -22,7 +22,7 @@ namespace Sevens
 
             update(sevens.firstMove());
 
-          //  PlayGame();
+            PlayGame();
         }
 
 
@@ -31,10 +31,8 @@ namespace Sevens
         {
             while (!(sevens.isOver()))
             {
-
                 Board b = sevens.Play();
                 Turn(b);
-
             }
         }
 
@@ -97,7 +95,7 @@ namespace Sevens
             }
 
             //updates player's cards
-
+            //DONE AT HOME
         }
 
         //public void lightUp(int whichPlayer) //outlines the card of the player currently moving

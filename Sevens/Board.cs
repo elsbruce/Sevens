@@ -108,9 +108,12 @@ namespace Sevens
         }
         public void sevenOfDiamonds()
         {
-            while (queue.getCurrentPlayer().CheckSevenDiamonds() != true)
+
+            Boolean sevenFound = false;
+
+            while (!(sevenFound)) //this is wrong but stops an infinite loop
             {
-                queue.getNextPlayer().CheckSevenDiamonds();
+                sevenFound = queue.getNextPlayer().CheckSevenDiamonds();
             }
 
             sevens[0] = true;

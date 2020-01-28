@@ -46,7 +46,7 @@ namespace Sevens
         }
         public Board firstMove() //repetition between here and play, combine into one method
         {
-            board.sevenOfDiamonds(); //move find seven method into board
+            board.sevenOfDiamonds(); 
             return board;
         }
         public Board Play()
@@ -77,7 +77,7 @@ namespace Sevens
         {
             THISISHORRIFICDESIGNCHANGELATER++;
 
-            if (THISISHORRIFICDESIGNCHANGELATER < 1000)
+            if (THISISHORRIFICDESIGNCHANGELATER < 10)
             {
                 return false;
             }
