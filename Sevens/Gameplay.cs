@@ -20,9 +20,9 @@ namespace Sevens
 
             setUp(sevens.startGame());
 
-            Turn(sevens.firstMove());
+            update(sevens.firstMove());
 
-            PlayGame();
+          //  PlayGame();
         }
 
 
@@ -82,10 +82,13 @@ namespace Sevens
         private void update(Board board)
         {
             //updates board
-            for (int suits = 0; suits < 4; suits++)
+            for (int suit = 0; suit < 4; suit++)
             {
-                cardPlaced(suits, board.getMin()[suits]);
-                cardPlaced(suits, board.getMax()[suits]);
+                if (board.getSevens()[suit] == true) //if the seven has been placed, then show other things
+                {
+                    cardPlaced(suit, board.getMin()[suit]);
+                    cardPlaced(suit, board.getMax()[suit]);
+                }
             }
 
             //updates size of other player's hands

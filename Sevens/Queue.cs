@@ -53,16 +53,7 @@ namespace Sevens
         public Player getHumanPlayer(){
             return players[0];
         }
-        
-        public void findSeven() //identifies which player has the seven of diamonds, and sets current player to the player before
-        {
-            currentplayer = 0;
-            while ((this.players[currentplayer].CheckSevenDiamonds()) != true)
-            {
-                currentplayer++;
-            }
-        }
-
+      
         public Boolean isEmpty() //returns true if no players remain in queue
         {
             return false;

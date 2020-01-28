@@ -26,6 +26,7 @@ namespace Sevens
             {
                 if ((card.getValue() == 7) && (card.getSuit() == 0))
                 {
+                    listOfCards.Remove(card);
                     return true;
                 }
             }

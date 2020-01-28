@@ -46,23 +46,8 @@ namespace Sevens
         }
         public Board firstMove() //repetition between here and play, combine into one method
         {
-            board.getQueue().findSeven(); //move find seven method into board
-
-            Card cardToBePlayed = board.getQueue().getCurrentPlayer().getCardToBePlayed();
-
-            if (board.validMove(cardToBePlayed).Equals("y"))
-            {
-                board.Add(cardToBePlayed);
-                return board;
-            }
-            else if (board.validMove(cardToBePlayed).Equals("n"))
-            {
-                return board;
-            }
-            else
-            {
-                return null;
-            }
+            board.sevenOfDiamonds(); //move find seven method into board
+            return board;
         }
         public Board Play()
         {

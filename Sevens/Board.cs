@@ -10,6 +10,8 @@ namespace Sevens
     {
         private int[] min;
         private int[] max;
+        private Boolean[] sevens;
+        private Boolean[] aces;
         private Queue queue;
         private int[] sizeOfPlayersHands;
         private System.Windows.Forms.Timer timer;
@@ -21,8 +23,10 @@ namespace Sevens
 
         public Board()
         {
-            min = new int[] { 7, 7, 7, 7 };
+            min = new int[] { 7, 7, 7, 7 }; //initialise all mins to 7
             max = new int[] { 7, 7, 7, 7 }; //initialise all maxs to 7
+            sevens = new bool[] { false, false, false, false };
+            aces = new bool[] { false, false, false, false };
             queue = new Queue();
             sizeOfPlayersHands = new int[4];
             timer = new System.Windows.Forms.Timer();
@@ -55,9 +59,17 @@ namespace Sevens
             return sizeOfPlayersHands;
         }
 
+        public Boolean[] getSevens()
+        {
+            return sevens;
+        }
+
         public void Add(Card card)
         {
-            if (card.getValue() < min[card.getSuit()])
+            if (card.getValue() == 7) {
+                sevens[card.getSuit()] = true;
+            }
+            else if (card.getValue() < min[card.getSuit()])
             {
                 min[card.getSuit()] = card.getValue();
             }
@@ -76,11 +88,11 @@ namespace Sevens
             {
                 return "null";
             }
-            else if (card.getValue() == (min[card.getSuit()] - 1))
+            else if ((sevens[card.getSuit()] == true) && (card.getValue() == (min[card.getSuit()] - 1)))
             {
                 return "y";
             }
-            else if (card.getValue() == (max[card.getSuit()] + 1))
+            else if ((sevens[card.getSuit()] == true) && (card.getValue() == (max[card.getSuit()] + 1)))
             {
                 return "y";
             }
@@ -94,9 +106,14 @@ namespace Sevens
             }
 
         }
-        public void removeCardFromHand()
+        public void sevenOfDiamonds()
         {
+            while (queue.getCurrentPlayer().CheckSevenDiamonds() != true)
+            {
+                queue.getNextPlayer().CheckSevenDiamonds();
+            }
 
+            sevens[0] = true;
         }
         /*
         public Boolean checkEnd()
