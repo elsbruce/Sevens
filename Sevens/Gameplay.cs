@@ -29,15 +29,25 @@ namespace Sevens
 
         private void PlayGame()
         {
-            while (!(sevens.isOver()))
-            {
-                Board b = sevens.Play();
-                Turn(b);
+
+
+            Board b;
+
+            b = sevens.Play();
+
+
+            while (!this.Turn(b)){
+
+              b=sevens.Play();
             }
+            
+                
+            
         }
 
-        private void Turn(Board b)
+        private Boolean Turn(Board b)
         {
+       
             if (b == null)
             {
                 // if returns null then switch buttons on
@@ -49,10 +59,12 @@ namespace Sevens
                 }
                 //get move
                 //then disable buttons
+                return true;
             }
             else
             {
                 update(b);
+                return false;
             }
         }
 
@@ -67,7 +79,7 @@ namespace Sevens
             }
             else
             {
-                DialogResult errorMessage = MessageBox.Show("This is not a valid move" + MessageBoxButtons.OK + MessageBoxIcon.Information);
+                DialogResult errorMessage = MessageBox.Show("This is not a valid move");
             }
 
             for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
@@ -177,7 +189,7 @@ namespace Sevens
         }
         private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e) //concerningly does seem to work
         {
-            Turn(sevens.Play());
+           // Turn(sevens.Play());
         }
 
         public TableLayoutPanel getTableLayoutPanel()
