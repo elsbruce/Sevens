@@ -57,6 +57,9 @@ namespace Sevens
                     playerHand[cardNumber].Enabled = true;
                     playerHand[cardNumber].Click += playerHand_Click;
                 }
+
+                SkipTurn.Enabled = true;
+                SkipTurn.Click += SkipTurn_Click;
                 //get move
                 //then disable buttons
                 return true;
@@ -106,7 +109,9 @@ namespace Sevens
                 otherPlayers[(playerNumber - 1)].Text = board.getSizeOfPlayersHands()[playerNumber].ToString(); ;
             }
 
-            //updates player's cards
+            //updates player's cards        
+
+
             //DONE AT HOME
         }
 
@@ -207,6 +212,9 @@ namespace Sevens
             
         }
 
-
+        private void SkipTurn_Click(object sender, EventArgs e)
+        {
+            PlayGame(); //SORT THIS OUT
+        }
     }
 }
