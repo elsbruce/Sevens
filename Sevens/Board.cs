@@ -18,7 +18,7 @@ namespace Sevens
 
         // diamonds 0, hearts 1, clubs 2, spades 3
 
-        //sort out timer, possibly increment aces in the same way as 7s?
+        //sort out timer
        
 
         public Board()
@@ -106,8 +106,8 @@ namespace Sevens
             }
 
         }
-        public void sevenOfDiamonds()
-        {
+        public void sevenOfDiamonds() 
+            {
 
             Boolean sevenFound = false;
 
@@ -118,19 +118,20 @@ namespace Sevens
 
             sevens[0] = true;
         }
-        /*
+        
         public Boolean checkEnd()
-        {
-            if ((min[0] == 2) && (min[1] == 2) && (min[2] == 2) && (min[3] == 2)) //incomplete, what about aces?
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+        {            
+                for (int i = 0; i < 4; i++)
+                {
+                    if ((min[i] != 2) | (max[i] != 13) | (sevens[i] != true) | (aces[i] != true))
+                {
+                    return false;
+                }
+                }
+            return true;
+     
         }
-        */
+        
         void timer_Tick(object sender, EventArgs e)
         {
 

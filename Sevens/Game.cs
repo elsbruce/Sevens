@@ -8,13 +8,12 @@ namespace Sevens
 {
     class Game
     {
-        private  const int NUMBEROFPLAYERS = 4;
+        private const int NUMBEROFPLAYERS = 4;
 
         private Player[] leaderboard;
         private int numberOfRounds;
         private int difficulty;
         private Board board;
-        private int THISISHORRIFICDESIGNCHANGELATER;
 
         public Game(int rounds, int difficultyInput)
         {
@@ -22,11 +21,10 @@ namespace Sevens
             numberOfRounds = rounds;
             difficulty = difficultyInput;
             board = new Board();
-            THISISHORRIFICDESIGNCHANGELATER = 0;
 
         }
 
-      public Board startGame() //deals all cards (is this method needed??)
+        public Board startGame() //deals all cards (is this method needed??)
         {
             Deal();
             return board;
@@ -36,30 +34,30 @@ namespace Sevens
         {
             Deck deck = new Deck();
             deck.Shuffle();
- 
+
             while (!deck.isEmpty())
             {
-                    board.getQueue().getNextPlayer().addToHand(deck.getNextCard());
-                   //loops through players, in order to add a card to each player in the queue's hands in turn
-                
+                board.getQueue().getNextPlayer().addToHand(deck.getNextCard());
+                //loops through players, in order to add a card to each player in the queue's hands in turn
+
             }
         }
         public Board firstMove() //repetition between here and play, combine into one method
         {
-            board.sevenOfDiamonds(); 
+            board.sevenOfDiamonds();
             return board;
         }
         public Board Play()
         {
-            Card cardToBePlayed = board.getQueue().getNextPlayer().getCardToBePlayed();
+            Card cardToBePlayed = board.getQueue().getNextPlayer().getCardToBePlayed(board);
 
             if (board.validMove(cardToBePlayed).Equals("y")) {
-                board.Add(board.getQueue().getCurrentPlayer().Move());
+                board.Add(board.getQueue().getCurrentPlayer().Move(board));
                 return board;
             }
-            else  if (board.validMove(cardToBePlayed).Equals("n"))
+            else if (board.validMove(cardToBePlayed).Equals("n"))
             {
-                board.Add(board.getQueue().getCurrentPlayer().Move()); //delete this
+             //   board.Add(board.getQueue().getCurrentPlayer().Move()); //delete this
                 return board;
             }
             else
@@ -68,38 +66,20 @@ namespace Sevens
             }
         }
 
-        public Board humanPlay(String indexOfCard) //shouldn't need this i
+        public Board humanPlay(String indexOfCard)
         {
             board.Add(board.getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(indexOfCard)));
             return board;
         }
 
-        public Boolean isOver()
-        {
-            THISISHORRIFICDESIGNCHANGELATER++;
-
-            if (THISISHORRIFICDESIGNCHANGELATER < 10)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-
-            //if (!(board.getQueue().isEmpty())) //currently infinite loop
-            //{
-            //    return false;
-            //}
-            //else
-            //{
-            //    return true;
-            //}
-        }
-
         public Board getBoard()
         {
             return board;
+        }
+
+        public Boolean isOver()
+        {
+            return board.checkEnd();
         }
     }
 }

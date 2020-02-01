@@ -9,12 +9,12 @@ namespace Sevens
     class HumanPlayer : Player
     {
 
-        public override Card Move()
+        public override Card Move(Board board)
         {
             return null;
         }
 
-        public override Card getCardToBePlayed()
+        public override Card getCardToBePlayed(Board board)
         {
             return null;
         }

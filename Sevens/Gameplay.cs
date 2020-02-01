@@ -11,7 +11,7 @@ namespace Sevens
         Label[] otherPlayers = new Label[3];
         Game sevens;
 
-        //when a button is pressed how to then return to the main body of code (not possible?)
+        //add check of whether game is over before next move
 
         public Gameplay(int numberOfRounds, int difficulty)
         {
@@ -39,10 +39,7 @@ namespace Sevens
             while (!this.Turn(b)){
 
               b=sevens.Play();
-            }
-            
-                
-            
+            }            
         }
 
         private Boolean Turn(Board b)
@@ -80,9 +77,9 @@ namespace Sevens
                 playerHand[Convert.ToInt32(s.Name)].Visible = false;
                 update(sevens.humanPlay(s.Name));
             }
-            else
+            else if ((sevens.getBoard().validMove(sevens.getBoard().getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(s.Name))).Equals("n")))
             {
-                DialogResult errorMessage = MessageBox.Show("This is not a valid move");
+                MessageBox.Show("This is not a valid move");
             }
 
             for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
@@ -110,9 +107,6 @@ namespace Sevens
             }
 
             //updates player's cards        
-
-
-            //DONE AT HOME
         }
 
         //public void lightUp(int whichPlayer) //outlines the card of the player currently moving
@@ -192,9 +186,9 @@ namespace Sevens
                 tablePanel.Controls.Add(temp, 15, (playerNumber-1));
             }
         }
-        private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e) //concerningly does seem to work
+        private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-           // Turn(sevens.Play());
+           
         }
 
         public TableLayoutPanel getTableLayoutPanel()
@@ -202,7 +196,7 @@ namespace Sevens
             return tablePanel;
         }
 
-        private void SortButton_Click(object sender, EventArgs e)
+        private void SortButton_Click(object sender, EventArgs e) //SORT OUT DISPLAY
         {
             sevens.getBoard().getQueue().getHumanPlayer().sortCards(); //calls merge sort
 

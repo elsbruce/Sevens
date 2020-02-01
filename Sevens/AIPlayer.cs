@@ -7,29 +7,25 @@ using System.Threading.Tasks;
 namespace Sevens
 {
     class AIPlayer : Player {
-      //  int index;
         public AIPlayer()
         {
-          //  index = 0; // temporary, will be deleted when AI is added
         }
-        public override Card Move()
+        public override Card Move(Board board)
         {
-            Card card = getCardToBePlayed();
+            Card card = getCardToBePlayed(board);
             playCard(card);
-         //   index = 0;
             return card;
         }
 
-        public override Card getCardToBePlayed() //AI will go here
+        public override Card getCardToBePlayed(Board board) //AI will go here
         {
-            //if (index < (base.getCurrentSize() - 1)) //-1 because first index is 0
-            //{
-            //    index++;
-            //}
-            //else
-            //{
-            //    index = 0;
-            //}
+            for (int i = 0; i < getCurrentSize(); i++)
+            {
+                if (board.validMove(base.getCardAt(i)) == "y")
+                {
+                    return base.getCardAt(i);
+                }
+            }
             return base.getCards().FirstOrDefault();
         }
 

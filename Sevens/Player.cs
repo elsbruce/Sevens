@@ -62,8 +62,8 @@ namespace Sevens
         {
             return listOfCards;
         }
-        public abstract Card Move();
-        public abstract Card getCardToBePlayed();
+        public abstract Card Move(Board board); //board being passed might be bad
+        public abstract Card getCardToBePlayed(Board board);
 
 
         public Boolean CheckWin()
