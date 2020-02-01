@@ -9,7 +9,7 @@ namespace Sevens
     class Queue
     {
         private Player[] players;
-        private int head;
+        private int head; //why have head and tail?
         private int tail;
         private int currentplayer;
 

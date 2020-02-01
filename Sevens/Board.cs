@@ -64,6 +64,11 @@ namespace Sevens
             return sevens;
         }
 
+        public Boolean[] getAces()
+        {
+            return aces;
+        }
+
         public void Add(Card card)
         {
             if (card.getValue() == 7) {

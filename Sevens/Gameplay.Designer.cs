@@ -68,7 +68,7 @@
             this.tablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.15709F));
             this.tablePanel.Size = new System.Drawing.Size(777, 447);
             this.tablePanel.TabIndex = 0;
-            this.tablePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.TableLayoutPanel1_Paint);
+            this.tablePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.TablePanel_Paint);
             // 
             // sortButton
             // 

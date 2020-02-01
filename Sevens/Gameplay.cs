@@ -71,15 +71,15 @@ namespace Sevens
         private void playerHand_Click(object sender, EventArgs e)
         {
             Button s = (Button)sender;
-
+            String moveIsValid = sevens.getBoard().validMove(sevens.getBoard().getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(s.Name)));
             //if move is valid then card button is hidden and card is added to board
-            if (sevens.getBoard().validMove(sevens.getBoard().getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(s.Name))).Equals("y")){
+            if (moveIsValid.Equals("y")){
                 playerHand[Convert.ToInt32(s.Name)].Visible = false;
                 update(sevens.humanPlay(s.Name));
             }
-            else if ((sevens.getBoard().validMove(sevens.getBoard().getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(s.Name))).Equals("n")))
+            else if ((moveIsValid.Equals("n")))
             {
-                MessageBox.Show("This is not a valid move");
+             //   MessageBox.Show("This is not a valid move");
             }
 
             for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
@@ -98,6 +98,8 @@ namespace Sevens
                 {
                     cardPlaced(suit, board.getMin()[suit]);
                     cardPlaced(suit, board.getMax()[suit]);
+
+                    //aces
                 }
             }
 
@@ -114,25 +116,7 @@ namespace Sevens
         //    otherPlayers[(whichPlayer-1)].BorderStyle = BorderStyle.Fixed3D;
         //}
 
-        private string convertToSuit(int suit) //probs shouldn't be in gameplay
-        {
-            if (suit == 0)
-            {
-                return "D";
-            }
-            else if (suit == 1)
-            {
-                return "H";
-            }
-            else if (suit == 2)
-            {
-                return "C";
-            }
-            else
-            {
-                return "S";
-            }
-        }
+ 
 
         private void cardPlaced(int suitCounter, int valueCounter)
         {
@@ -146,10 +130,10 @@ namespace Sevens
                 for (int valueCounter = 1; valueCounter < 15; valueCounter++)
                 {
                     PictureBox temp = new PictureBox();
-                    temp.BackgroundImage = Image.FromFile("../" + convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg"); //could move to card class
+                    temp.BackgroundImage = Image.FromFile("../" + sevens.convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg"); //could move to card class
                     temp.BackgroundImageLayout = ImageLayout.Zoom;
                     temp.Dock = DockStyle.Fill;
-                    temp.Name = (convertToSuit(suitCounter) + valueCounter.ToString());
+                    temp.Name = (sevens.convertToSuit(suitCounter) + valueCounter.ToString());
                     temp.Size = new Size(42, 68);
                     temp.Visible = false;
                     c[suitCounter, (valueCounter - 1)] = temp;
@@ -186,10 +170,6 @@ namespace Sevens
                 tablePanel.Controls.Add(temp, 15, (playerNumber-1));
             }
         }
-        private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-           
-        }
 
         public TableLayoutPanel getTableLayoutPanel()
         {
@@ -209,6 +189,11 @@ namespace Sevens
         private void SkipTurn_Click(object sender, EventArgs e)
         {
             PlayGame(); //SORT THIS OUT
+        }
+
+        private void TablePanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

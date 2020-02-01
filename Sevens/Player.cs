@@ -24,7 +24,7 @@ namespace Sevens
         {
             foreach (Card card in listOfCards)
             {
-                if ((card.getValue() == 7) && (card.getSuit() == 0))
+                if (card.equalsSevenOfDiamonds())
                 {
                     listOfCards.Remove(card);
                     return true;
@@ -53,23 +53,12 @@ namespace Sevens
             return listOfCards.Count;
         }
 
-        //    public String[] orderCards()
-        //  {
-        //    HumanPlayer.MergeValue();
-        //   }
-
         public List<Card> getCards() //returns hand
         {
             return listOfCards;
         }
-        public abstract Card Move(Board board); //board being passed might be bad
+        public abstract Card Move(Board board);
         public abstract Card getCardToBePlayed(Board board);
-
-
-        public Boolean CheckWin()
-        {
-            return false;
-        }
 
         public Card removeCard(Card cardToBeRemoved)
         {
@@ -112,36 +101,36 @@ namespace Sevens
 
         private static List<Card> Merge(List<Card> left, List<Card> right)
         {
-            List<Card> result = new List<Card>();
+            List<Card> mergedList = new List<Card>();
 
             while (left.Count > 0 || right.Count > 0)
             {
                 if (left.Count > 0 && right.Count > 0)
                 {
-                    if (left.First().getValue() <= right.First().getValue())  //Comparing First two elements to see which has smaller value
+                    if (left.First().getValue() <= right.First().getValue())  //compares first two elements to see which has smaller value
                     {
-                        result.Add(left.First());
-                        left.Remove(left.First());      //Rest of the list minus the first element
-                    }
+                        mergedList.Add(left.First());
+                        left.Remove(left.First());
+                    }//removes first element from left list and adds it to merged list
                     else
                     {
-                        result.Add(right.First());
+                        mergedList.Add(right.First());
                         right.Remove(right.First());
                     }
                 }
-                else if (left.Count > 0)
-                {
-                    result.Add(left.First());
-                    left.Remove(left.First());
-                }
-                else if (right.Count > 0)
-                {
-                    result.Add(right.First());
+                else if (left.Count > 0) //if right tree is empty, add first element of left tree
+                    {
+                        mergedList.Add(left.First());
+                        left.Remove(left.First());
+                    }
+                else if (right.Count > 0) //if left tree is empty add first element of right tree
+                    {
+                        mergedList.Add(right.First());
 
-                    right.Remove(right.First());
+                        right.Remove(right.First());
+                    }
                 }
+                return mergedList;
             }
-            return result;
         }
     }
-}

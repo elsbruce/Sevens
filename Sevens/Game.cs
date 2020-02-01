@@ -81,5 +81,25 @@ namespace Sevens
         {
             return board.checkEnd();
         }
+
+        public string convertToSuit(int suit) 
+        {
+            if (suit == 0)
+            {
+                return "D";
+            }
+            else if (suit == 1)
+            {
+                return "H";
+            }
+            else if (suit == 2)
+            {
+                return "C";
+            }
+            else
+            {
+                return "S";
+            }
+        }
     }
 }
