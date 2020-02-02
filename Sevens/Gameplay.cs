@@ -32,17 +32,19 @@ namespace Sevens
 
         private void PlayGame()
         {
+            if (!(sevens.isOver()))
+            {
+
+                Board b;
+                b = sevens.Play();
 
 
-            Board b;
+                while (!this.Turn(b))
+                {
 
-            b = sevens.Play();
-
-
-            while (!this.Turn(b)){
-
-              b=sevens.Play();
-            }            
+                    b = sevens.Play();
+                }
+            } 
         }
 
         private Boolean Turn(Board b)
@@ -207,7 +209,7 @@ namespace Sevens
 
         }
 
-        private void condenseSuit(int suit) //FINISH
+        private void condenseSuit(int suit) //add reference to this
         {
             for (int i = 0; i < 14; i++)
             {
