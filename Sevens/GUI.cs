@@ -68,5 +68,17 @@ namespace Sevens
         {
 
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Instructions_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Instructions i = new Instructions();
+            i.Show();
+        }
     }
 }

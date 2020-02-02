@@ -206,5 +206,20 @@ namespace Sevens
         {
 
         }
+
+        private void condenseSuit(int suit) //FINISH
+        {
+            for (int i = 0; i < 14; i++)
+            {
+                tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, suit));
+            }
+
+            Button suitComplete = new Button();
+            suitComplete.BackgroundImage = Image.FromFile("../" + sevens.convertToSuit(suit) + ".jpg");
+            suitComplete.BackgroundImageLayout = ImageLayout.Zoom;
+            suitComplete.Dock = DockStyle.Fill;
+            suitComplete.Size = new Size(42, 68);
+            tablePanel.Controls.Add(suitComplete, 7, suit);
+        }
     }
 }

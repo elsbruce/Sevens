@@ -36,6 +36,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.menu1 = new System.Windows.Forms.TableLayoutPanel();
+            this.loadPreviousGame = new System.Windows.Forms.Button();
+            this.Instructions = new System.Windows.Forms.Button();
             this.menu1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,6 +131,8 @@
             this.menu1.Controls.Add(this.Rounds, 0, 1);
             this.menu1.Controls.Add(this.Difficulty, 2, 1);
             this.menu1.Controls.Add(this.playButton, 1, 2);
+            this.menu1.Controls.Add(this.loadPreviousGame, 2, 2);
+            this.menu1.Controls.Add(this.Instructions, 0, 2);
             this.menu1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.menu1.Location = new System.Drawing.Point(0, 0);
             this.menu1.Name = "menu1";
@@ -140,6 +144,28 @@
             this.menu1.Size = new System.Drawing.Size(798, 553);
             this.menu1.TabIndex = 7;
             this.menu1.Paint += new System.Windows.Forms.PaintEventHandler(this.TableLayoutPanel1_Paint);
+            // 
+            // loadPreviousGame
+            // 
+            this.loadPreviousGame.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.loadPreviousGame.Location = new System.Drawing.Point(534, 505);
+            this.loadPreviousGame.Name = "loadPreviousGame";
+            this.loadPreviousGame.Size = new System.Drawing.Size(261, 23);
+            this.loadPreviousGame.TabIndex = 6;
+            this.loadPreviousGame.Text = "Resume previous game";
+            this.loadPreviousGame.UseVisualStyleBackColor = true;
+            this.loadPreviousGame.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // Instructions
+            // 
+            this.Instructions.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.Instructions.Location = new System.Drawing.Point(3, 505);
+            this.Instructions.Name = "Instructions";
+            this.Instructions.Size = new System.Drawing.Size(259, 23);
+            this.Instructions.TabIndex = 7;
+            this.Instructions.Text = "How to play";
+            this.Instructions.UseVisualStyleBackColor = true;
+            this.Instructions.Click += new System.EventHandler(this.Instructions_Click);
             // 
             // StartMenu
             // 
@@ -165,6 +191,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel menu1;
+        private System.Windows.Forms.Button loadPreviousGame;
+        private System.Windows.Forms.Button Instructions;
     }
 }
 
