@@ -68,7 +68,9 @@ namespace Sevens
 
         public Board humanPlay(String indexOfCard)
         {
-            board.Add(board.getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(indexOfCard)));
+            Card cardToBePlayed = board.getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(indexOfCard));
+            board.Add(cardToBePlayed);
+            board.getQueue().getHumanPlayer().removeCard(cardToBePlayed);
             return board;
         }
 

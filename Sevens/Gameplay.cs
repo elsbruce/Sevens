@@ -8,6 +8,7 @@ namespace Sevens
     {
         PictureBox[,] c = new PictureBox[4, 14];
         Button[] playerHand = new Button[13];
+        List<Button> playerHandLIST = new List<Button>(); //Increment players hand as a list of buttons? so cards can be removed
         Label[] otherPlayers = new Label[3];
         Game sevens;
 
@@ -21,6 +22,8 @@ namespace Sevens
             setUp(sevens.startGame());
 
             update(sevens.firstMove());
+
+            displayPlayersHand();
 
             PlayGame();
         }
@@ -141,19 +144,7 @@ namespace Sevens
                 }
             }
 
-            //displays user's hand
-            for (int cardNumber = 0; cardNumber < board.getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
-            {
-                Button temp = new Button();
-                temp.BackgroundImage = Image.FromFile("../" + board.getQueue().getHumanPlayer().getStringArrayOfCards()[cardNumber] + ".jpg");
-                temp.BackgroundImageLayout = ImageLayout.Zoom;
-                temp.Dock = DockStyle.Fill;
-                temp.Name = cardNumber.ToString();
-                temp.Size = new Size(42, 68);
-                temp.Enabled = false;
-                playerHand[cardNumber] = temp;
-                tablePanel.Controls.Add(temp, cardNumber, 5);
-            }
+
 
             //adds boxes for other players
             for (int playerNumber = 1; playerNumber < 4; playerNumber++)
@@ -171,6 +162,23 @@ namespace Sevens
             }
         }
 
+        public void displayPlayersHand()
+        {
+            //displays user's hand
+            for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
+            {
+                Button temp = new Button();
+                temp.BackgroundImage = Image.FromFile("../" + sevens.getBoard().getQueue().getHumanPlayer().getStringArrayOfCards()[cardNumber] + ".jpg");
+                temp.BackgroundImageLayout = ImageLayout.Zoom;
+                temp.Dock = DockStyle.Fill;
+                temp.Name = cardNumber.ToString();
+                temp.Size = new Size(42, 68);
+                temp.Enabled = false;
+                playerHand[cardNumber] = temp;
+                tablePanel.Controls.Add(temp, cardNumber, 5);
+            }
+        }
+
         public TableLayoutPanel getTableLayoutPanel()
         {
             return tablePanel;
@@ -178,10 +186,13 @@ namespace Sevens
 
         private void SortButton_Click(object sender, EventArgs e) //SORT OUT DISPLAY
         {
-            sevens.getBoard().getQueue().getHumanPlayer().sortCards(); //calls merge sort
 
-            tablePanel.Controls.Clear(); //only needs to clear player hand
-            setUp(sevens.getBoard());
+            for (int i = 0; i < 13; i++) {
+                tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
+            }
+
+            sevens.getBoard().getQueue().getHumanPlayer().sortCards(); //calls merge sort
+            displayPlayersHand();
             PlayGame();
             
         }
