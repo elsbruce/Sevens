@@ -74,6 +74,10 @@ namespace Sevens
             if (card.getValue() == 7) {
                 sevens[card.getSuit()] = true;
             }
+            else if ((card.getValue() == 14) && ((min[card.getSuit()] == 2) || (max[card.getSuit()] == 13))) //??????
+            {
+                aces[card.getSuit()] = true;
+            }
             else if (card.getValue() < min[card.getSuit()])
             {
                 min[card.getSuit()] = card.getValue();
@@ -103,6 +107,9 @@ namespace Sevens
             }
             else if (card.getValue() == 7)
             {
+                return "y";
+            }
+            else if ((card.getValue() == 14) && (min[card.getSuit()] == 2)){ //if aces is to be played low
                 return "y";
             }
             else

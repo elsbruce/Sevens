@@ -28,8 +28,6 @@ namespace Sevens
             PlayGame();
         }
 
-
-
         private void PlayGame()
         {
             if (!(sevens.isOver()))
@@ -68,6 +66,7 @@ namespace Sevens
             }
             else
             {
+                displayAITurn();
                 update(b);
                 return false;
             }
@@ -79,12 +78,17 @@ namespace Sevens
             String moveIsValid = sevens.getBoard().validMove(sevens.getBoard().getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(s.Name)));
             //if move is valid then card button is hidden and card is added to board
             if (moveIsValid.Equals("y")){
-                playerHand[Convert.ToInt32(s.Name)].Visible = false;
+                for (int i = 0; i < 13; i++)
+                {
+                    tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
+                }
+
                 update(sevens.humanPlay(s.Name));
+                displayPlayersHand();
             }
             else if ((moveIsValid.Equals("n")))
             {
-             //   MessageBox.Show("This is not a valid move");
+                MessageBox.Show("This is not a valid move");
             }
 
             for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
@@ -103,25 +107,44 @@ namespace Sevens
                 {
                     cardPlaced(suit, board.getMin()[suit]);
                     cardPlaced(suit, board.getMax()[suit]);
-
-                    //aces
+                }
+                if (board.getAces()[suit] == true)
+                {
+                    placeAce(suit);
                 }
             }
 
             //updates size of other player's hands
             for (int playerNumber = 1; playerNumber < 4; playerNumber++) {
                 otherPlayers[(playerNumber - 1)].Text = board.getSizeOfPlayersHands()[playerNumber].ToString(); ;
-            }
-
-            //updates player's cards        
+            }       
         }
 
-        //public void lightUp(int whichPlayer) //outlines the card of the player currently moving
-        //{
-        //    otherPlayers[(whichPlayer-1)].BorderStyle = BorderStyle.Fixed3D;
-        //}
+        public void displayAITurn() //outlines the card of the player currently moving for a short amount of time
+        {
+            //timer
 
- 
+            otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BorderStyle = BorderStyle.Fixed3D;
+
+        }
+
+        private void placeAce(int suit)
+        {
+            if (sevens.getBoard().getMin()[suit] == 2)
+            {
+                cardPlaced(suit, 1);
+
+                if (sevens.getBoard().getMax()[suit] == 13)
+                {
+                    condenseSuit(suit);
+                }
+            }
+            else if (sevens.getBoard().getMax()[suit] == 13)
+            {
+                cardPlaced(suit, 14);
+            }
+        }
+
 
         private void cardPlaced(int suitCounter, int valueCounter)
         {
@@ -145,8 +168,6 @@ namespace Sevens
                     tablePanel.Controls.Add(temp, (valueCounter-1), suitCounter);
                 }
             }
-
-
 
             //adds boxes for other players
             for (int playerNumber = 1; playerNumber < 4; playerNumber++)
