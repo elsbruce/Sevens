@@ -76,6 +76,18 @@ namespace Sevens
             listOfCards = MergeSort(listOfCards);
         }
 
+        public Boolean handEmpty()
+        {
+            if (listOfCards == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private static List<Card> MergeSort(List<Card> unsorted)
         {
             if (unsorted.Count <= 1)

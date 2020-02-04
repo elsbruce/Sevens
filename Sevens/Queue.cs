@@ -45,8 +45,8 @@ namespace Sevens
         
         public Player getNextPlayer()
         {
-      //      int temp = currentplayer;
             currentplayer = (currentplayer + 1) % tail;
+            playerFinished();
             return players[currentplayer];
         }
 
@@ -54,14 +54,30 @@ namespace Sevens
             return players[0];
         }
       
-        public Boolean isEmpty() //returns true if no players remain in queue
+        public Boolean isEmpty() //returns true if all players are dummy players
         {
-            return false;
+            for (int i = 0; i < 4; i++)
+            {
+                if (players[i] is DummyPlayer)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public void removePlayer(int positionOfPlayer)
         {
             tail = tail - 1;
         }
+
+        public void playerFinished()
+        {
+            if (getCurrentPlayer().handEmpty())
+            {
+                players[getCurrentPlayerIndex()] = new DummyPlayer();
+            }
+        }
+
     }
 }

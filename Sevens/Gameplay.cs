@@ -8,7 +8,6 @@ namespace Sevens
     {
         PictureBox[,] c = new PictureBox[4, 14];
         Button[] playerHand = new Button[13];
-        List<Button> playerHandLIST = new List<Button>(); //Increment players hand as a list of buttons? so cards can be removed
         Label[] otherPlayers = new Label[3];
         Game sevens;
 
@@ -30,7 +29,7 @@ namespace Sevens
 
         private void PlayGame()
         {
-            if (!(sevens.isOver()))
+            if (!(sevens.isOver()) && !(sevens.getBoard().getQueue().getHumanPlayer().handEmpty()))
             {
 
                 Board b;
@@ -42,7 +41,11 @@ namespace Sevens
 
                     b = sevens.Play();
                 }
-            } 
+            }
+            else if (sevens.getBoard().getQueue().getHumanPlayer().handEmpty())
+            {
+                playerWin();
+            }
         }
 
         private Boolean Turn(Board b)
@@ -58,8 +61,8 @@ namespace Sevens
                     playerHand[cardNumber].Click += playerHand_Click;
                 }
 
-                SkipTurn.Enabled = true;
-                SkipTurn.Click += SkipTurn_Click;
+                skipTurnButton.Enabled = true;
+             //   skipTurnButton.Click += SkipTurn_Click;
                 //get move
                 //then disable buttons
                 return true;
@@ -85,18 +88,21 @@ namespace Sevens
 
                 update(sevens.humanPlay(s.Name));
                 displayPlayersHand();
+                for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
+                {
+                    playerHand[cardNumber].Enabled = false;
+                }
+
+                PlayGame();
+
+
             }
             else if ((moveIsValid.Equals("n")))
             {
                 MessageBox.Show("This is not a valid move");
             }
 
-            for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
-            {
-                playerHand[cardNumber].Enabled = false;
-            }
-
-            PlayGame();
+            
         }
         private void update(Board board)
         {
@@ -223,6 +229,7 @@ namespace Sevens
         private void SkipTurn_Click(object sender, EventArgs e)
         {
             PlayGame(); //SORT THIS OUT
+        
         }
 
         private void TablePanel_Paint(object sender, PaintEventArgs e)
@@ -243,6 +250,16 @@ namespace Sevens
             suitComplete.Dock = DockStyle.Fill;
             suitComplete.Size = new Size(42, 68);
             tablePanel.Controls.Add(suitComplete, 7, suit);
+        }
+
+        private void PauseButton_Click(object sender, EventArgs e)
+        {
+            sevens.Pause();
+        }
+
+        private void playerWin()
+        {
+            MessageBox.Show("YOU WIN!");
         }
     }
 }

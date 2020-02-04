@@ -148,9 +148,18 @@ namespace Sevens
         {
 
         }
-        public void saveBoard()
+        public String toBeSaved()
         {
+            String board = "";
 
+            for (int i = 0; i < 4; i++)
+            {
+                board = board + min[i].ToString() + max[i].ToString() + "\\";
+            }
+
+           // board = board + getQueue().getHumanPlayer().getStringArrayOfCards() + getQueue().getCurrentPlayer().getStringArrayOfCards();
+
+            return board;
         }
     }
 }

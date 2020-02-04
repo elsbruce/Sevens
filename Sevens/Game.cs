@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,7 +58,7 @@ namespace Sevens
             }
             else if (board.validMove(cardToBePlayed).Equals("n"))
             {
-             //   board.Add(board.getQueue().getCurrentPlayer().Move()); //delete this
+             
                 return board;
             }
             else
@@ -71,6 +72,7 @@ namespace Sevens
             Card cardToBePlayed = board.getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(indexOfCard));
             board.Add(cardToBePlayed);
             board.getQueue().getHumanPlayer().removeCard(cardToBePlayed);
+
             return board;
         }
 
@@ -101,6 +103,16 @@ namespace Sevens
             else
             {
                 return "S";
+            }
+        }
+
+        public void Pause()
+        {
+            string pathToFile = @"D:\gameState.txt";
+
+            using (StreamWriter streamWrite = File.CreateText(pathToFile))
+            {
+                streamWrite.WriteLine(board.toBeSaved());
             }
         }
     }
