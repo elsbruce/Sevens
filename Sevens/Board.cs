@@ -154,10 +154,21 @@ namespace Sevens
 
             for (int i = 0; i < 4; i++)
             {
-                board = board + min[i].ToString() + max[i].ToString() + "\\";
+                board = board + min[i].ToString() + max[i].ToString() + "//";
             }
 
-           // board = board + getQueue().getHumanPlayer().getStringArrayOfCards() + getQueue().getCurrentPlayer().getStringArrayOfCards();
+            foreach (Player p in getQueue().getQueue()) //if dummyplayers
+            {
+                foreach (String s in p.getStringArrayOfCards())
+                {
+
+                    board = board + s + "/";
+                }
+
+                board = board + "<>";
+            }
+
+            board = board + getQueue().getCurrentPlayerIndex().ToString();
 
             return board;
         }

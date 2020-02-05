@@ -11,8 +11,6 @@ namespace Sevens
         Label[] otherPlayers = new Label[3];
         Game sevens;
 
-        //add check of whether game is over before next move
-
         public Gameplay(int numberOfRounds, int difficulty)
         {
             sevens = new Game(numberOfRounds, difficulty);
@@ -54,7 +52,6 @@ namespace Sevens
             if (b == null)
             {
                 // if returns null then switch buttons on
-                //timer.Start();
                 for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
                 {
                     playerHand[cardNumber].Enabled = true;
@@ -62,7 +59,6 @@ namespace Sevens
                 }
 
                 skipTurnButton.Enabled = true;
-             //   skipTurnButton.Click += SkipTurn_Click;
                 //get move
                 //then disable buttons
                 return true;
@@ -213,7 +209,7 @@ namespace Sevens
             return tablePanel;
         }
 
-        private void SortButton_Click(object sender, EventArgs e) //SORT OUT DISPLAY
+        private void SortButton_Click(object sender, EventArgs e) //return to game
         {
 
             for (int i = 0; i < 13; i++) {
@@ -222,13 +218,11 @@ namespace Sevens
 
             sevens.getBoard().getQueue().getHumanPlayer().sortCards(); //calls merge sort
             displayPlayersHand();
-            PlayGame();
-            
         }
 
         private void SkipTurn_Click(object sender, EventArgs e)
         {
-            PlayGame(); //SORT THIS OUT
+            PlayGame();
         
         }
 
@@ -237,7 +231,7 @@ namespace Sevens
 
         }
 
-        private void condenseSuit(int suit) //add reference to this
+        private void condenseSuit(int suit)
         {
             for (int i = 0; i < 14; i++)
             {
@@ -255,6 +249,10 @@ namespace Sevens
         private void PauseButton_Click(object sender, EventArgs e)
         {
             sevens.Pause();
+            this.Hide();
+            StartMenu startMenu = new StartMenu();
+            startMenu.Show();
+
         }
 
         private void playerWin()
