@@ -143,7 +143,7 @@
             this.menu1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.menu1.Size = new System.Drawing.Size(798, 553);
             this.menu1.TabIndex = 7;
-            this.menu1.Paint += new System.Windows.Forms.PaintEventHandler(this.TableLayoutPanel1_Paint);
+         
             // 
             // loadPreviousGame
             // 

@@ -51,6 +51,7 @@
     <Compile Include="Card.cs" />
     <Compile Include="Deck.cs" />
     <Compile Include="DummyPlayer.cs" />
+    <Compile Include="EasyPlayer.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Gameplay.cs">
       <SubType>Form</SubType>

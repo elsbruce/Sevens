@@ -6,9 +6,18 @@ using System.Threading.Tasks;
 
 namespace Sevens
 {
-    class AIPlayer : Player {
-        public AIPlayer()
+    abstract class AIPlayer : Player {
+
+        private List<Card> possibleMoves; //do i need this??
+        public AIPlayer(int difficulty)
         {
+            possibleMoves = new List<Card>();
+
+            if (difficulty == 1)
+            {
+                
+            }
+
         }
         public override Card Move(Board board)
         {
@@ -17,23 +26,25 @@ namespace Sevens
             return card;
         }
 
-        public override Card getCardToBePlayed(Board board) //AI will go here
-        {
-            for (int i = 0; i < getCurrentSize(); i++)
-            {
-                if (board.validMove(base.getCardAt(i)) == "y")
-                {
-                    return base.getCardAt(i);
-                }
-            }
-            return base.getCards().FirstOrDefault();
-        }
+        public override Card getCardToBePlayed(Board board); //AI will go here
+      
 
         public void playCard(Card cardToBePlayed)
         {
             removeCard(cardToBePlayed);
         }
 
-        
+        protected List<Card> getPossibleMoves(Board board)
+        {
+            for (int i = 0; i < getCurrentSize(); i++)
+            {
+                if (board.validMove(base.getCardAt(i)) == "y")
+                {
+                    possibleMoves.Add(base.getCardAt(i));
+                }
+            }
+
+            return possibleMoves;
+        }
     }
     }

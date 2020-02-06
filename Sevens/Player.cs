@@ -78,7 +78,7 @@ namespace Sevens
 
         public Boolean handEmpty()
         {
-            if (listOfCards == null)
+            if (listOfCards.Count == 0)
             {
                 return true;
             }

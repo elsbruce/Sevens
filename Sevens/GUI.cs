@@ -33,10 +33,16 @@ namespace Sevens
         {
             // ADD VALIDATION
 
-            this.Hide();
-            Gameplay gp = new Gameplay(Rounds.SelectedIndex, Difficulty.SelectedIndex);
-            gp.Show();
-
+            if ((Rounds.SelectedIndex == -1) || (Difficulty.SelectedIndex == -1))
+            {
+                MessageBox.Show("Please select a number of rounds and a difficulty level");
+            }
+            else
+            {
+                this.Hide();
+                Gameplay gp = new Gameplay(Rounds.SelectedIndex, Difficulty.SelectedIndex);
+                gp.Show();
+            }
         }
 
         private void Rounds_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,10 +70,6 @@ namespace Sevens
 
         }
 
-        private void TableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void Button1_Click(object sender, EventArgs e)
         {
