@@ -65,7 +65,7 @@ namespace Sevens
         public Player getNextPlayer()
         {
             currentplayer = (currentplayer + 1) % tail;
-            playerFinished();
+            //playerFinished(); //implement this at some point
             return players[currentplayer];
         }
 

@@ -15,7 +15,7 @@ namespace Sevens
 
         public override Card getCardToBePlayed(Board board)
         {
-            Card dummyCard = new Card(-1, -1);
+            Card dummyCard = new Card(92, 92);
             return dummyCard;
         }
 

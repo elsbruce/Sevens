@@ -160,7 +160,8 @@ namespace Sevens
                 for (int valueCounter = 1; valueCounter < 15; valueCounter++)
                 {
                     PictureBox temp = new PictureBox();
-                    temp.BackgroundImage = Image.FromFile("../" + sevens.convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg"); //could move to card class
+                    string cardName = sevens.convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg";
+                    temp.BackgroundImage = Image.FromFile("C:\\Users\\K033994\\Source\\Repos\\Sevens\\Sevens\\images\\"+cardName);
                     temp.BackgroundImageLayout = ImageLayout.Zoom;
                     temp.Dock = DockStyle.Fill;
                     temp.Name = (sevens.convertToSuit(suitCounter) + valueCounter.ToString());
@@ -175,7 +176,7 @@ namespace Sevens
             for (int playerNumber = 1; playerNumber < 4; playerNumber++)
             {
                 Label temp = new Label();
-                temp.BackgroundImage = Image.FromFile("../P" + playerNumber + ".jpg");
+                temp.BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject("P" + playerNumber);
                 temp.BackgroundImageLayout = ImageLayout.Zoom;
                 temp.Dock = DockStyle.Fill;
                 temp.Name = "Player" + playerNumber;
@@ -193,7 +194,7 @@ namespace Sevens
             for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
             {
                 Button temp = new Button();
-                temp.BackgroundImage = Image.FromFile("../" + sevens.getBoard().getQueue().getHumanPlayer().getStringArrayOfCards()[cardNumber] + ".jpg");
+                temp.BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject(sevens.getBoard().getQueue().getHumanPlayer().getStringArrayOfCards()[cardNumber]);
                 temp.BackgroundImageLayout = ImageLayout.Zoom;
                 temp.Dock = DockStyle.Fill;
                 temp.Name = cardNumber.ToString();
@@ -239,7 +240,7 @@ namespace Sevens
             }
 
             Button suitComplete = new Button();
-            suitComplete.BackgroundImage = Image.FromFile("../" + sevens.convertToSuit(suit) + ".jpg");
+            suitComplete.BackgroundImage = (Bitmap)Properties.Resources.ResourceManager.GetObject(sevens.convertToSuit(suit) + ".jpg");
             suitComplete.BackgroundImageLayout = ImageLayout.Zoom;
             suitComplete.Dock = DockStyle.Fill;
             suitComplete.Size = new Size(42, 68);
