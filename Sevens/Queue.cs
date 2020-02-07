@@ -13,15 +13,34 @@ namespace Sevens
         private int tail;
         private int currentplayer;
 
-        public Queue()
+        public Queue(int difficultyInput)
         {
 
             players = new Player[4];
             players[0] = new HumanPlayer(); //human player
-            for (int x = 1; x < 4; x++)
+
+            if (difficultyInput == 0)
             {
-                players[x] = new AIPlayer(); //add 3 AI players
+                for (int x = 1; x < 4; x++)
+                {
+                    players[x] = new EasyPlayer(); //add 3 Easy AI players
+                }
             }
+            else if (difficultyInput == 1)
+            {
+                for (int x = 1; x < 4; x++)
+                {
+                    players[x] = new MediumPlayer(); //add 3 Medium AI players
+                }
+            }
+            else
+            {
+                for (int x = 1; x < 4; x++)
+                {
+                    players[x] = new DifficultPlayer(); //add 3 Difficult AI players
+                }
+            }
+
             head = 0;
             tail = 4;
             currentplayer = 0;

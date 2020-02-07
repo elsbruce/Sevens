@@ -21,7 +21,7 @@ namespace Sevens
             leaderboard = new Player[NUMBEROFPLAYERS];
             numberOfRounds = rounds;
             difficulty = difficultyInput;
-            board = new Board();
+            board = new Board(difficultyInput);
 
         }
 

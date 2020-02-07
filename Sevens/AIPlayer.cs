@@ -8,16 +8,9 @@ namespace Sevens
 {
     abstract class AIPlayer : Player {
 
-        private List<Card> possibleMoves; //do i need this??
-        public AIPlayer(int difficulty)
+        public AIPlayer()
         {
-            possibleMoves = new List<Card>();
-
-            if (difficulty == 1)
-            {
-                
-            }
-
+           
         }
         public override Card Move(Board board)
         {
@@ -26,8 +19,7 @@ namespace Sevens
             return card;
         }
 
-        public override Card getCardToBePlayed(Board board); //AI will go here
-      
+
 
         public void playCard(Card cardToBePlayed)
         {
@@ -36,6 +28,8 @@ namespace Sevens
 
         protected List<Card> getPossibleMoves(Board board)
         {
+            List<Card> possibleMoves = new List<Card>();
+
             for (int i = 0; i < getCurrentSize(); i++)
             {
                 if (board.validMove(base.getCardAt(i)) == "y")

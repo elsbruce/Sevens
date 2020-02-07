@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Sevens
 {
-    class EasyPlayer : AIPlayer
+    class DifficultPlayer : AIPlayer
     {
-        public EasyPlayer()
+
+        public DifficultPlayer()
         {
 
         }
 
         public override Card getCardToBePlayed(Board board)
-
-        //random returning first card??
         {
-            List<Card> possibleMoves = getPossibleMoves(board);
+
+        List<Card> possibleMoves = getPossibleMoves(board);
 
             if (possibleMoves.Count == 0)
             {
@@ -28,6 +28,5 @@ namespace Sevens
                 return possibleMoves.First();
             }
         }
-
     }
 }

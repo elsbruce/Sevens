@@ -50,6 +50,7 @@
     <Compile Include="Board.cs" />
     <Compile Include="Card.cs" />
     <Compile Include="Deck.cs" />
+    <Compile Include="DifficultPlayer.cs" />
     <Compile Include="DummyPlayer.cs" />
     <Compile Include="EasyPlayer.cs" />
     <Compile Include="Game.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Instructions.Designer.cs">
       <DependentUpon>Instructions.cs</DependentUpon>
     </Compile>
+    <Compile Include="MediumPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

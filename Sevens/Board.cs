@@ -21,13 +21,13 @@ namespace Sevens
         //sort out timer
        
 
-        public Board()
+        public Board(int difficultyInput)
         {
             min = new int[] { 7, 7, 7, 7 }; //initialise all mins to 7
             max = new int[] { 7, 7, 7, 7 }; //initialise all maxs to 7
             sevens = new bool[] { false, false, false, false };
             aces = new bool[] { false, false, false, false };
-            queue = new Queue();
+            queue = new Queue(difficultyInput);
             sizeOfPlayersHands = new int[4];
             timer = new System.Windows.Forms.Timer();
             timer.Interval = 1000;
