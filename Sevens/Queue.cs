@@ -85,10 +85,6 @@ namespace Sevens
             return true;
         }
 
-        public void removePlayer(int positionOfPlayer)
-        {
-            tail = tail - 1;
-        }
 
         public void playerFinished()
         {

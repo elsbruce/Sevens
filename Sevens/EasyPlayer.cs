@@ -14,9 +14,15 @@ namespace Sevens
         }
 
         public override Card getCardToBePlayed(Board board)
-
-        //random returning first card??
         {
+            // 1 in 4 chance of returning random card, otherwise returns first of possible moves
+
+            Random random = new Random();
+            if (random.Next(0, 3) == 0)
+            {
+                return base.getCards().FirstOrDefault();
+            }
+
             List<Card> possibleMoves = getPossibleMoves(board);
 
             if (possibleMoves.Count == 0)

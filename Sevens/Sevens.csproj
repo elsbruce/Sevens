@@ -110,86 +110,83 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="D7.jpg" />
-    <Content Include="H7.jpg" />
-    <Content Include="images\C.jpg">
+    <EmbeddedResource Include="images\C.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\C1.jpg">
+    </EmbeddedResource>
+    <EmbeddedResource Include="images\C1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\C10.jpg">
+    </EmbeddedResource>
+    <EmbeddedResource Include="images\C10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\C11.jpg">
+    </EmbeddedResource>
+    <EmbeddedResource Include="images\C11.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\C12.jpg">
+    </EmbeddedResource>
+    <EmbeddedResource Include="images\C12.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\C13.jpg">
+    </EmbeddedResource>
+    <EmbeddedResource Include="images\C13.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\C14.jpg" />
-    <Content Include="images\C2.jpg" />
-    <Content Include="images\C3.jpg" />
-    <Content Include="images\C4.jpg" />
-    <Content Include="images\C5.jpg" />
-    <Content Include="images\C6.jpg" />
-    <Content Include="images\C7.jpg" />
-    <Content Include="images\C8.jpg" />
-    <Content Include="images\C9.jpg" />
-    <Content Include="images\D.jpg" />
-    <Content Include="images\D1.jpg">
+    </EmbeddedResource>
+    <EmbeddedResource Include="images\C14.jpg" />
+    <EmbeddedResource Include="images\C2.jpg" />
+    <EmbeddedResource Include="images\C3.jpg" />
+    <EmbeddedResource Include="images\C4.jpg" />
+    <EmbeddedResource Include="images\C5.jpg" />
+    <EmbeddedResource Include="images\C6.jpg" />
+    <EmbeddedResource Include="images\C7.jpg" />
+    <EmbeddedResource Include="images\C8.jpg" />
+    <EmbeddedResource Include="images\C9.jpg" />
+    <EmbeddedResource Include="images\D.jpg" />
+    <EmbeddedResource Include="images\D1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="images\D10.jpg" />
-    <Content Include="images\D11.jpg" />
-    <Content Include="images\D12.jpg" />
-    <Content Include="images\D13.jpg" />
-    <Content Include="images\D14.jpg" />
-    <Content Include="images\D2.jpg" />
-    <Content Include="images\D3.jpg" />
-    <Content Include="images\D4.jpg" />
-    <Content Include="images\D5.jpg" />
-    <Content Include="images\D6.jpg" />
-    <Content Include="images\D7.jpg" />
-    <Content Include="images\D8.jpg" />
-    <Content Include="images\D9.jpg" />
-    <Content Include="images\H.jpg" />
-    <Content Include="images\H1.jpg" />
-    <Content Include="images\H10.jpg" />
-    <Content Include="images\H11.jpg" />
-    <Content Include="images\H12.jpg" />
-    <Content Include="images\H13.jpg" />
-    <Content Include="images\H14.jpg" />
-    <Content Include="images\H2.jpg" />
-    <Content Include="images\H3.jpg" />
-    <Content Include="images\H4.jpg" />
-    <Content Include="images\H5.jpg" />
-    <Content Include="images\H6.jpg" />
-    <Content Include="images\H7.jpg" />
-    <Content Include="images\H8.jpg" />
-    <Content Include="images\H9.jpg" />
-    <Content Include="images\P1.jpg" />
-    <Content Include="images\P2.jpg" />
-    <Content Include="images\P3.jpg" />
-    <Content Include="images\S.jpg" />
-    <Content Include="images\S1.jpg" />
-    <Content Include="images\S10.jpg" />
-    <Content Include="images\S11.jpg" />
-    <Content Include="images\S12.jpg" />
-    <Content Include="images\S13.jpg" />
-    <Content Include="images\S14.jpg" />
-    <Content Include="images\S2.jpg" />
-    <Content Include="images\S3.jpg" />
-    <Content Include="images\S4.jpg" />
-    <Content Include="images\S5.jpg" />
-    <Content Include="images\S6.jpg" />
-    <Content Include="images\S7.jpg" />
-    <Content Include="images\S8.jpg" />
-    <Content Include="images\S9.jpg" />
-    <Content Include="S7.jpg" />
+    </EmbeddedResource>
+    <EmbeddedResource Include="images\D10.jpg" />
+    <EmbeddedResource Include="images\D11.jpg" />
+    <EmbeddedResource Include="images\D12.jpg" />
+    <EmbeddedResource Include="images\D13.jpg" />
+    <EmbeddedResource Include="images\D14.jpg" />
+    <EmbeddedResource Include="images\D2.jpg" />
+    <EmbeddedResource Include="images\D3.jpg" />
+    <EmbeddedResource Include="images\D4.jpg" />
+    <EmbeddedResource Include="images\D5.jpg" />
+    <EmbeddedResource Include="images\D6.jpg" />
+    <EmbeddedResource Include="images\D7.jpg" />
+    <EmbeddedResource Include="images\D8.jpg" />
+    <EmbeddedResource Include="images\D9.jpg" />
+    <EmbeddedResource Include="images\H.jpg" />
+    <EmbeddedResource Include="images\H1.jpg" />
+    <EmbeddedResource Include="images\H10.jpg" />
+    <EmbeddedResource Include="images\H11.jpg" />
+    <EmbeddedResource Include="images\H12.jpg" />
+    <EmbeddedResource Include="images\H13.jpg" />
+    <EmbeddedResource Include="images\H14.jpg" />
+    <EmbeddedResource Include="images\H2.jpg" />
+    <EmbeddedResource Include="images\H3.jpg" />
+    <EmbeddedResource Include="images\H4.jpg" />
+    <EmbeddedResource Include="images\H5.jpg" />
+    <EmbeddedResource Include="images\H6.jpg" />
+    <EmbeddedResource Include="images\H7.jpg" />
+    <EmbeddedResource Include="images\H8.jpg" />
+    <EmbeddedResource Include="images\H9.jpg" />
+    <EmbeddedResource Include="images\P1.jpg" />
+    <EmbeddedResource Include="images\P2.jpg" />
+    <EmbeddedResource Include="images\P3.jpg" />
+    <EmbeddedResource Include="images\S.jpg" />
+    <EmbeddedResource Include="images\S1.jpg" />
+    <EmbeddedResource Include="images\S10.jpg" />
+    <EmbeddedResource Include="images\S11.jpg" />
+    <EmbeddedResource Include="images\S12.jpg" />
+    <EmbeddedResource Include="images\S13.jpg" />
+    <EmbeddedResource Include="images\S14.jpg" />
+    <EmbeddedResource Include="images\S2.jpg" />
+    <EmbeddedResource Include="images\S3.jpg" />
+    <EmbeddedResource Include="images\S4.jpg" />
+    <EmbeddedResource Include="images\S5.jpg" />
+    <EmbeddedResource Include="images\S6.jpg" />
+    <EmbeddedResource Include="images\S7.jpg" />
+    <EmbeddedResource Include="images\S8.jpg" />
+    <EmbeddedResource Include="images\S9.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -70,10 +70,18 @@ namespace Sevens
         public Board humanPlay(String indexOfCard)
         {
             Card cardToBePlayed = board.getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(indexOfCard));
-            board.Add(cardToBePlayed);
-            board.getQueue().getHumanPlayer().removeCard(cardToBePlayed);
 
-            return board;
+            if (board.validMove(cardToBePlayed) == "y")
+            {
+                board.Add(cardToBePlayed);
+                board.getQueue().getHumanPlayer().removeCard(cardToBePlayed);
+                return board;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         public Board getBoard()
@@ -81,9 +89,20 @@ namespace Sevens
             return board;
         }
 
-        public Boolean isOver()
+        public String isOver()
         {
-            return board.checkEnd();
+            if (board.getQueue().getHumanPlayer().handEmpty())
+            {
+                return "Human wins";
+            }
+            else if (board.checkEnd())
+            {
+                return "Game over";
+            }
+            else
+            {
+                return "N";
+            }
         }
 
         public string convertToSuit(int suit) 
