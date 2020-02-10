@@ -224,18 +224,7 @@ namespace Sevens
             return tablePanel;
         }
 
-        private void SortButton_Click(object sender, EventArgs e) //return to game
-        {
 
-            for (int i = 0; i < 13; i++) {
-                tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
-            }
-
-            sevens.getBoard().getQueue().getHumanPlayer().sortCards(false); //calls merge sort by values CAN BE IMPROVED
-            displayPlayersHand();
-            sevens.currentMove();
-            PlayGame();
-        }
 
         private void SkipTurn_Click(object sender, EventArgs e)
         {
@@ -296,6 +285,33 @@ namespace Sevens
             {
                 playerHand[cardNumber].Enabled = false;
             }
+        }
+
+        private void SortButton_Click(object sender, EventArgs e) //return to game, combine two sort buttons
+        {
+
+            for (int i = 0; i < 13; i++)
+            {
+                tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
+            }
+
+            sevens.getBoard().getQueue().getHumanPlayer().sortCards(false); 
+            displayPlayersHand();
+            sevens.currentMove();
+            PlayGame();
+        }
+
+        private void SortSuit_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 13; i++)
+            {
+                tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
+            }
+
+            sevens.getBoard().getQueue().getHumanPlayer().sortCards(true); 
+            displayPlayersHand();
+            sevens.currentMove();
+            PlayGame();
         }
     }
 }

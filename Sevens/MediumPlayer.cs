@@ -18,6 +18,16 @@ namespace Sevens
         {
             {
                 List<Card> possibleMoves = getPossibleMoves(board);
+                int[] moveScores = new int[possibleMoves.Count];
+
+       //         List<Card> cardsOfSuit
+
+                for (int i = 0; i < possibleMoves.Count; i++)
+                {
+                    Card currentMove = possibleMoves.ElementAt(i);
+
+                    
+                }
 
                 sortCards(true);
 
