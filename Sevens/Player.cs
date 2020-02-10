@@ -71,9 +71,9 @@ namespace Sevens
             return listOfCards.ElementAt(index);
         }
 
-        public void sortCards()
+        public void sortCards(Boolean bySuit)
         {
-            listOfCards = MergeSort(listOfCards);
+            listOfCards = MergeSort(listOfCards, bySuit);
         }
 
         public Boolean handEmpty()
@@ -88,7 +88,7 @@ namespace Sevens
             }
         }
 
-        private static List<Card> MergeSort(List<Card> unsorted)
+        private static List<Card> MergeSort(List<Card> unsorted, Boolean bySuit)
         {
             if (unsorted.Count <= 1)
                 return unsorted;
@@ -106,12 +106,12 @@ namespace Sevens
                 right.Add(unsorted.ElementAt(i));
             }
 
-            left = MergeSort(left);
-            right = MergeSort(right);
-            return Merge(left, right);
+            left = MergeSort(left, bySuit);
+            right = MergeSort(right, bySuit);
+            return Merge(left, right, bySuit);
         }
 
-        private static List<Card> Merge(List<Card> left, List<Card> right)
+        private static List<Card> Merge(List<Card> left, List<Card> right, Boolean bySuit)
         {
             List<Card> mergedList = new List<Card>();
 
@@ -119,30 +119,56 @@ namespace Sevens
             {
                 if (left.Count > 0 && right.Count > 0)
                 {
-                    if (left.First().getValue() <= right.First().getValue())  //compares first two elements to see which has smaller value
+                    if (bySuit) 
                     {
-                        mergedList.Add(left.First());
-                        left.Remove(left.First());
-                    }//removes first element from left list and adds it to merged list
+                        if (compareBySuit(left, right))  //compares first two elements to see which has smaller value
+                        {
+                            mergedList.Add(left.First());
+                            left.Remove(left.First());
+                        }//removes first element from left list and adds it to merged list
+                        else
+                        {
+                            mergedList.Add(right.First());
+                            right.Remove(right.First());
+                        }
+                    }
                     else
                     {
-                        mergedList.Add(right.First());
-                        right.Remove(right.First());
+                        if (compareByValue(left, right))  //compares first two elements to see which has smaller value
+                        {
+                            mergedList.Add(left.First());
+                            left.Remove(left.First());
+                        }//removes first element from left list and adds it to merged list
+                        else
+                        {
+                            mergedList.Add(right.First());
+                            right.Remove(right.First());
+                        }
                     }
                 }
                 else if (left.Count > 0) //if right tree is empty, add first element of left tree
-                    {
-                        mergedList.Add(left.First());
-                        left.Remove(left.First());
-                    }
-                else if (right.Count > 0) //if left tree is empty add first element of right tree
-                    {
-                        mergedList.Add(right.First());
-
-                        right.Remove(right.First());
-                    }
+                {
+                    mergedList.Add(left.First());
+                    left.Remove(left.First());
                 }
-                return mergedList;
+                else if (right.Count > 0) //if left tree is empty add first element of right tree
+                {
+                    mergedList.Add(right.First());
+
+                    right.Remove(right.First());
+                }
             }
+            return mergedList;
+        }
+
+        public static Boolean compareByValue(List<Card> left, List<Card> right)
+        {
+            return (left.First().getValue() <= right.First().getValue());
+        }
+
+        public static Boolean compareBySuit(List<Card> left, List<Card> right)
+        {
+            return (left.First().getSuit() <= right.First().getSuit());
         }
     }
+}

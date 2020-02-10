@@ -33,13 +33,13 @@ namespace Sevens
             {
 
                 Board b;
-                b = sevens.Play();
+                b = sevens.nextMove();
 
 
                 while (!this.Turn(b))
                 {
 
-                    b = sevens.Play();
+                    b = sevens.nextMove();
                 }
             }
             else {
@@ -75,46 +75,46 @@ namespace Sevens
         private void playerHand_Click(object sender, EventArgs e)
         {
             Button s = (Button)sender;
-            String moveIsValid = sevens.getBoard().validMove(sevens.getBoard().getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(s.Name)));
-            //if move is valid then card button is hidden and card is added to board
-            if (moveIsValid.Equals("y"))
-            {
-                for (int i = 0; i < 13; i++)
-                {
-                    tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
-                }
-
-                update(sevens.humanPlay(s.Name));
-                displayPlayersHand();
-                for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
-                {
-                    playerHand[cardNumber].Enabled = false;
-                }
-
-                PlayGame();
-
-            }
-            else if ((moveIsValid.Equals("n")))
-            {
-                MessageBox.Show("This is not a valid move");
-            }
-
-            //Board humanTurn = sevens.humanPlay(s.Name);
-            //if (humanTurn == null)
+            //String moveIsValid = sevens.getBoard().validMove(sevens.getBoard().getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(s.Name)));
+            ////if move is valid then card button is hidden and card is added to board
+            //if (moveIsValid.Equals("y"))
             //{
-            //    MessageBox.Show("This is not a valid move.");
-            //}
-            //else
-            //{
-            //    update(humanTurn);
             //    for (int i = 0; i < 13; i++)
             //    {
             //        tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
             //    }
+
+            //    update(sevens.humanPlay(s.Name));
             //    displayPlayersHand();
-            //    disablePlayerButtons();
+            //    for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
+            //    {
+            //        playerHand[cardNumber].Enabled = false;
+            //    }
+
             //    PlayGame();
+
             //}
+            //else if ((moveIsValid.Equals("n")))
+            //{
+            //    MessageBox.Show("This is not a valid move");
+            //}
+
+            Board humanTurn = sevens.humanPlay(s.Name);
+            if (humanTurn == null)
+            {
+                MessageBox.Show("This is not a valid move.");
+            }
+            else
+            {
+                update(humanTurn);
+                for (int i = 0; i < 13; i++)
+                {
+                    tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
+                }
+                displayPlayersHand();
+                disablePlayerButtons();
+                PlayGame();
+            }
 
 
         }
@@ -231,8 +231,10 @@ namespace Sevens
                 tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
             }
 
-            sevens.getBoard().getQueue().getHumanPlayer().sortCards(); //calls merge sort
+            sevens.getBoard().getQueue().getHumanPlayer().sortCards(false); //calls merge sort by values CAN BE IMPROVED
             displayPlayersHand();
+            sevens.currentMove();
+            PlayGame();
         }
 
         private void SkipTurn_Click(object sender, EventArgs e)

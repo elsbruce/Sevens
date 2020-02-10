@@ -48,23 +48,36 @@ namespace Sevens
             board.sevenOfDiamonds();
             return board;
         }
-        public Board Play()
+        public Board nextMove()
         {
             Card cardToBePlayed = board.getQueue().getNextPlayer().getCardToBePlayed(board);
 
-            if (board.validMove(cardToBePlayed).Equals("y")) {
+            return Turn(cardToBePlayed);
+        }
+
+        public Board Turn(Card cardToBePlayed)
+        {
+            if (board.validMove(cardToBePlayed).Equals("y"))
+            {
                 board.Add(board.getQueue().getCurrentPlayer().Move(board));
                 return board;
             }
             else if (board.validMove(cardToBePlayed).Equals("n"))
             {
-             
+
                 return board;
             }
             else
             {
                 return null;
             }
+        }
+
+        public Board currentMove()
+        {
+            Card cardToBePlayed = board.getQueue().getCurrentPlayer().getCardToBePlayed(board);
+
+            return Turn(cardToBePlayed);
         }
 
         public Board humanPlay(String indexOfCard)

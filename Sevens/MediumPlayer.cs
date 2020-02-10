@@ -19,6 +19,8 @@ namespace Sevens
             {
                 List<Card> possibleMoves = getPossibleMoves(board);
 
+                sortCards(true);
+
                 if (possibleMoves.Count == 0)
                 {
                     return base.getCards().FirstOrDefault();
