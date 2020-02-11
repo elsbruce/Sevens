@@ -43,9 +43,17 @@ namespace Sevens
                 }
             }
             else {
-                MessageBox.Show(sevens.isOver());
+                MessageBox.Show("Player " + sevens.getLeaderboard()[0].ToString() + " won.");
+                int humanPosition = 0;
+                for (int i = 0; i < sevens.getLeaderboard().Count; i++)
+                 {
+                    humanPosition = i;
+                 }
+                MessageBox.Show("You came in position " + (humanPosition + 1));
             }
-        }
+                
+            }
+        
 
         private Boolean Turn(Board b)
         {

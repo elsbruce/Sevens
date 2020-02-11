@@ -30,8 +30,8 @@
         {
             this.tablePanel = new System.Windows.Forms.TableLayoutPanel();
             this.sortValue = new System.Windows.Forms.Button();
-            this.skipTurnButton = new System.Windows.Forms.Button();
             this.pauseButton = new System.Windows.Forms.Button();
+            this.skipTurnButton = new System.Windows.Forms.Button();
             this.SortSuit = new System.Windows.Forms.Button();
             this.tablePanel.SuspendLayout();
             this.SuspendLayout();
@@ -84,6 +84,17 @@
             this.sortValue.UseVisualStyleBackColor = true;
             this.sortValue.Click += new System.EventHandler(this.SortButton_Click);
             // 
+            // pauseButton
+            // 
+            this.pauseButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pauseButton.Location = new System.Drawing.Point(718, 258);
+            this.pauseButton.Name = "pauseButton";
+            this.pauseButton.Size = new System.Drawing.Size(56, 79);
+            this.pauseButton.TabIndex = 2;
+            this.pauseButton.Text = "PAUSE";
+            this.pauseButton.UseVisualStyleBackColor = true;
+            this.pauseButton.Click += new System.EventHandler(this.PauseButton_Click);
+            // 
             // skipTurnButton
             // 
             this.skipTurnButton.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -95,17 +106,6 @@
             this.skipTurnButton.Text = "PASS";
             this.skipTurnButton.UseVisualStyleBackColor = true;
             this.skipTurnButton.Click += new System.EventHandler(this.SkipTurn_Click);
-            // 
-            // pauseButton
-            // 
-            this.pauseButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pauseButton.Location = new System.Drawing.Point(718, 258);
-            this.pauseButton.Name = "pauseButton";
-            this.pauseButton.Size = new System.Drawing.Size(56, 79);
-            this.pauseButton.TabIndex = 2;
-            this.pauseButton.Text = "PAUSE";
-            this.pauseButton.UseVisualStyleBackColor = true;
-            this.pauseButton.Click += new System.EventHandler(this.PauseButton_Click);
             // 
             // SortSuit
             // 

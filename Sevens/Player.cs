@@ -88,7 +88,19 @@ namespace Sevens
             }
         }
 
-        private static List<Card> MergeSort(List<Card> unsorted, Boolean bySuit)
+        public int[] cardsSuitCounts()
+        {
+            int[] cardCount = new int[4] { 0, 0, 0, 0 };
+
+            for (int i = 0; i < getCurrentSize(); i++)
+            {
+                cardCount[getCardAt(i).getSuit()]++;
+            }
+
+            return cardCount;
+        }
+
+            private static List<Card> MergeSort(List<Card> unsorted, Boolean bySuit)
         {
             if (unsorted.Count <= 1)
                 return unsorted;

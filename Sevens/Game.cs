@@ -11,14 +11,14 @@ namespace Sevens
     {
         private const int NUMBEROFPLAYERS = 4;
 
-        private Player[] leaderboard;
+        private List<int> leaderboard;
         private int numberOfRounds;
         private int difficulty;
         private Board board;
 
         public Game(int rounds, int difficultyInput)
         {
-            leaderboard = new Player[NUMBEROFPLAYERS];
+            leaderboard = new List<int>();
             numberOfRounds = rounds;
             difficulty = difficultyInput;
             board = new Board(difficultyInput);
@@ -50,6 +50,10 @@ namespace Sevens
         }
         public Board nextMove()
         {
+            int playerFinished = board.getQueue().playerFinished();
+            if (playerFinished != -1) {
+                leaderboard.Add(playerFinished);
+            }
             Card cardToBePlayed = board.getQueue().getNextPlayer().getCardToBePlayed(board);
 
             return Turn(cardToBePlayed);
@@ -147,5 +151,15 @@ namespace Sevens
                 streamWrite.WriteLine(board.toBeSaved());
             }
         }
+
+        public List<int> getLeaderboard()
+        {
+            return leaderboard;
+        }
+
+        //public int humanPlayerPosition()
+        //{
+
+        //}
     }
 }

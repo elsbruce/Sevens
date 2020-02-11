@@ -16,7 +16,8 @@ namespace Sevens
 
         public override Card getCardToBePlayed(Board board)
         {
-
+            // AI players gang up
+            //counts cards of each suit in human player, then plays card of that suit
         List<Card> possibleMoves = getPossibleMoves(board);
 
             if (possibleMoves.Count == 0)
@@ -25,6 +26,8 @@ namespace Sevens
             }
             else
             {
+                int[] humanValues = board.getQueue().getHumanPlayer().cardsSuitCounts();
+                humanValues.OrderBy
                 return possibleMoves.First();
             }
         }

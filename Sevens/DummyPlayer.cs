@@ -23,6 +23,8 @@ namespace Sevens
         {
             return getCardToBePlayed(board);
         }
+
+       
     }
  
 }

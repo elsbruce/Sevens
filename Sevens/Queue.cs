@@ -65,7 +65,7 @@ namespace Sevens
         public Player getNextPlayer()
         {
             currentplayer = (currentplayer + 1) % tail;
-            //playerFinished(); //implement this at some point
+            
             return players[currentplayer];
         }
 
@@ -86,12 +86,17 @@ namespace Sevens
         }
 
 
-        public void playerFinished()
+        public int playerFinished()
         {
             if (getCurrentPlayer().handEmpty())
             {
                 players[getCurrentPlayerIndex()] = new DummyPlayer();
+                Card bodge = new Card(7,0);
+                players[getCurrentPlayerIndex()].addToHand(bodge);
+                return getCurrentPlayerIndex();
             }
+
+            return -1;
         }
 
     }
