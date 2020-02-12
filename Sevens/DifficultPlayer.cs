@@ -27,8 +27,8 @@ namespace Sevens
             else
             {
                 int[] humanValues = board.getQueue().getHumanPlayer().cardsSuitCounts();
-                humanValues.OrderBy
-                return possibleMoves.First();
+                return possibleMoves.Find(item => item.getSuit() == humanValues.ToList().IndexOf(humanValues.Max()));
+                
             }
         }
     }
