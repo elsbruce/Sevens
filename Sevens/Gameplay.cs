@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 namespace Sevens
 {
     public partial class Gameplay : Form
@@ -83,31 +84,8 @@ namespace Sevens
         private void playerHand_Click(object sender, EventArgs e)
         {
             Button s = (Button)sender;
-            //String moveIsValid = sevens.getBoard().validMove(sevens.getBoard().getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(s.Name)));
-            ////if move is valid then card button is hidden and card is added to board
-            //if (moveIsValid.Equals("y"))
-            //{
-            //    for (int i = 0; i < 13; i++)
-            //    {
-            //        tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
-            //    }
-
-            //    update(sevens.humanPlay(s.Name));
-            //    displayPlayersHand();
-            //    for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().getHumanPlayer().getCurrentSize(); cardNumber++)
-            //    {
-            //        playerHand[cardNumber].Enabled = false;
-            //    }
-
-            //    PlayGame();
-
-            //}
-            //else if ((moveIsValid.Equals("n")))
-            //{
-            //    MessageBox.Show("This is not a valid move");
-            //}
-
             Board humanTurn = sevens.humanPlay(s.Name);
+
             if (humanTurn == null)
             {
                 MessageBox.Show("This is not a valid move.");
@@ -150,6 +128,8 @@ namespace Sevens
 
         public void displayAITurn() //outlines the card of the player currently moving for a short amount of time
         {
+            int milliseconds = 1000;
+            Thread.Sleep(milliseconds);
             otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BorderStyle = BorderStyle.Fixed3D;
 
         }
@@ -321,5 +301,6 @@ namespace Sevens
             sevens.currentMove();
             PlayGame();
         }
+
     }
 }

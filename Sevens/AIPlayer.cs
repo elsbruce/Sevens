@@ -1,16 +1,14 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sevens
 {
     abstract class AIPlayer : Player {
 
+    
         public AIPlayer()
         {
-           
+            
         }
         public override Card Move(Board board)
         {
@@ -23,6 +21,7 @@ namespace Sevens
 
         public void playCard(Card cardToBePlayed)
         {
+
             removeCard(cardToBePlayed);
         }
 
@@ -40,5 +39,6 @@ namespace Sevens
 
             return possibleMoves;
         }
-    }
+
+}
     }

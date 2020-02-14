@@ -1,9 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sevens
 {
@@ -51,6 +48,7 @@ namespace Sevens
         public Board nextMove()
         {
             int playerFinished = board.getQueue().playerFinished();
+
             if (playerFinished != -1) {
                 leaderboard.Add(playerFinished);
             }
