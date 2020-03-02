@@ -10,21 +10,32 @@ using System.Windows.Forms;
 
 namespace Sevens
 {
-    public partial class FileWrite : Form
+   partial class FileWrite : Form
     {
+        Game sevens;
         public FileWrite(Game sevens)
         {
             InitializeComponent();
 
+            this.sevens = sevens;
 
-            sevens.Pause(Int32.Parse(positionToSave.Text), 100);
-            StartMenu startMenu = new StartMenu();
-            startMenu.Show();
 
         }
         private void FileWrite_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void PositionToSave_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PlayButton_Click(object sender, EventArgs e)
+        {
+            sevens.Pause(Int32.Parse(positionToSave.Text), 100);
+            StartMenu startMenu = new StartMenu();
+            startMenu.Show();
         }
     }
 }

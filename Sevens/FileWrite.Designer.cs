@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileWrite));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.positionToSave = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.playButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,6 +44,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel1.Controls.Add(this.positionToSave, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.playButton, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -59,6 +62,7 @@
             this.positionToSave.Name = "positionToSave";
             this.positionToSave.Size = new System.Drawing.Size(260, 20);
             this.positionToSave.TabIndex = 0;
+            this.positionToSave.TextChanged += new System.EventHandler(this.PositionToSave_TextChanged);
             // 
             // label1
             // 
@@ -69,6 +73,18 @@
             this.label1.Size = new System.Drawing.Size(260, 26);
             this.label1.TabIndex = 1;
             this.label1.Text = "Input the position where you would like to save the game position to?";
+            // 
+            // playButton
+            // 
+            this.playButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("playButton.BackgroundImage")));
+            this.playButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.playButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playButton.Location = new System.Drawing.Point(269, 303);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(260, 144);
+            this.playButton.TabIndex = 6;
+            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.Click += new System.EventHandler(this.PlayButton_Click);
             // 
             // FileWrite
             // 
@@ -90,5 +106,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox positionToSave;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button playButton;
     }
 }
