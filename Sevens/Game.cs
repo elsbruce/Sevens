@@ -140,14 +140,33 @@ namespace Sevens
             }
         }
 
-        public void Pause()
+        public void Pause(int position, int size)
         {
-            string pathToFile = @"D:\gameState.txt";
+            writeToFile(position, size);
+        }
 
-            using (StreamWriter streamWrite = File.CreateText(pathToFile))
-            {
-                streamWrite.WriteLine(board.toBeSaved());
-            }
+
+        public void writeToFile(int pos, int size)
+        {
+
+            FileStream pathToFile;
+
+            BinaryWriter bw;
+
+            //create a file stream object
+
+            pathToFile = new FileStream(@"D:\gameState.txt", FileMode.Append, FileAccess.Write);
+
+            //create a binary writer object
+            bw = new BinaryWriter(pathToFile);
+
+            //set file position where to write data
+            pathToFile.Position = pos * size;
+            //write data
+            bw.Write(board.toBeSaved());
+            //close objects
+            bw.Close();
+            pathToFile.Close();
         }
 
         public List<int> getLeaderboard()
@@ -155,9 +174,5 @@ namespace Sevens
             return leaderboard;
         }
 
-        //public int humanPlayerPosition()
-        //{
-
-        //}
     }
 }

@@ -242,10 +242,10 @@ namespace Sevens
 
         private void PauseButton_Click(object sender, EventArgs e)
         {
-            sevens.Pause();
+
             this.Hide();
-            StartMenu startMenu = new StartMenu();
-            startMenu.Show();
+            FileWrite pausePanel = new FileWrite(sevens);
+
 
         }
 
