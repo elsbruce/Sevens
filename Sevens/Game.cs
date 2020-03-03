@@ -56,7 +56,12 @@ namespace Sevens
 
             return Turn(cardToBePlayed);
         }
+        public Board currentMove()
+        {
+            Card cardToBePlayed = board.getQueue().getCurrentPlayer().getCardToBePlayed(board);
 
+            return Turn(cardToBePlayed);
+        }
         public Board Turn(Card cardToBePlayed)
         {
             if (board.validMove(cardToBePlayed).Equals("y"))
@@ -75,16 +80,9 @@ namespace Sevens
             }
         }
 
-        public Board currentMove()
-        {
-            Card cardToBePlayed = board.getQueue().getCurrentPlayer().getCardToBePlayed(board);
-
-            return Turn(cardToBePlayed);
-        }
-
         public Board humanPlay(String indexOfCard)
         {
-            Card cardToBePlayed = board.getQueue().getHumanPlayer().getCardAt(Convert.ToInt32(indexOfCard));
+            Card cardToBePlayed = board.getQueue().getHumanPlayer().getCards()[(Convert.ToInt32(indexOfCard))];
 
             if (board.validMove(cardToBePlayed) == "y")
             {
@@ -140,13 +138,7 @@ namespace Sevens
             }
         }
 
-        public void Pause(int position, int size)
-        {
-            writeToFile(position, size);
-        }
-
-
-        public void writeToFile(int pos, int size)
+        public void Pause(int pos, int size)
         {
 
             FileStream pathToFile;

@@ -66,11 +66,6 @@ namespace Sevens
             return cardToBeRemoved;
         }
 
-        public Card getCardAt(int index)
-        {
-            return listOfCards.ElementAt(index);
-        }
-
         public void sortCards(Boolean bySuit)
         {
             listOfCards = MergeSort(listOfCards, bySuit);
@@ -94,7 +89,7 @@ namespace Sevens
 
             for (int i = 0; i < getCurrentSize(); i++)
             {
-                cardCount[getCardAt(i).getSuit()]++;
+                cardCount[getCards()[i].getSuit()]++;
             }
 
             return cardCount;

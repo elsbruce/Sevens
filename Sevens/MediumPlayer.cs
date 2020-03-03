@@ -49,7 +49,7 @@ namespace Sevens
 
             for (int i = 0; i < base.getCurrentSize(); i++)
             {
-                if ((base.getCardAt(i).getSuit() == possibleMoveCard.getSuit()) && sameSide(possibleMoveCard, base.getCardAt(i)))
+                if ((base.getCards()[i].getSuit() == possibleMoveCard.getSuit()) && sameSide(possibleMoveCard, base.getCards()[i]))
                 {
                     counter++;
                 }

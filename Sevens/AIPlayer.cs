@@ -31,9 +31,9 @@ namespace Sevens
 
             for (int i = 0; i < getCurrentSize(); i++)
             {
-                if (board.validMove(base.getCardAt(i)) == "y")
+                if (board.validMove(base.getCards()[i]) == "y")
                 {
-                    possibleMoves.Add(base.getCardAt(i));
+                    possibleMoves.Add(base.getCards()[i]);
                 }
             }
 
