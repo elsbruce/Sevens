@@ -22,13 +22,7 @@ namespace Sevens
 
         }
 
-        public Board startGame() //deals all cards (is this method needed??)
-        {
-            Deal();
-            return board;
-        }
-
-        public void Deal()
+        public Board startGame()
         {
             Deck deck = new Deck();
             deck.Shuffle();
@@ -39,6 +33,8 @@ namespace Sevens
                 //loops through players, in order to add a card to each player in the queue's hands in turn
 
             }
+
+            return board;
         }
         public Board firstMove() //repetition between here and play, combine into one method
         {
@@ -95,11 +91,6 @@ namespace Sevens
                 return null;
             }
 
-        }
-
-        public Board getBoard()
-        {
-            return board;
         }
 
         public String isOver()
@@ -165,6 +156,9 @@ namespace Sevens
         {
             return leaderboard;
         }
-
+        public Board getBoard()
+        {
+            return board;
+        }
     }
 }

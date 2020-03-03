@@ -13,13 +13,8 @@ namespace Sevens
         private Boolean[] sevens;
         private Boolean[] aces;
         private Queue queue;
-        private int[] sizeOfPlayersHands;
-        private System.Windows.Forms.Timer timer;
 
         // diamonds 0, hearts 1, clubs 2, spades 3
-
-        //sort out timer
-       
 
         public Board(int difficultyInput)
         {
@@ -28,29 +23,14 @@ namespace Sevens
             sevens = new bool[] { false, false, false, false };
             aces = new bool[] { false, false, false, false };
             queue = new Queue(difficultyInput);
-            sizeOfPlayersHands = new int[4];
-            timer = new System.Windows.Forms.Timer();
-            timer.Interval = 1000;
-            timer.Tick += new EventHandler(timer_Tick);
-
         }
 
-        public Queue getQueue()
-        {
-            return queue;
-        }
-        public int[] getMin()
-        {
-            return min;
-        }
 
-        public int[] getMax()
-        {
-            return max;
-        }
 
         public int[] getSizeOfPlayersHands()
         {
+            int[] sizeOfPlayersHands = new int[4];
+
             for (int i = 0; i < 4; i++)
             {
                 sizeOfPlayersHands[i] = queue.getQueue()[i].getCurrentSize();
@@ -59,19 +39,11 @@ namespace Sevens
             return sizeOfPlayersHands;
         }
 
-        public Boolean[] getSevens()
-        {
-            return sevens;
-        }
-
-        public Boolean[] getAces()
-        {
-            return aces;
-        }
 
         public void Add(Card card)
         {
-            if (card.getValue() == 7) {
+            if (card.getValue() == 7)
+            {
                 sevens[card.getSuit()] = true;
             }
             else if ((card.getValue() == 14) && ((min[card.getSuit()] == 2) || (max[card.getSuit()] == 13))) //??????
@@ -109,7 +81,8 @@ namespace Sevens
             {
                 return "y";
             }
-            else if ((card.getValue() == 14) && (min[card.getSuit()] == 2)){ //if aces is to be played low
+            else if ((card.getValue() == 14) && (min[card.getSuit()] == 2))
+            { //if aces is to be played low
                 return "y";
             }
             else
@@ -118,36 +91,30 @@ namespace Sevens
             }
 
         }
-        public void sevenOfDiamonds() 
-            {
-
-            Boolean sevenFound = false;
-
-            while (!(sevenFound)) //this is wrong but stops an infinite loop
+        public void sevenOfDiamonds()
+        {
+            Boolean sevenFound;
+            do
             {
                 sevenFound = queue.getNextPlayer().CheckSevenDiamonds();
-            }
+            } while (!sevenFound); 
 
             sevens[0] = true;
         }
-        
+
         public Boolean checkEnd()
-        {            
-                for (int i = 0; i < 4; i++)
-                {
-                    if ((min[i] != 2) | (max[i] != 13) | (sevens[i] != true) | (aces[i] != true))
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if ((min[i] != 2) | (max[i] != 13) | (sevens[i] != true) | (aces[i] != true))
                 {
                     return false;
                 }
-                }
+            }
             return true;
-     
-        }
-        
-        void timer_Tick(object sender, EventArgs e)
-        {
 
         }
+
         public String toBeSaved()
         {
             String board = "";
@@ -171,6 +138,30 @@ namespace Sevens
             board = board + getQueue().getCurrentPlayerIndex().ToString();
 
             return board;
+        }
+        public Queue getQueue()
+        {
+            return queue;
+        }
+        public int[] getMin()
+        {
+            return min;
+        }
+
+        public int[] getMax()
+        {
+            return max;
+        }
+
+
+        public Boolean[] getSevens()
+        {
+            return sevens;
+        }
+
+        public Boolean[] getAces()
+        {
+            return aces;
         }
     }
 }

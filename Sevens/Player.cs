@@ -48,15 +48,7 @@ namespace Sevens
             return stringCards;
         }
 
-        public int getCurrentSize()
-        {
-            return listOfCards.Count;
-        }
 
-        public List<Card> getCards() //returns hand
-        {
-            return listOfCards;
-        }
         public abstract Card Move(Board board);
         public abstract Card getCardToBePlayed(Board board);
 
@@ -95,7 +87,7 @@ namespace Sevens
             return cardCount;
         }
 
-            private static List<Card> MergeSort(List<Card> unsorted, Boolean bySuit)
+        private static List<Card> MergeSort(List<Card> unsorted, Boolean bySuit)
         {
             if (unsorted.Count <= 1)
                 return unsorted;
@@ -126,7 +118,7 @@ namespace Sevens
             {
                 if (left.Count > 0 && right.Count > 0)
                 {
-                    if (bySuit) 
+                    if (bySuit)
                     {
                         if (compareBySuit(left, right))  //compares first two elements to see which has smaller value
                         {
@@ -176,6 +168,15 @@ namespace Sevens
         public static Boolean compareBySuit(List<Card> left, List<Card> right)
         {
             return (left.First().getSuit() <= right.First().getSuit());
+        }
+        public int getCurrentSize()
+        {
+            return listOfCards.Count;
+        }
+
+        public List<Card> getCards() //returns hand
+        {
+            return listOfCards;
         }
     }
 }
