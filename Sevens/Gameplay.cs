@@ -242,10 +242,39 @@ namespace Sevens
 
         private void PauseButton_Click(object sender, EventArgs e)
         {
+            tablePanel.Controls.Clear();
+            tablePanel.ColumnCount = 3;
+            tablePanel.RowCount = 3;
 
-            this.Hide();
-            FileWrite pausePanel = new FileWrite(sevens);
+            Label messageToUser = new Label();
+            messageToUser.Text = "Please input the number, between 1 and 5, where you would like to save this game position to:";
+            messageToUser.Dock = DockStyle.Fill;
+            tablePanel.Controls.Add(messageToUser, 1, 0);
+                
+            TextBox text = new TextBox();
+            text.Dock = DockStyle.Fill;
+            tablePanel.Controls.Add(text, 1, 1);
 
+            Button textEntered = new Button();
+            textEntered.Text = "Go";
+            tablePanel.Controls.Add(textEntered, 2, 1);
+            textEntered.Click += TextEntered_Click;
+
+        }
+
+        private void TextEntered_Click(object sender, EventArgs e)
+        {
+            int whereToSave;
+  
+            if (Int32.TryParse(tablePanel.GetControlFromPosition(1,1).Text, out whereToSave) && (whereToSave <= 5) && (whereToSave >= 1))
+            {
+                MessageBox.Show("ay");
+                sevens.Pause(whereToSave, 100);
+            }
+            else
+            {
+                MessageBox.Show("invalid");
+            }
 
         }
 
