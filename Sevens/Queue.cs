@@ -9,40 +9,41 @@ namespace Sevens
     class Queue
     {
         private Player[] players;
-        private int head; //why have head and tail?
-        private int tail;
+      //  private int head; //why have head and tail?
+     //   private int tail;
         private int currentplayer;
+        public int sizeOfQueue;
 
         public Queue(int difficultyInput)
         {
+            sizeOfQueue = 4;
 
-            players = new Player[4];
+            players = new Player[sizeOfQueue];
             players[0] = new HumanPlayer(); //human player
 
             if (difficultyInput == 0)
             {
-                for (int x = 1; x < 4; x++)
+                for (int x = 1; x < sizeOfQueue; x++)
                 {
                     players[x] = new EasyPlayer(); //add 3 Easy AI players
                 }
             }
             else if (difficultyInput == 1)
             {
-                for (int x = 1; x < 4; x++)
+                for (int x = 1; x < sizeOfQueue; x++)
                 {
                     players[x] = new MediumPlayer(); //add 3 Medium AI players
                 }
             }
             else
             {
-                for (int x = 1; x < 4; x++)
+                for (int x = 1; x < sizeOfQueue; x++)
                 {
                     players[x] = new DifficultPlayer(); //add 3 Difficult AI players
                 }
             }
 
-            head = 0;
-            tail = 4;
+          //  head = 0;
             currentplayer = 0;
 
         }
@@ -64,13 +65,25 @@ namespace Sevens
         
         public Player getNextPlayer()
         {
-            currentplayer = (currentplayer + 1) % tail;
+            currentplayer = (currentplayer + 1) % sizeOfQueue;
             
             return players[currentplayer];
         }
 
         public Player getHumanPlayer(){
             return players[0];
+        }
+
+        public void currentPlayerMinusOne()
+        {
+            if (currentplayer == 0)
+            {
+                currentplayer = (sizeOfQueue - 1);
+            }
+            else
+            {
+                currentplayer = (currentplayer - 1);
+            }
         }
       
         public Boolean isEmpty() //returns true if all players are dummy players

@@ -41,7 +41,7 @@ namespace Sevens
             board.sevenOfDiamonds();
             return board;
         }
-        public Board nextMove()
+        public Board nextMove() //gets the move from the next player in the queue, and adds it to the board (if possible)
         {
             int playerFinished = board.getQueue().playerFinished();
 
@@ -52,13 +52,13 @@ namespace Sevens
 
             return Turn(cardToBePlayed);
         }
-        public Board currentMove()
-        {
-            Card cardToBePlayed = board.getQueue().getCurrentPlayer().getCardToBePlayed(board);
+        //public Board currentMove()
+        //{
+        //    Card cardToBePlayed = board.getQueue().getCurrentPlayer().getCardToBePlayed(board);
 
-            return Turn(cardToBePlayed);
-        }
-        public Board Turn(Card cardToBePlayed)
+        //    return Turn(cardToBePlayed);
+       // }
+        public Board Turn(Card cardToBePlayed) //plays current player's move, adds it to board
         {
             if (board.validMove(cardToBePlayed).Equals("y"))
             {

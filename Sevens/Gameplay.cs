@@ -285,7 +285,7 @@ namespace Sevens
 
             sevens.getBoard().getQueue().getHumanPlayer().sortCards(false); 
             displayPlayersHand();
-            sevens.currentMove();
+            sevens.getBoard().getQueue().currentPlayerMinusOne();
             PlayGame();
         }
 
@@ -298,7 +298,7 @@ namespace Sevens
 
             sevens.getBoard().getQueue().getHumanPlayer().sortCards(true); 
             displayPlayersHand();
-            sevens.currentMove();
+            sevens.getBoard().getQueue().currentPlayerMinusOne();
             PlayGame();
         }
 
