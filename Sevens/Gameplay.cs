@@ -39,7 +39,6 @@ namespace Sevens
 
                 while (!this.Turn(b))
                 {
-
                     b = sevens.nextMove();
                 }
             }
@@ -76,7 +75,7 @@ namespace Sevens
             else
             {
                 displayAITurn(); //goes to this when current player index = 0
-                update(b);
+                update(sevens.getBoard());
                 return false;
             }
         }
@@ -104,34 +103,39 @@ namespace Sevens
 
 
         }
+
+
         private void update(Board board)
         {
             //updates board
             for (int suit = 0; suit < 4; suit++)
             {
-                if (board.getSevens()[suit] == true) //if the seven has been placed, then show other things
+                if (sevens.getBoard().getSevens()[suit] == true) //if the seven has been placed, then show other things
                 {
-                    cardPlaced(suit, board.getMin()[suit]);
-                    cardPlaced(suit, board.getMax()[suit]);
+                    cardPlaced(suit, sevens.getBoard().getMin()[suit]);
+                    cardPlaced(suit, sevens.getBoard().getMax()[suit]);
                 }
-                if (board.getAces()[suit] == true)
+                if (sevens.getBoard().getAces()[suit] == true)
                 {
                     placeAce(suit);
                 }
             }
 
             //updates size of other player's hands
-            for (int playerNumber = 1; playerNumber < 4; playerNumber++) {
-                otherPlayers[(playerNumber - 1)].Text = board.getSizeOfPlayersHands()[playerNumber].ToString(); ;
-            }       
+            for (int playerNumber = 1; playerNumber < 4; playerNumber++)
+            {
+                otherPlayers[(playerNumber - 1)].Text = sevens.getBoard().getSizeOfPlayersHands()[playerNumber].ToString(); ;
+            }
         }
+
 
         public void displayAITurn() //outlines the card of the player currently moving for a short amount of time
         {
+            
             int milliseconds = 1000;
             Thread.Sleep(milliseconds);
             otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BorderStyle = BorderStyle.Fixed3D;
-
+            
         }
 
         private void placeAce(int suit)
@@ -330,6 +334,5 @@ namespace Sevens
             sevens.getBoard().getQueue().currentPlayerMinusOne();
             PlayGame();
         }
-
     }
 }
