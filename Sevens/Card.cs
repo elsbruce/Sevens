@@ -40,10 +40,6 @@ namespace Sevens
             }
         }
 
-        public String getStringValue()
-        {
-            return value.ToString();
-        }
 
         public string getStringSuit() //returns a letter to represent each suit, duplicated in game class
         {

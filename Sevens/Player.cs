@@ -41,7 +41,7 @@ namespace Sevens
 
             foreach (Card card in listOfCards)
             {
-                stringCards[i] = card.getStringSuit() + card.getStringValue();
+                stringCards[i] = card.getStringSuit() + card.getValue().ToString();
                 i++;
             }
 

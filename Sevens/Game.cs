@@ -50,16 +50,6 @@ namespace Sevens
             }
             Card cardToBePlayed = board.getQueue().getNextPlayer().getCardToBePlayed(board);
 
-            return Turn(cardToBePlayed);
-        }
-        //public Board currentMove()
-        //{
-        //    Card cardToBePlayed = board.getQueue().getCurrentPlayer().getCardToBePlayed(board);
-
-        //    return Turn(cardToBePlayed);
-       // }
-        public Board Turn(Card cardToBePlayed) //plays current player's move, adds it to board
-        {
             if (board.validMove(cardToBePlayed).Equals("y"))
             {
                 board.Add(board.getQueue().getCurrentPlayer().Move(board));
@@ -145,11 +135,18 @@ namespace Sevens
 
             //set file position where to write data
             pathToFile.Position = pos * size;
+
             //write data
-            bw.Write(board.toBeSaved());
+            //   bw.Write(board.toBeSaved());
+            bw.Write("t");
+
             //close objects
             bw.Close();
             pathToFile.Close();
+
+            // File.WriteAllText(@"D:\gameState.txt", board.toBeSaved());
+
+
         }
 
         public List<int> getLeaderboard()
