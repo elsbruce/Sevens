@@ -13,17 +13,15 @@ namespace Sevens
         public override Card Move(Board board)
         {
             Card card = getCardToBePlayed(board);
-            playCard(card);
+            removeCard(card);
             return card;
         }
 
+        //public void playCard(Card cardToBePlayed)
+        //{
 
-
-        public void playCard(Card cardToBePlayed)
-        {
-
-            removeCard(cardToBePlayed);
-        }
+        //    removeCard(cardToBePlayed);
+        //}
 
         protected List<Card> getPossibleMoves(Board board)
         {
