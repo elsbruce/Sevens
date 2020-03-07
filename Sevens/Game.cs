@@ -13,6 +13,11 @@ namespace Sevens
         private int difficulty;
         private Board board;
 
+        public Game()
+        {
+
+        }
+
         public Game(int rounds, int difficultyInput)
         {
             leaderboard = new List<int>();
@@ -122,31 +127,49 @@ namespace Sevens
         public void Pause(int pos, int size)
         {
 
-            FileStream pathToFile;
+            //FileStream pathToFile;
 
-            BinaryWriter bw;
+            //BinaryWriter bw;
 
-            //create a file stream object
+            ////create a file stream object
 
-            pathToFile = new FileStream(@"D:\gameState.txt", FileMode.Append, FileAccess.Write);
+            //pathToFile = new FileStream(@"D:\gameState.txt", FileMode.Append, FileAccess.Write);
 
-            //create a binary writer object
-            bw = new BinaryWriter(pathToFile);
+            ////create a binary writer object
+            //bw = new BinaryWriter(pathToFile);
 
-            //set file position where to write data
-            pathToFile.Position = pos * size;
+            ////set file position where to write data
+            //pathToFile.Position = pos * size;
 
-            //write data
-            //   bw.Write(board.toBeSaved());
-            bw.Write("t");
+            ////write data
+            ////   bw.Write(board.toBeSaved());
+            //bw.Write("t");
 
-            //close objects
-            bw.Close();
-            pathToFile.Close();
+            ////close objects
+            //bw.Close();
+            //pathToFile.Close();
 
-            // File.WriteAllText(@"D:\gameState.txt", board.toBeSaved());
+            File.WriteAllText(@"F:\gameState.txt", board.toBeSaved());
 
 
+        }
+
+        public void loadPrevious(int whichGame)
+        {
+            String fileName = @"F:\gameState.txt";
+            String[] text;
+
+
+            if (File.Exists(fileName))
+            {
+              // using (BinaryReader reader = new BinaryReader(File.Open(fileName, FileMode.Open)))
+                
+                text = File.ReadAllLines(fileName);
+               // Board b = new Board();
+               // b.
+               // text[whichGame];
+                
+            }
         }
 
         public List<int> getLeaderboard()

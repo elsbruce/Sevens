@@ -13,6 +13,7 @@ namespace Sevens
         private Boolean[] sevens;
         private Boolean[] aces;
         private Queue queue;
+        private const int numberOfPlayers = 4;
 
         // diamonds 0, hearts 1, clubs 2, spades 3
 
@@ -29,9 +30,9 @@ namespace Sevens
 
         public int[] getSizeOfPlayersHands()
         {
-            int[] sizeOfPlayersHands = new int[4];
+            int[] sizeOfPlayersHands = new int[numberOfPlayers];
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < numberOfPlayers; i++)
             {
                 sizeOfPlayersHands[i] = queue.getQueue()[i].getCurrentSize();
             }
@@ -162,6 +163,30 @@ namespace Sevens
         public Boolean[] getAces()
         {
             return aces;
+        }
+
+        public void setMin(int[] input)
+        {
+            this.min = input;
+        }
+        public void setMax(int[] input)
+        {
+            this.max = input;
+        }
+        public void setSevens(Boolean[] input)
+        {
+            this.sevens = input;
+        }
+        public void setAces(Boolean[] input)
+        {
+            this.aces = input;
+        }
+        public void setQueue(Player[] input) //do
+        {
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+
+            }
         }
     }
 }

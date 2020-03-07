@@ -154,7 +154,7 @@
             this.loadPreviousGame.TabIndex = 6;
             this.loadPreviousGame.Text = "Resume previous game";
             this.loadPreviousGame.UseVisualStyleBackColor = true;
-            this.loadPreviousGame.Click += new System.EventHandler(this.Button1_Click);
+            this.loadPreviousGame.Click += new System.EventHandler(this.loadPreviousGame_Click);
             // 
             // Instructions
             // 

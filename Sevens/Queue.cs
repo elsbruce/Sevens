@@ -78,11 +78,11 @@ namespace Sevens
         {
             if (currentplayer == 0)
             {
-                currentplayer = (sizeOfQueue - 1);
+                setCurrentPlayer(sizeOfQueue - 1);
             }
             else
             {
-                currentplayer = (currentplayer - 1);
+                setCurrentPlayer(currentplayer - 1);
             }
         }
       
@@ -112,5 +112,10 @@ namespace Sevens
             return -1;
         }
 
+
+        public void setCurrentPlayer(int input)
+        {
+            currentplayer = input;
+        }
     }
 }
