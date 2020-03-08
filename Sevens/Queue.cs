@@ -71,18 +71,23 @@ namespace Sevens
         }
 
         public Player getHumanPlayer(){
-            return players[0];
+            return getPlayerAt(0);
+        }
+
+        public Player getPlayerAt(int position)
+        {
+            return players[position];
         }
 
         public void currentPlayerMinusOne()
         {
             if (currentplayer == 0)
             {
-                setCurrentPlayer(sizeOfQueue - 1);
+                setCurrentPlayerIndex(sizeOfQueue - 1);
             }
             else
             {
-                setCurrentPlayer(currentplayer - 1);
+                setCurrentPlayerIndex(currentplayer - 1);
             }
         }
       
@@ -113,7 +118,7 @@ namespace Sevens
         }
 
 
-        public void setCurrentPlayer(int input)
+        public void setCurrentPlayerIndex(int input)
         {
             currentplayer = input;
         }

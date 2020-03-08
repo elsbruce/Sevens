@@ -92,13 +92,15 @@ namespace Sevens
         }
         private void TextEntered_Click(object sender, EventArgs e)
         {
-            int whereToSave;
+            int position;
 
-            if (Int32.TryParse(menu1.GetControlFromPosition(1, 1).Text, out whereToSave) && (whereToSave <= 5) && (whereToSave >= 1))
+            if (Int32.TryParse(menu1.GetControlFromPosition(1, 1).Text, out position) && (position <= 5) && (position >= 1))
             {
                 MessageBox.Show("ay");
-                Game previous = new Game();
-                previous.loadPrevious(whereToSave);
+                this.Hide();
+                Gameplay gp = new Gameplay(position);
+                gp.Show();
+
             }
             else
             {

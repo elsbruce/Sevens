@@ -13,7 +13,7 @@ namespace Sevens
         private Boolean[] sevens;
         private Boolean[] aces;
         private Queue queue;
-        private const int numberOfPlayers = 4;
+        private const int NUMBEROFPLAYERS = 4;
 
         // diamonds 0, hearts 1, clubs 2, spades 3
 
@@ -30,9 +30,9 @@ namespace Sevens
 
         public int[] getSizeOfPlayersHands()
         {
-            int[] sizeOfPlayersHands = new int[numberOfPlayers];
+            int[] sizeOfPlayersHands = new int[NUMBEROFPLAYERS];
 
-            for (int i = 0; i < numberOfPlayers; i++)
+            for (int i = 0; i < NUMBEROFPLAYERS; i++)
             {
                 sizeOfPlayersHands[i] = queue.getQueue()[i].getCurrentSize();
             }
@@ -122,9 +122,12 @@ namespace Sevens
 
             for (int i = 0; i < 4; i++)
             {
-                board = board + min[i].ToString() + max[i].ToString() + "//";
+                board = board + min[i].ToString() + "/";
             }
-
+            for (int i = 0; i < 4; i++)
+            {
+                board = board + max[i].ToString() + "/";
+            }
             foreach (Player p in getQueue().getQueue()) //if dummyplayers
             {
                 foreach (String s in p.getStringArrayOfCards())
@@ -133,10 +136,11 @@ namespace Sevens
                     board = board + s + "/";
                 }
 
-                board = board + "<>";
+                board = board + "~";
             }
 
-            board = board + getQueue().getCurrentPlayerIndex().ToString();
+            board = board + getQueue().getCurrentPlayerIndex().ToString() + "~" + getSevens().ToString() + "~" + getAces().ToString(); ;
+
 
             return board;
         }
@@ -158,6 +162,11 @@ namespace Sevens
         public Boolean[] getSevens()
         {
             return sevens;
+        }
+
+        public int getNUMBEROFPLAYERS()
+        {
+            return NUMBEROFPLAYERS;
         }
 
         public Boolean[] getAces()
@@ -183,7 +192,7 @@ namespace Sevens
         }
         public void setQueue(Player[] input) //do
         {
-            for (int i = 0; i < numberOfPlayers; i++)
+            for (int i = 0; i < NUMBEROFPLAYERS; i++)
             {
 
             }

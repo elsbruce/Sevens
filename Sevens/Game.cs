@@ -6,8 +6,6 @@ namespace Sevens
 {
     class Game
     {
-        private const int NUMBEROFPLAYERS = 4;
-
         private List<int> leaderboard;
         private int numberOfRounds;
         private int difficulty;
@@ -18,13 +16,12 @@ namespace Sevens
 
         }
 
-        public Game(int rounds, int difficultyInput)
+        public Game(int roundsInput, int difficultyInput)
         {
             leaderboard = new List<int>();
-            numberOfRounds = rounds;
+            numberOfRounds = roundsInput; //input comes from GUI, where 0 is first option
             difficulty = difficultyInput;
             board = new Board(difficultyInput);
-
         }
 
         public Board startGame()
@@ -124,7 +121,7 @@ namespace Sevens
             }
         }
 
-        public void Pause(int pos, int size)
+        public void Pause(int whereToSave)
         {
 
             //FileStream pathToFile;
@@ -149,13 +146,15 @@ namespace Sevens
             //bw.Close();
             //pathToFile.Close();
 
-            File.WriteAllText(@"F:\gameState.txt", board.toBeSaved());
+            File.WriteAllText(@"F:\gameState.txt", getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
 
 
         }
 
         public void loadPrevious(int whichGame)
         {
+
+            whichGame = 0; //haven't set up direct access yet
             String fileName = @"F:\gameState.txt";
             String[] text;
 
@@ -165,13 +164,53 @@ namespace Sevens
               // using (BinaryReader reader = new BinaryReader(File.Open(fileName, FileMode.Open)))
                 
                 text = File.ReadAllLines(fileName);
-               // Board b = new Board();
-               // b.
-               // text[whichGame];
-                
+                setRounds(Int32.Parse(text[whichGame].Substring(0, 1)));
+                setDifficulty(Int32.Parse(text[whichGame].Substring(1, 1)));
+                board = new Board(getDifficulty());
+
+                text[whichGame] = text[whichGame].Remove(0, 2);
+                String[] minsAndMaxes = new String[8];
+                minsAndMaxes = text[whichGame].Split('/');
+                Array.Resize(ref minsAndMaxes, 8);
+
+                String[] maxes = new String[8];
+                minsAndMaxes.CopyTo(maxes, 0);
+                Array.Resize(ref minsAndMaxes, 4);
+                Array.Reverse(maxes);
+                Array.Resize(ref maxes, 4);
+                board.setMin(Array.ConvertAll(minsAndMaxes, element => Int32.Parse(element)));
+                board.setMax(Array.ConvertAll(maxes, element => Int32.Parse(element)));
+
+                String[] playerCards = text[whichGame].Split('~');
+
+                int counter = 8; //skip first 8
+
+                for (int i = 0; i < board.getNUMBEROFPLAYERS(); i++)
+                {
+                    String[] cardString = playerCards[i].Split('/');
+
+                    while (counter < (cardString.Length - 1)) //-1 as final card is invalid, just created due to final /
+                    {
+                        board.getQueue().getPlayerAt(i).addToHand(new Card(Int32.Parse(cardString[counter].Substring(1)), cardString[counter].Substring(0,1)));
+                        counter++;
+                    }
+                    counter = 0;
+                }
+
+                board.getQueue().setCurrentPlayerIndex(Int32.Parse(playerCards[4]));
+                board.setSevens(Array.ConvertAll(playerCards[5], element => bool.Parse(element)));
+                board.setAces(Array.ConvertAll(playerCards[6], element => bool.Parse(element)));
             }
         }
 
+        public void setDifficulty(int input)
+        {
+            difficulty = input;
+        }
+        public void setRounds(int input)
+        {
+            numberOfRounds = input;
+        }
         public List<int> getLeaderboard()
         {
             return leaderboard;
@@ -179,6 +218,16 @@ namespace Sevens
         public Board getBoard()
         {
             return board;
+        }
+
+        public int getDifficulty()
+        {
+            return difficulty;
+        }
+
+        public int getNumberOfRounds()
+        {
+            return numberOfRounds;
         }
     }
 }

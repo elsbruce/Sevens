@@ -36,12 +36,12 @@ namespace Sevens
 
         public String[] getStringArrayOfCards() //returns a string of the user's cards
         {
-            String[] stringCards = new String[13];
+            String[] stringCards = new String[listOfCards.Count];
             int i = 0;
 
             foreach (Card card in listOfCards)
             {
-                stringCards[i] = card.getStringSuit() + card.getValue().ToString();
+                stringCards[i] = card.suitIntToString() + card.getValue().ToString();
                 i++;
             }
 

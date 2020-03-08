@@ -14,6 +14,7 @@ namespace Sevens
         Label[] otherPlayers = new Label[3];
         Game sevens;
 
+
         public Gameplay(int numberOfRounds, int difficulty)
         {
             sevens = new Game(numberOfRounds, difficulty);
@@ -25,6 +26,17 @@ namespace Sevens
 
             displayPlayersHand();
 
+            PlayGame();
+        }
+
+        public Gameplay(int whereToReadFrom)
+        {
+            InitializeComponent();
+            sevens = new Game();
+            sevens.loadPrevious(whereToReadFrom);
+            setUp(sevens.getBoard());
+            displayPlayersHand();
+            update(sevens.getBoard());
             PlayGame();
         }
 
@@ -273,7 +285,7 @@ namespace Sevens
             if (Int32.TryParse(tablePanel.GetControlFromPosition(1,1).Text, out whereToSave) && (whereToSave <= 5) && (whereToSave >= 1))
             {
                 MessageBox.Show("ay");
-                sevens.Pause(whereToSave, 100);
+                sevens.Pause(whereToSave);
             }
             else
             {
