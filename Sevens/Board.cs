@@ -139,9 +139,18 @@ namespace Sevens
                 board = board + "~";
             }
 
-            board = board + getQueue().getCurrentPlayerIndex().ToString() + "~" + getSevens().ToString() + "~" + getAces().ToString(); ;
+            board = board + getQueue().getCurrentPlayerIndex().ToString() + "~";
 
+            for (int i = 0; i < 4; i++)
+            {
+                board = board + getSevens()[i].ToString() + "/";
+            }
 
+            board = board + "~";
+            for (int i = 0; i < 4; i++)
+            {
+                board = board + getAces()[i].ToString() + "/";
+            }
             return board;
         }
         public Queue getQueue()

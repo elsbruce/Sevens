@@ -121,7 +121,7 @@ namespace Sevens
             }
         }
 
-        public void Pause(int whereToSave)
+        public void Pause(int whereToSave) //saves game state to external text file ( at position specified by the 
         {
 
             //FileStream pathToFile;
@@ -146,16 +146,16 @@ namespace Sevens
             //bw.Close();
             //pathToFile.Close();
 
-            File.WriteAllText(@"F:\gameState.txt", getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
+            File.WriteAllText(@"D:\gameState.txt", getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
 
 
         }
 
-        public void loadPrevious(int whichGame)
+        public void loadPrevious(int whichGame) //reads in game state from a previous game from textfile and sets up a new game to have all the values and states of the previous game
         {
 
             whichGame = 0; //haven't set up direct access yet
-            String fileName = @"F:\gameState.txt";
+            String fileName = @"D:\gameState.txt";
             String[] text;
 
 
@@ -198,8 +198,13 @@ namespace Sevens
                 }
 
                 board.getQueue().setCurrentPlayerIndex(Int32.Parse(playerCards[4]));
-                board.setSevens(Array.ConvertAll(playerCards[5], element => bool.Parse(element)));
-                board.setAces(Array.ConvertAll(playerCards[6], element => bool.Parse(element)));
+                String[] temp = new String[4];
+                temp = playerCards[5].Split('/');
+                Array.Resize(ref temp, 4);
+                board.setSevens(Array.ConvertAll(temp, element => bool.Parse(element)));
+                temp = playerCards[6].Split('/');
+                Array.Resize(ref temp, 4);
+                board.setAces(Array.ConvertAll(temp, element => bool.Parse(element)));
             }
         }
 
