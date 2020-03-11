@@ -51,11 +51,11 @@ namespace Sevens
             if (playerFinished != -1) {
                 leaderboard.Add(playerFinished);
             }
-            Card cardToBePlayed = board.getQueue().getNextPlayer().getCardToBePlayed(board);
+            Card cardToBePlayed = board.getQueue().getNextPlayer().retrieveCardToBePlayed(board);
 
             if (board.validMove(cardToBePlayed).Equals("y"))
             {
-                board.Add(board.getQueue().getCurrentPlayer().Move(board));
+                board.Add(board.getQueue().getCurrentPlayer().Move());
                 return board;
             }
             else if (board.validMove(cardToBePlayed).Equals("n"))

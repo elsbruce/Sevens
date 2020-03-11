@@ -49,8 +49,8 @@ namespace Sevens
         }
 
 
-        public abstract Card Move(Board board);
-        public abstract Card getCardToBePlayed(Board board);
+        public abstract Card Move();
+        public abstract Card retrieveCardToBePlayed(Board board);
 
         public Card removeCard(Card cardToBeRemoved)
         {

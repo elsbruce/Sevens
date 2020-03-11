@@ -13,15 +13,15 @@ namespace Sevens
 
         }
 
-        public override Card getCardToBePlayed(Board board)
+        public override Card determineCardToBePlayed(Board board)
         {
             Card dummyCard = new Card(7, 0);
             return dummyCard;
         }
 
-        public override Card Move(Board board)
+        public override Card Move()
         {
-            return getCardToBePlayed(board);
+            return determineCardToBePlayed(board);
         }
 
        

@@ -14,7 +14,7 @@ namespace Sevens
 
         }
 
-        public override Card getCardToBePlayed(Board board)
+        public override void determineCardToBePlayed(Board board)
         {
             // AI players gang up
             //counts cards of each suit in human player, then plays card of that suit
@@ -22,12 +22,12 @@ namespace Sevens
 
             if (possibleMoves.Count == 0)
             {
-                return base.getCards().FirstOrDefault();
+                setCardToBePlayed(base.getCards().FirstOrDefault());
             }
             else
             {
                 int[] humanValues = board.getQueue().getHumanPlayer().cardsSuitCounts();
-                return possibleMoves.Find(item => item.getSuit() == humanValues.ToList().IndexOf(humanValues.Max()));
+                setCardToBePlayed(possibleMoves.Find(item => item.getSuit() == humanValues.ToList().IndexOf(humanValues.Max())));
                 //what if none of this suit
             }
         }

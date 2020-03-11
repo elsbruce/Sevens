@@ -4,25 +4,34 @@ using System.Collections.Generic;
 namespace Sevens
 {
     abstract class AIPlayer : Player {
-
+        private Card cardToBePlayed;
     
         public AIPlayer()
         {
             
         }
-        public override Card Move(Board board)
+        public override Card Move()
         {
-            Card card = getCardToBePlayed(board);
-            removeCard(card);
-            return card;
+            removeCard(getCardToBePlayed());
+            return getCardToBePlayed();
         }
 
-        //public void playCard(Card cardToBePlayed)
-        //{
+        protected void setCardToBePlayed(Card card)
+        {
+            cardToBePlayed = card;
+        }
+        public Card getCardToBePlayed()
+        {
+            return cardToBePlayed;
+        }
 
-        //    removeCard(cardToBePlayed);
-        //}
+        public override Card retrieveCardToBePlayed(Board board)
+        {
+            determineCardToBePlayed(board);
+            return getCardToBePlayed();
+        }
 
+        public abstract void determineCardToBePlayed(Board board);
         protected List<Card> getPossibleMoves(Board board)
         {
             List<Card> possibleMoves = new List<Card>();

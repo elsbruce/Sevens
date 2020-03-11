@@ -15,32 +15,29 @@ namespace Sevens
         }
 
 
-        public override Card getCardToBePlayed(Board board) //gets card which is of maximum benefit to the AI player
+        public override void determineCardToBePlayed(Board board) //gets card which is of maximum benefit to the AI player
         {
             List<Card> possibleMoves = getPossibleMoves(board);
             int[] moveScores = new int[possibleMoves.Count];
             int max = 0;
             Card cardToReturn = base.getCards().FirstOrDefault();
 
-            if (possibleMoves.Count == 0)
+            if (possibleMoves.Count != 0)
             {
-                return cardToReturn;
-            }
-
-            for (int i = 0; i < possibleMoves.Count; i++) //loops through possible moves and finds score of each one
-            {
-                moveScores[i] = Count(possibleMoves.ElementAt(i));
-
-
-                if (moveScores[i] > max) //if score is the biggest of the possible moves so far, then update cardToReturn
+                for (int i = 0; i < possibleMoves.Count; i++) //loops through possible moves and finds score of each one
                 {
-                    max = moveScores[i];
-                    cardToReturn = possibleMoves.ElementAt(i);
+                    moveScores[i] = Count(possibleMoves.ElementAt(i));
+
+
+                    if (moveScores[i] > max) //if score is the biggest of the possible moves so far, then update cardToReturn
+                    {
+                        max = moveScores[i];
+                        cardToReturn = possibleMoves.ElementAt(i);
+                    }
+
                 }
-
             }
-            return cardToReturn;
-
+            setCardToBePlayed(cardToReturn);
          }
 
         public int Count(Card possibleMoveCard) //counter increments by one each time another card of the same suit and the same side of the seven is found in their hand
