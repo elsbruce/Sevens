@@ -75,6 +75,7 @@ namespace Sevens
 
             if (board.validMove(cardToBePlayed) == "y")
             {
+                
                 board.Add(cardToBePlayed);
                 board.getQueue().getHumanPlayer().removeCard(cardToBePlayed);
                 return board;

@@ -99,6 +99,8 @@ namespace Sevens
             if (humanTurn == null)
             {
                 MessageBox.Show("This is not a valid move.");
+                sevens.getBoard().getQueue().currentPlayerMinusOne();
+                PlayGame();
             }
             else
             {
@@ -135,7 +137,7 @@ namespace Sevens
             //updates size of other player's hands
             for (int playerNumber = 1; playerNumber < 4; playerNumber++)
             {
-                otherPlayers[(playerNumber - 1)].Text = sevens.getBoard().getSizeOfPlayersHands()[playerNumber].ToString(); ;
+                otherPlayers[(playerNumber - 1)].Text = sevens.getBoard().getSizeOfPlayersHands()[playerNumber].ToString();
             }
         }
 
