@@ -70,25 +70,35 @@ namespace Sevens
 
         }
 
-        private void loadPreviousGame_Click(object sender, EventArgs e)
+        private void loadPreviousGame_Click(object sender, EventArgs e) //checks whether text file location exists, then if it does it clears the screen to allow the user to input a number
         {
-            menu1.Controls.Clear();
-            menu1.ColumnCount = 3;
-            menu1.RowCount = 3;
+            Game sevensTemp = new Game();
 
-            Label messageToUser = new Label();
-            messageToUser.Text = "Please input the number, between 1 and 5, where you would like to read the game from:";
-            messageToUser.Dock = DockStyle.Fill;
-            menu1.Controls.Add(messageToUser, 1, 0);
+            if (!(sevensTemp.fileExists()))
+            {
+                MessageBox.Show("This game cannot be saved to an external file");
 
-            TextBox text = new TextBox();
-            text.Dock = DockStyle.Fill;
-            menu1.Controls.Add(text, 1, 1);
+            }
+            else
+            {
+                menu1.Controls.Clear();
+                menu1.ColumnCount = 3;
+                menu1.RowCount = 3;
 
-            Button textEntered = new Button();
-            textEntered.Text = "Go";
-            menu1.Controls.Add(textEntered, 2, 1);
-            textEntered.Click += TextEntered_Click;
+                Label messageToUser = new Label();
+                messageToUser.Text = "Please input the number, between 1 and 5, where you would like to read the game from:";
+                messageToUser.Dock = DockStyle.Fill;
+                menu1.Controls.Add(messageToUser, 1, 0);
+
+                TextBox text = new TextBox();
+                text.Dock = DockStyle.Fill;
+                menu1.Controls.Add(text, 1, 1);
+
+                Button textEntered = new Button();
+                textEntered.Text = "Go";
+                menu1.Controls.Add(textEntered, 2, 1);
+                textEntered.Click += TextEntered_Click;
+            }
         }
         private void TextEntered_Click(object sender, EventArgs e)
         {

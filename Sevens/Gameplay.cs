@@ -48,7 +48,6 @@ namespace Sevens
                 Board b;
                 b = sevens.nextMove();
 
-
                 while (!this.Turn(b))
                 {
                     b = sevens.nextMove();
@@ -256,26 +255,34 @@ namespace Sevens
             tablePanel.Controls.Add(suitComplete, 7, suit);
         }
 
-        private void PauseButton_Click(object sender, EventArgs e)
+        private void PauseButton_Click(object sender, EventArgs e) //checks whether text file to be saved to exists, then clears tablelayoutpanel to allow the user to input a number for where the game is to be saved
         {
-            tablePanel.Controls.Clear();
-            tablePanel.ColumnCount = 3;
-            tablePanel.RowCount = 3;
 
-            Label messageToUser = new Label();
-            messageToUser.Text = "Please input the number, between 1 and 5, where you would like to save this game position to:";
-            messageToUser.Dock = DockStyle.Fill;
-            tablePanel.Controls.Add(messageToUser, 1, 0);
-                
-            TextBox text = new TextBox();
-            text.Dock = DockStyle.Fill;
-            tablePanel.Controls.Add(text, 1, 1);
+            if (!(sevens.fileExists()))
+            {
+                MessageBox.Show("This game cannot be saved to an external file");
 
-            Button textEntered = new Button();
-            textEntered.Text = "Go";
-            tablePanel.Controls.Add(textEntered, 2, 1);
-            textEntered.Click += TextEntered_Click;
+            }
+            else
+            {
+                tablePanel.Controls.Clear();
+                tablePanel.ColumnCount = 3;
+                tablePanel.RowCount = 3;
 
+                Label messageToUser = new Label();
+                messageToUser.Text = "Please input the number, between 1 and 5, where you would like to save this game position to:";
+                messageToUser.Dock = DockStyle.Fill;
+                tablePanel.Controls.Add(messageToUser, 1, 0);
+
+                TextBox text = new TextBox();
+                text.Dock = DockStyle.Fill;
+                tablePanel.Controls.Add(text, 1, 1);
+
+                Button textEntered = new Button();
+                textEntered.Text = "Go";
+                tablePanel.Controls.Add(textEntered, 2, 1);
+                textEntered.Click += TextEntered_Click;
+            }
         }
 
         private void TextEntered_Click(object sender, EventArgs e)

@@ -104,7 +104,7 @@ namespace Sevens
         }
 
 
-        public int playerFinished()
+        public int playerFinished() //replaces current player with a dummy player within the queue
         {
             if (getCurrentPlayer().handEmpty())
             {

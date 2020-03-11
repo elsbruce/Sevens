@@ -10,6 +10,7 @@ namespace Sevens
         private int numberOfRounds;
         private int difficulty;
         private Board board;
+        private String externalTextFile = @"D:\gameState.txt";
 
         public Game()
         {
@@ -146,7 +147,7 @@ namespace Sevens
             //bw.Close();
             //pathToFile.Close();
 
-            File.WriteAllText(@"D:\gameState.txt", getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
+            File.WriteAllText(externalTextFile, getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
 
 
         }
@@ -155,15 +156,14 @@ namespace Sevens
         {
 
             whichGame = 0; //haven't set up direct access yet
-            String fileName = @"D:\gameState.txt";
             String[] text;
 
 
-            if (File.Exists(fileName))
+            if (File.Exists(externalTextFile))
             {
               // using (BinaryReader reader = new BinaryReader(File.Open(fileName, FileMode.Open)))
                 
-                text = File.ReadAllLines(fileName);
+                text = File.ReadAllLines(externalTextFile);
                 setRounds(Int32.Parse(text[whichGame].Substring(0, 1)));
                 setDifficulty(Int32.Parse(text[whichGame].Substring(1, 1)));
                 board = new Board(getDifficulty());
@@ -233,6 +233,17 @@ namespace Sevens
         public int getNumberOfRounds()
         {
             return numberOfRounds;
+        }
+
+        public Boolean fileExists()
+        {
+            if (File.Exists(externalTextFile)){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
