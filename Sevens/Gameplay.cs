@@ -44,7 +44,6 @@ namespace Sevens
         {
             if (sevens.isOver() == "N")
             {
-
                 Board b;
                 b = sevens.nextMove();
 
@@ -87,6 +86,7 @@ namespace Sevens
             {
                 displayAITurn(); //goes to this when current player index = 0
                 update(sevens.getBoard());
+                Refresh();
                 return false;
             }
         }
@@ -116,19 +116,17 @@ namespace Sevens
 
 
         }
-
-
         private void update(Board board)
         {
             //updates board
             for (int suit = 0; suit < 4; suit++)
             {
-                if (sevens.getBoard().getSevens()[suit] == true) //if the seven has been placed, then show other things
+                if (board.getSevens()[suit] == true) //if the seven has been placed, then show other things
                 {
-                    cardPlaced(suit, sevens.getBoard().getMin()[suit]);
-                    cardPlaced(suit, sevens.getBoard().getMax()[suit]);
+                    cardPlaced(suit, board.getMin()[suit]);
+                    cardPlaced(suit, board.getMax()[suit]);
                 }
-                if (sevens.getBoard().getAces()[suit] == true)
+                if (board.getAces()[suit] == true)
                 {
                     placeAce(suit);
                 }
@@ -144,11 +142,11 @@ namespace Sevens
 
         public void displayAITurn() //outlines the card of the player currently moving for a short amount of time
         {
-            
-            int milliseconds = 1000;
+            otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.P" + (sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1) + ".jpg");
+            int milliseconds = 500;
             Thread.Sleep(milliseconds);
-            otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BorderStyle = BorderStyle.Fixed3D;
-            
+            otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.loading.jpg");
+
         }
 
         private void placeAce(int suit)
