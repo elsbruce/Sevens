@@ -27,7 +27,20 @@ namespace Sevens
             else
             {
                 int[] humanValues = board.getQueue().getHumanPlayer().cardsSuitCounts();
-                setCardToBePlayed(possibleMoves.Find(item => item.getSuit() == humanValues.ToList().IndexOf(humanValues.Max())));
+
+                //sort human values
+                //create new list of their indexes in position
+
+                for (int a = 0; a < 4; a++)
+                {
+                    int i = humanValues.ToList().IndexOf(humanValues.Min());
+                    humanValues.ToList().Remove(humanValues.Min());
+                    Card card = possibleMoves.Find(item => item.getSuit() == i);
+                    
+                    setCardToBePlayed(card);
+                    
+                }
+
                 //what if none of this suit
             }
         }

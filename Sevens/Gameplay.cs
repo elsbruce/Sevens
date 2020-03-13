@@ -87,6 +87,7 @@ namespace Sevens
                 displayAITurn(); //goes to this when current player index = 0
                 update(sevens.getBoard());
                 Refresh();
+                otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.P" + (sevens.getBoard().getQueue().getCurrentPlayerIndex()) + ".jpg");
                 return false;
             }
         }
@@ -140,13 +141,11 @@ namespace Sevens
         }
 
 
-        public void displayAITurn() //outlines the card of the player currently moving for a short amount of time
+        public void displayAITurn() //displays a loading symbol on the player currently moving for a short amount of time
         {
-            otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.P" + (sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1) + ".jpg");
+            otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.loading.jpg");
             int milliseconds = 500;
             Thread.Sleep(milliseconds);
-            otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.loading.jpg");
-
         }
 
         private void placeAce(int suit)

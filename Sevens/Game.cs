@@ -125,37 +125,40 @@ namespace Sevens
         public void Pause(int whereToSave) //saves game state to external text file ( at position specified by the 
         {
 
-            //FileStream pathToFile;
+            FileStream fout;
+            int size = 100;
+            BinaryWriter bw;
 
-            //BinaryWriter bw;
+            //create a file stream object
 
-            ////create a file stream object
+            fout = new FileStream(@"D:\GAMESTATE.bin", FileMode.OpenOrCreate, FileAccess.Write);
 
-            //pathToFile = new FileStream(@"D:\gameState.txt", FileMode.Append, FileAccess.Write);
+            //create a binary writer object
+            bw = new BinaryWriter(fout);
 
-            ////create a binary writer object
-            //bw = new BinaryWriter(pathToFile);
+            //set file position where to write data
+            fout.Position = whereToSave * size;
+            //write data
+            bw.Write(getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
+            bw.Flush();
+            //write data
 
-            ////set file position where to write data
-            //pathToFile.Position = pos * size;
-
-            ////write data
-            ////   bw.Write(board.toBeSaved());
-            //bw.Write("t");
-
-            ////close objects
-            //bw.Close();
-            //pathToFile.Close();
-
-            File.WriteAllText(externalTextFile, getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
-
+            bw.Close();
+            fout.Close();
 
         }
 
+
         public void loadPrevious(int whichGame) //reads in game state from a previous game from textfile and sets up a new game to have all the values and states of the previous game
         {
+            int size = 100;
+            FileStream fn;
+            BinaryReader binaryReader;
+            fn = new FileStream(@"D:\GAMESTATE.bin", FileMode.Open, FileAccess.Read);
+            binaryReader = new BinaryReader(fn);
 
-            whichGame = 0; //haven't set up direct access yet
+            fn.Seek(whichGame * size, 0);
+            String t = binaryReader.ReadString();
             String[] text;
 
 
