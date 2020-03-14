@@ -90,24 +90,28 @@ namespace Sevens
         private static List<Card> MergeSort(List<Card> unsorted, Boolean bySuit)
         {
             if (unsorted.Count <= 1)
+            {
                 return unsorted;
-
-            List<Card> left = new List<Card>();
-            List<Card> right = new List<Card>();
-
-            int mid = unsorted.Count / 2;
-            for (int i = 0; i < mid; i++)  //Dividing the unsorted list
-            {
-                left.Add(unsorted.ElementAt(i));
             }
-            for (int i = mid; i < unsorted.Count; i++)
+            else
             {
-                right.Add(unsorted.ElementAt(i));
-            }
+                List<Card> left = new List<Card>();
+                List<Card> right = new List<Card>();
 
-            left = MergeSort(left, bySuit);
-            right = MergeSort(right, bySuit);
-            return Merge(left, right, bySuit);
+                int mid = unsorted.Count / 2;
+                for (int i = 0; i < mid; i++)  //Dividing the unsorted list
+                {
+                    left.Add(unsorted.ElementAt(i));
+                }
+                for (int i = mid; i < unsorted.Count; i++)
+                {
+                    right.Add(unsorted.ElementAt(i));
+                }
+
+                left = MergeSort(left, bySuit);
+                right = MergeSort(right, bySuit);
+                return Merge(left, right, bySuit);
+            }
         }
 
         private static List<Card> Merge(List<Card> left, List<Card> right, Boolean bySuit)

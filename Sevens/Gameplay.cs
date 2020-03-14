@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.IO;
 using System.Reflection;
 using System.Threading;
 namespace Sevens
@@ -196,7 +194,7 @@ namespace Sevens
                     temp.BackgroundImage = getImage("Sevens.images." + sevens.convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg");         
                     temp.BackgroundImageLayout = ImageLayout.Zoom;
                     temp.Dock = DockStyle.Fill;
-                    temp.Name = (sevens.convertToSuit(suitCounter) + valueCounter.ToString());
+                  //  temp.Name = (sevens.convertToSuit(suitCounter) + valueCounter.ToString());
                     temp.Size = new Size(42, 68);
                     temp.Visible = false;
                     c[suitCounter, (valueCounter - 1)] = temp;
