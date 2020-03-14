@@ -149,7 +149,14 @@ namespace Sevens
             //updates size of other player's hands
             for (int playerNumber = 1; playerNumber < 4; playerNumber++)
             {
-                otherPlayers[(playerNumber - 1)].Text = sevens.getBoard().getSizeOfPlayersHands()[playerNumber].ToString();
+                if (sevens.getBoard().getQueue().getPlayerAt(playerNumber).handEmpty())
+                {
+                    otherPlayers[(playerNumber - 1)].Text = "finished";
+                }
+                else
+                {
+                    otherPlayers[(playerNumber - 1)].Text = sevens.getBoard().getSizeOfPlayersHands()[playerNumber].ToString();
+                }
             }
         }
 
@@ -159,6 +166,7 @@ namespace Sevens
             otherPlayers[(sevens.getBoard().getQueue().getCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.loading.jpg");
             int milliseconds = 500;
             Thread.Sleep(milliseconds);
+
         }
 
         private void placeAce(int suit)
