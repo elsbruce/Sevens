@@ -60,6 +60,21 @@ namespace Sevens
                     humanPosition = i;
                  }
                 MessageBox.Show("You came in position " + (humanPosition + 1));
+
+                if (sevens.getRoundsPlayed() < sevens.getNumberOfRounds())
+                {
+                    StartMenu returnToStart = new StartMenu();
+                    this.Hide();
+                    returnToStart.Show();
+                }
+                else
+                {
+                    sevens.setRoundsPlayed(sevens.getRoundsPlayed() + 1);
+                    setUp(sevens.startGame());
+                    update(sevens.firstMove());
+                    displayPlayersHand();
+                    PlayGame();
+                }
             }
                 
             }

@@ -11,6 +11,7 @@ namespace Sevens
         private int difficulty;
         private Board board;
         private String externalTextFile = @"D:\gameState.txt";
+        private int roundsPlayed;
 
         public Game()
         {
@@ -22,11 +23,14 @@ namespace Sevens
             leaderboard = new List<int>();
             numberOfRounds = roundsInput; //input comes from GUI, where 0 is first option
             difficulty = difficultyInput;
-            board = new Board(difficultyInput);
+
+            roundsPlayed = 0;
         }
 
         public Board startGame()
         {
+            board = new Board(getDifficulty());
+
             Deck deck = new Deck();
             deck.Shuffle();
 
@@ -219,6 +223,11 @@ namespace Sevens
         {
             numberOfRounds = input;
         }
+
+        public void setRoundsPlayed(int input)
+        {
+            roundsPlayed = input;
+        }
         public List<int> getLeaderboard()
         {
             return leaderboard;
@@ -238,6 +247,10 @@ namespace Sevens
             return numberOfRounds;
         }
 
+        public int getRoundsPlayed()
+        {
+            return roundsPlayed;
+        }
         public Boolean fileExists()
         {
             if (File.Exists(externalTextFile)){
