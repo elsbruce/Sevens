@@ -7,6 +7,7 @@ namespace Sevens
     class Game
     {
         private List<int> leaderboard;
+        private int[] playerScores;
         private int numberOfRounds;
         private int difficulty;
         private Board board;
@@ -23,7 +24,7 @@ namespace Sevens
             leaderboard = new List<int>();
             numberOfRounds = roundsInput; //input comes from GUI, where 0 is first option
             difficulty = difficultyInput;
-
+            playerScores = new int[] { 0, 0, 0, 0 };
             roundsPlayed = 0;
         }
 
@@ -215,6 +216,28 @@ namespace Sevens
             }
         }
 
+        public void updatePlayerScores()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                int position = leaderboard.IndexOf(i);
+
+                if (position == 0)
+                {
+                    incrementPlayerScore(i, 5);
+                }
+                else if (position == 1)
+                {
+                    incrementPlayerScore(i, 3);
+                }
+                else if (position == 2)
+                {
+                    incrementPlayerScore(i, 1);
+                }
+
+            }
+        }
+
         public void setDifficulty(int input)
         {
             difficulty = input;
@@ -227,6 +250,11 @@ namespace Sevens
         public void setRoundsPlayed(int input)
         {
             roundsPlayed = input;
+        }
+
+        public void incrementPlayerScore(int index, int input)
+        {
+            playerScores[index] = playerScores[index] + input;
         }
         public List<int> getLeaderboard()
         {
@@ -250,6 +278,11 @@ namespace Sevens
         public int getRoundsPlayed()
         {
             return roundsPlayed;
+        }
+
+        public int[] getPlayerScores()
+        {
+            return playerScores;
         }
         public Boolean fileExists()
         {

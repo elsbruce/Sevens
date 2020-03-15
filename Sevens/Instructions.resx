@@ -120,9 +120,13 @@
   <data name="label1.Text" xml:space="preserve">
     <value> Welcome to Sevens!
 
-When you begin a game you will be dealt a hand of 13 cards. To play you should click which card you wish to place. You may only play a card either one above or one below the cards of the same suit already placed on the board.
+When you begin a game you will be dealt a hand of 13 cards. To play, you should click which card you wish to place. You may only play a card either one above or one below the cards of the same suit already placed on the board.
 The aim of the game is to be the first player to place all your cards, so think tactically - could you hold on to a certain card to block other players from moving?
 
-DETAILS OF SCORING SYSTEM</value>
+You may pass a turn by pressing the pass button, can pause mid round by pressing the pause button such that you can restart the game at a later date, or you can sort the cards either by value or suit.
+
+In each round, you will score 5 points for coming first, 3 points for coming second, 1 point for coming third and no points if you come in last.
+
+Enjoy!</value>
   </data>
 </root>

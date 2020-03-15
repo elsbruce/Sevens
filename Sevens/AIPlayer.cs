@@ -47,5 +47,5 @@ namespace Sevens
             return possibleMoves;
         }
 
-}
     }
+}

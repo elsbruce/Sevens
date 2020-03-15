@@ -28,9 +28,6 @@ namespace Sevens
             else
             {
                 List<int> humanValues = board.getQueue().getHumanPlayer().cardsSuitCounts().OfType<int>().ToList();
-                humanValues.AsReadOnly();
-                List<int> temp = humanValues;
-                temp.Sort();
 
                 //sort human values
                 //create new list of their indexes in position
@@ -39,10 +36,10 @@ namespace Sevens
                 //loops through 4 times, to go through each of the 4 suits in order of how beneficial they are to the human player
                 for (int a = 0; a < 4; a++)
                 {
-                    int i = humanValues.IndexOf(humanValues.Min());
-                    humanValues.Insert(i, 99);
+                    int index = humanValues.IndexOf(humanValues.Min());
+                    humanValues.Insert(index, 99);
 
-                    bestMoves = possibleMoves.FindAll(item => item.getSuit() == i);
+                    bestMoves = possibleMoves.FindAll(item => item.getSuit() == index);
 
                     if (bestMoves.Count == 1)
                     {
@@ -52,20 +49,35 @@ namespace Sevens
                     else if (bestMoves.Count > 1)
                     { //calculates using other AIs
 
-                        board.getQueue().getNextPlayer().getCards();
+                        MediumPlayer temp = new MediumPlayer();
+                        int[] moveScores = new int[possibleMoves.Count];
+                        int max = 0;
+
+                        temp = (MediumPlayer)board.getQueue().getNextPlayer();
                         if (board.getQueue().getCurrentPlayer().GetType().ToString() == "HumanPlayer")
                         {
-                            board.getQueue().getNextPlayer().getCards();
-                            board.getQueue().currentPlayerMinusOne();
+                            temp = (MediumPlayer)board.getQueue().getNextPlayer();
                             board.getQueue().currentPlayerMinusOne();
                         }
                         board.getQueue().currentPlayerMinusOne();
-                        setCardToBePlayed(bestMoves.FirstOrDefault());
-                        break;
-                    }
 
+                        for (int i = 0; i < bestMoves.Count; i++) //loops through possible moves and finds score of each one
+                        {
+                            moveScores[i] = temp.Count(bestMoves.ElementAt(a));
+
+
+                            if (moveScores[i] > max) //if score is the biggest of the possible moves so far, then update cardToReturn
+                            {
+                                max = moveScores[i];
+                                setCardToBePlayed(bestMoves.ElementAt(i));
+                            }
+                            setCardToBePlayed(bestMoves.FirstOrDefault());
+                            break;
+                        }
+
+                    }
                 }
-            }
             }
         }
     }
+}

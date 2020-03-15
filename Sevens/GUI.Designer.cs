@@ -56,7 +56,9 @@
             // Difficulty
             // 
             this.Difficulty.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Difficulty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Difficulty.FormattingEnabled = true;
+            this.Difficulty.ItemHeight = 20;
             this.Difficulty.Items.AddRange(new object[] {
             "Easy",
             "Medium",
@@ -70,7 +72,9 @@
             // Rounds
             // 
             this.Rounds.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Rounds.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Rounds.FormattingEnabled = true;
+            this.Rounds.ItemHeight = 20;
             this.Rounds.Items.AddRange(new object[] {
             "One",
             "Two",
@@ -87,9 +91,10 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label3.Location = new System.Drawing.Point(534, 254);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(534, 247);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(261, 13);
+            this.label3.Size = new System.Drawing.Size(261, 20);
             this.label3.TabIndex = 3;
             this.label3.Text = "Pick a difficulty level:";
             this.label3.Click += new System.EventHandler(this.Label3_Click);
@@ -98,7 +103,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 35F);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(268, 0);
             this.label1.Name = "label1";
@@ -112,9 +117,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label2.Location = new System.Drawing.Point(3, 254);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 227);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(259, 13);
+            this.label2.Size = new System.Drawing.Size(259, 40);
             this.label2.TabIndex = 2;
             this.label2.Text = "How many rounds would you like to play?";
             this.label2.Click += new System.EventHandler(this.Label2_Click);
@@ -143,14 +149,14 @@
             this.menu1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.menu1.Size = new System.Drawing.Size(798, 553);
             this.menu1.TabIndex = 7;
-         
             // 
             // loadPreviousGame
             // 
             this.loadPreviousGame.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.loadPreviousGame.Location = new System.Drawing.Point(534, 505);
+            this.loadPreviousGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadPreviousGame.Location = new System.Drawing.Point(534, 478);
             this.loadPreviousGame.Name = "loadPreviousGame";
-            this.loadPreviousGame.Size = new System.Drawing.Size(261, 23);
+            this.loadPreviousGame.Size = new System.Drawing.Size(261, 50);
             this.loadPreviousGame.TabIndex = 6;
             this.loadPreviousGame.Text = "Resume previous game";
             this.loadPreviousGame.UseVisualStyleBackColor = true;
@@ -159,9 +165,10 @@
             // Instructions
             // 
             this.Instructions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Instructions.Location = new System.Drawing.Point(3, 505);
+            this.Instructions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Instructions.Location = new System.Drawing.Point(3, 478);
             this.Instructions.Name = "Instructions";
-            this.Instructions.Size = new System.Drawing.Size(259, 23);
+            this.Instructions.Size = new System.Drawing.Size(259, 50);
             this.Instructions.TabIndex = 7;
             this.Instructions.Text = "How to play";
             this.Instructions.UseVisualStyleBackColor = true;

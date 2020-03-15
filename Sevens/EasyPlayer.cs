@@ -22,16 +22,18 @@ namespace Sevens
             {
                 setCardToBePlayed(base.getCards().FirstOrDefault());
             }
-
-            List<Card> possibleMoves = getPossibleMoves(board);
-
-            if (possibleMoves.Count == 0)
-            {
-                setCardToBePlayed(base.getCards().FirstOrDefault());
-            }
             else
             {
-                setCardToBePlayed(possibleMoves.First());
+                List<Card> possibleMoves = getPossibleMoves(board);
+
+                if (possibleMoves.Count == 0)
+                {
+                    setCardToBePlayed(base.getCards().FirstOrDefault());
+                }
+                else
+                {
+                    setCardToBePlayed(possibleMoves.First());
+                }
             }
         }
 

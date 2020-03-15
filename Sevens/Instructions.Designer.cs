@@ -74,9 +74,9 @@
             // back
             // 
             this.back.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.back.Location = new System.Drawing.Point(3, 284);
+            this.back.Location = new System.Drawing.Point(3, 283);
             this.back.Name = "back";
-            this.back.Size = new System.Drawing.Size(110, 51);
+            this.back.Size = new System.Drawing.Size(110, 52);
             this.back.TabIndex = 1;
             this.back.Text = "Return to main menu";
             this.back.UseVisualStyleBackColor = true;
@@ -88,10 +88,11 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(119, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(460, 169);
+            this.label1.Size = new System.Drawing.Size(460, 168);
             this.label1.TabIndex = 2;
             this.label1.Text = resources.GetString("label1.Text");
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label1.Click += new System.EventHandler(this.Label1_Click);
             // 
             // Instructions
             // 

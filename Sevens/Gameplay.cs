@@ -51,6 +51,7 @@ namespace Sevens
                 }
             }
             else {
+                sevens.updatePlayerScores();
                 MessageBox.Show("Player " + sevens.getLeaderboard()[0].ToString() + " won.");
                 int humanPosition = 0;
                 for (int i = 0; i < sevens.getLeaderboard().Count; i++)
@@ -372,6 +373,11 @@ namespace Sevens
             displayPlayersHand();
             sevens.getBoard().getQueue().currentPlayerMinusOne();
             PlayGame();
+        }
+
+        private void Label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
