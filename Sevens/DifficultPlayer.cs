@@ -16,7 +16,7 @@ namespace Sevens
 
         public override void determineCardToBePlayed(Board board)
         {
-            // AI players gang up
+            //AI players gang up
             //counts cards of each suit in human player, then plays card of that suit
             List<Card> possibleMoves = getPossibleMoves(board);
             List<Card> bestMoves = new List<Card>();
@@ -39,21 +39,33 @@ namespace Sevens
                 //loops through 4 times, to go through each of the 4 suits in order of how beneficial they are to the human player
                 for (int a = 0; a < 4; a++)
                 {
-                    //      int i = humanValues.IndexOf(humanValues.Min());
-                    //      humanValues.Remove(humanValues.Min());
- 
+                    int i = humanValues.IndexOf(humanValues.Min());
+                    humanValues.Insert(i, 99);
 
-                    temp.ElementAt(a)
                     bestMoves = possibleMoves.FindAll(item => item.getSuit() == i);
 
-                    if (bestMoves.Count != 0)
+                    if (bestMoves.Count == 1)
                     {
                         setCardToBePlayed(bestMoves.FirstOrDefault());
+                        break;
                     }
-                }
+                    else if (bestMoves.Count > 1)
+                    { //calculates using other AIs
 
-                //what if none of this suit
+                        board.getQueue().getNextPlayer().getCards();
+                        if (board.getQueue().getCurrentPlayer().GetType().ToString() == "HumanPlayer")
+                        {
+                            board.getQueue().getNextPlayer().getCards();
+                            board.getQueue().currentPlayerMinusOne();
+                            board.getQueue().currentPlayerMinusOne();
+                        }
+                        board.getQueue().currentPlayerMinusOne();
+                        setCardToBePlayed(bestMoves.FirstOrDefault());
+                        break;
+                    }
+
+                }
+            }
             }
         }
     }
-}

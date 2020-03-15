@@ -61,17 +61,17 @@ namespace Sevens
 
                 if (sevens.getRoundsPlayed() < sevens.getNumberOfRounds())
                 {
-                    StartMenu returnToStart = new StartMenu();
-                    this.Hide();
-                    returnToStart.Show();
-                }
-                else
-                {
                     sevens.setRoundsPlayed(sevens.getRoundsPlayed() + 1);
                     setUp(sevens.startGame());
                     update(sevens.firstMove());
                     displayPlayersHand();
                     PlayGame();
+                }
+                else
+                {
+                    StartMenu returnToStart = new StartMenu();
+                    this.Hide();
+                    returnToStart.Show();
                 }
             }
                 
