@@ -225,6 +225,10 @@ namespace Sevens
                 otherPlayers[(playerNumber - 1)] = temp;
                 tablePanel.Controls.Add(temp, 15, (playerNumber-1));
             }
+
+            pauseButton.BackgroundImage = getImage("Sevens.images.pause.png");
+            pauseButton.BackgroundImageLayout = ImageLayout.Zoom;
+            pauseButton.Text = ("");
         }
 
         public void displayPlayersHand()
@@ -289,7 +293,7 @@ namespace Sevens
                 tablePanel.Controls.Clear();
                 tablePanel.ColumnCount = 3;
                 tablePanel.RowCount = 3;
-
+                tablePanel.BackColor = Color.White;
                 Label messageToUser = new Label();
                 messageToUser.Text = "Please input the number, between 1 and 5, where you would like to save this game position to:";
                 messageToUser.Dock = DockStyle.Fill;

@@ -191,5 +191,8 @@
   <ItemGroup>
     <EmbeddedResource Include="images\loading.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="images\pause.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

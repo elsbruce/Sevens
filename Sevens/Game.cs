@@ -107,7 +107,7 @@ namespace Sevens
             }
         }
 
-        public string convertToSuit(int suit) 
+        public string convertToSuit(int suit)
         {
             if (suit == 0)
             {
@@ -130,40 +130,37 @@ namespace Sevens
         public void Pause(int whereToSave) //saves game state to external text file ( at position specified by the 
         {
 
-            FileStream fout;
-            int size = 100;
-            BinaryWriter bw;
+            //FileStream fout;
+            //int size = 100;
+            //BinaryWriter bw;
 
-            //create a file stream object
+            ////create a file stream object
 
-            fout = new FileStream(@"D:\GAMESTATE.bin", FileMode.OpenOrCreate, FileAccess.Write);
+            //fout = new FileStream(@"D:\GAMESTATE.bin", FileMode.OpenOrCreate, FileAccess.Write);
 
-            //create a binary writer object
-            bw = new BinaryWriter(fout);
+            ////create a binary writer object
+            //bw = new BinaryWriter(fout);
 
-            //set file position where to write data
-            fout.Position = whereToSave * size;
-            //write data
-            bw.Write(getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
-            bw.Flush();
-            //write data
+            ////set file position where to write data
+            //fout.Position = whereToSave * size;
+            ////write data
+            //bw.Write(getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
+            //bw.Flush();
+            ////write data
 
-            bw.Close();
-            fout.Close();
-
+            //bw.Close();
+            //fout.Close();
+            String[] text = new String[5];
+            text = File.ReadAllLines(externalTextFile); //HERE
+            text[whereToSave - 1] = getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved();
+            File.WriteAllLines(@"D:\Gamestate.txt", text);
         }
-
+    
 
         public void loadPrevious(int whichGame) //reads in game state from a previous game from textfile and sets up a new game to have all the values and states of the previous game
         {
-            int size = 100;
-            FileStream fn;
-            BinaryReader binaryReader;
-            fn = new FileStream(@"D:\GAMESTATE.bin", FileMode.Open, FileAccess.Read);
-            binaryReader = new BinaryReader(fn);
+            whichGame = 0; //haven't set up direct access yet
 
-            fn.Seek(whichGame * size, 0);
-            String t = binaryReader.ReadString();
             String[] text;
 
 
