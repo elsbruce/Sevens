@@ -84,9 +84,13 @@ namespace Sevens
                 board.getQueue().getHumanPlayer().removeCard(cardToBePlayed);
                 return board;
             }
-            else
+            else if (board.validMove(cardToBePlayed) == "n")
             {
                 return null;
+            }
+            else
+            {
+                return board;
             }
 
         }
