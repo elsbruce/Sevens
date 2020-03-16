@@ -24,7 +24,15 @@ namespace Sevens
             return new Card(7,0);
         }
 
-       
+       public override Boolean handEmpty()
+        {
+            return true;
+        }
+
+        public override int getCurrentSize()
+        {
+            return 0;
+        }
     }
  
 }

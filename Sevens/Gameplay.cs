@@ -51,18 +51,20 @@ namespace Sevens
                 }
             }
             else {
-                sevens.updatePlayerScores();
                 MessageBox.Show("Player " + sevens.getLeaderboard()[0].ToString() + " won.");
-                int humanPosition = 0;
                 for (int i = 0; i < sevens.getLeaderboard().Count; i++)
                  {
-                    humanPosition = i;
+                    if (sevens.getLeaderboard()[i] == 0)
+                    {
+                        MessageBox.Show("You came in position " + (i+ 1));
+                    }
                  }
-                MessageBox.Show("You came in position " + (humanPosition + 1));
+
 
                 if (sevens.getRoundsPlayed() < sevens.getNumberOfRounds())
                 {
                     sevens.setRoundsPlayed(sevens.getRoundsPlayed() + 1);
+                    tablePanel.Controls.Clear();
                     setUp(sevens.startGame());
                     update(sevens.firstMove());
                     displayPlayersHand();
@@ -114,8 +116,7 @@ namespace Sevens
             if (humanTurn == null)
             {
                 MessageBox.Show("This is not a valid move.");
-                sevens.getBoard().getQueue().currentPlayerMinusOne();
-                PlayGame();
+                Turn(null);
             }
             else
             {
@@ -221,7 +222,8 @@ namespace Sevens
                 temp.Name = "Player" + playerNumber;
                 temp.Size = new Size(42, 68);
                 temp.Text = board.getSizeOfPlayersHands()[playerNumber].ToString();
-                temp.Font = new Font(temp.Font, FontStyle.Bold);
+                temp.Font = new Font("Arial", 18, FontStyle.Bold);
+                temp.ForeColor = Color.Black;
                 otherPlayers[(playerNumber - 1)] = temp;
                 tablePanel.Controls.Add(temp, 15, (playerNumber-1));
             }

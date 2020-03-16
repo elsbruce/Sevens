@@ -63,7 +63,7 @@ namespace Sevens
             listOfCards = MergeSort(listOfCards, bySuit);
         }
 
-        public Boolean handEmpty()
+        public virtual Boolean handEmpty()
         {
             if (listOfCards.Count == 0)
             {
@@ -173,7 +173,7 @@ namespace Sevens
         {
             return (left.First().getSuit() <= right.First().getSuit());
         }
-        public int getCurrentSize()
+        public virtual int getCurrentSize()
         {
             return listOfCards.Count;
         }

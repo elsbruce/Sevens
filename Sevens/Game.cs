@@ -99,10 +99,12 @@ namespace Sevens
         {
             if (board.getQueue().getHumanPlayer().handEmpty())
             {
+                updatePlayerScores("h");
                 return "Human wins";
             }
             else if (board.checkEnd())
             {
+                updatePlayerScores();
                 return "Game over";
             }
             else
@@ -133,27 +135,6 @@ namespace Sevens
 
         public void Pause(int whereToSave) //saves game state to external text file ( at position specified by the 
         {
-
-            //FileStream fout;
-            //int size = 100;
-            //BinaryWriter bw;
-
-            ////create a file stream object
-
-            //fout = new FileStream(@"D:\GAMESTATE.bin", FileMode.OpenOrCreate, FileAccess.Write);
-
-            ////create a binary writer object
-            //bw = new BinaryWriter(fout);
-
-            ////set file position where to write data
-            //fout.Position = whereToSave * size;
-            ////write data
-            //bw.Write(getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved());
-            //bw.Flush();
-            ////write data
-
-            //bw.Close();
-            //fout.Close();
             String[] text = new String[5];
             text = File.ReadAllLines(externalTextFile); //HERE
             text[whereToSave - 1] = getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved();
@@ -163,15 +144,13 @@ namespace Sevens
 
         public void loadPrevious(int whichGame) //reads in game state from a previous game from textfile and sets up a new game to have all the values and states of the previous game
         {
-            whichGame = 0; //haven't set up direct access yet
+            whichGame = 0; 
 
             String[] text;
 
 
             if (File.Exists(externalTextFile))
-            {
-              // using (BinaryReader reader = new BinaryReader(File.Open(fileName, FileMode.Open)))
-                
+            {               
                 text = File.ReadAllLines(externalTextFile);
                 setRounds(Int32.Parse(text[whichGame].Substring(0, 1)));
                 setDifficulty(Int32.Parse(text[whichGame].Substring(1, 1)));
@@ -216,7 +195,33 @@ namespace Sevens
                 board.setAces(Array.ConvertAll(temp, element => bool.Parse(element)));
             }
         }
+        public void updatePlayerScores(String s)
+        {
+            for (int i = 0; i < leaderboard.Count; i++)
+            {
+                int whichPlayer = leaderboard[i];
 
+                if (i == 0)
+                {
+                    incrementPlayerScore(whichPlayer, 5);
+                }
+                else if (i == 1)
+                {
+                    incrementPlayerScore(whichPlayer, 3);
+                }
+                else if (i == 2)
+                {
+                    incrementPlayerScore(whichPlayer, 1);
+                }
+
+            }
+            //for remaining players not on leaderboard
+
+             int[] sizeOfHands = new int[4];
+             sizeOfHands  = board.getSizeOfPlayersHands();   
+            
+            //CODE HERE TO ASSIGN POINTS VALUES APPROPRIATELY
+        }
         public void updatePlayerScores()
         {
             for (int i = 0; i < 4; i++)
