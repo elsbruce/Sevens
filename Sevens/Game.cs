@@ -97,17 +97,17 @@ namespace Sevens
 
         public String isOver()
         {
-            if (board.getQueue().getHumanPlayer().handEmpty())
-            {
-                updatePlayerScores("h");
-                return "Human wins";
-            }
-            else if (board.checkEnd())
+            if (board.checkEnd())
             {
                 updatePlayerScores();
                 return "Game over";
             }
-            else
+            else if (board.getQueue().getHumanPlayer().handEmpty())
+            {
+                    updatePlayerScores("h");
+                    return "Human wins";
+            }
+                else
             {
                 return "N";
             }
