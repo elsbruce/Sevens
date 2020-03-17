@@ -52,10 +52,9 @@ namespace Sevens
         public abstract Card Move();
         public abstract Card retrieveCardToBePlayed(Board board);
 
-        public Card removeCard(Card cardToBeRemoved)
+        public void removeCard(Card cardToBeRemoved)
         {
             listOfCards.Remove(cardToBeRemoved);
-            return cardToBeRemoved;
         }
 
         public void sortCards(Boolean bySuit)
