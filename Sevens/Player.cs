@@ -26,7 +26,7 @@ namespace Sevens
             {
                 if (card.equalsSevenOfDiamonds())
                 {
-                    listOfCards.Remove(card);
+                    removeCard(card);
                     return true;
                 }
             }
