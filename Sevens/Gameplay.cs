@@ -33,6 +33,7 @@ namespace Sevens
             sevens = new Game();
             sevens.loadPrevious(whereToReadFrom);
             setUp(sevens.getBoard());
+            resumeFromPreviousGame();
             displayPlayersHand();
             update(sevens.getBoard());
             PlayGame();
@@ -231,6 +232,17 @@ namespace Sevens
             pauseButton.BackgroundImage = getImage("Sevens.images.pause.png");
             pauseButton.BackgroundImageLayout = ImageLayout.Zoom;
             pauseButton.Text = ("");
+        }
+
+        public void resumeFromPreviousGame()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int value = sevens.getBoard().getMin()[i]; value < sevens.getBoard().getMax()[i]; value++)
+                {
+                    cardPlaced(i, value);
+                }
+            }
         }
 
         public void displayPlayersHand()

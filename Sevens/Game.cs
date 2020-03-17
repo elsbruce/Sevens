@@ -144,14 +144,14 @@ namespace Sevens
 
         public void loadPrevious(int whichGame) //reads in game state from a previous game from textfile and sets up a new game to have all the values and states of the previous game
         {
-            whichGame = 0; 
-
             String[] text;
 
 
             if (File.Exists(externalTextFile))
             {               
                 text = File.ReadAllLines(externalTextFile);
+
+               
                 setRounds(Int32.Parse(text[whichGame].Substring(0, 1)));
                 setDifficulty(Int32.Parse(text[whichGame].Substring(1, 1)));
                 board = new Board(getDifficulty());

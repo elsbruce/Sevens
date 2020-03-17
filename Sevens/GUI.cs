@@ -106,8 +106,8 @@ namespace Sevens
 
             if (Int32.TryParse(menu1.GetControlFromPosition(1, 1).Text, out position) && (position <= 5) && (position >= 1))
             {
-                MessageBox.Show("ay");
                 this.Hide();
+                position = position - 1;
                 Gameplay gp = new Gameplay(position);
                 gp.Show();
 
