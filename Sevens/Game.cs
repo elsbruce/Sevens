@@ -53,7 +53,8 @@ namespace Sevens
         {
             int playerFinished = board.getQueue().playerFinished();
 
-            if (playerFinished != -1) {
+            if (playerFinished != -1)
+            {
                 leaderboard.Add(playerFinished);
             }
             Card cardToBePlayed = board.getQueue().getNextPlayer().retrieveCardToBePlayed(board);
@@ -104,10 +105,10 @@ namespace Sevens
             }
             else if (board.getQueue().getHumanPlayer().handEmpty())
             {
-                    updatePlayerScores("h");
-                    return "Human wins";
+                updatePlayerScores("h");
+                return "Human wins";
             }
-                else
+            else
             {
                 return "N";
             }
@@ -140,7 +141,7 @@ namespace Sevens
             text[whereToSave - 1] = getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved();
             File.WriteAllLines(@"D:\Gamestate.txt", text);
         }
-    
+
 
         public void loadPrevious(int whichGame) //reads in game state from a previous game from textfile and sets up a new game to have all the values and states of the previous game
         {
@@ -148,10 +149,10 @@ namespace Sevens
 
 
             if (File.Exists(externalTextFile))
-            {               
+            {
                 text = File.ReadAllLines(externalTextFile);
 
-               
+
                 setRounds(Int32.Parse(text[whichGame].Substring(0, 1)));
                 setDifficulty(Int32.Parse(text[whichGame].Substring(1, 1)));
                 board = new Board(getDifficulty());
@@ -166,6 +167,7 @@ namespace Sevens
                 Array.Resize(ref minsAndMaxes, 4);
                 Array.Reverse(maxes);
                 Array.Resize(ref maxes, 4);
+                Array.Reverse(maxes);
                 board.setMin(Array.ConvertAll(minsAndMaxes, element => Int32.Parse(element)));
                 board.setMax(Array.ConvertAll(maxes, element => Int32.Parse(element)));
 
@@ -179,7 +181,7 @@ namespace Sevens
 
                     while (counter < (cardString.Length - 1)) //-1 as final card is invalid, just created due to final /
                     {
-                        board.getQueue().getPlayerAt(i).addToHand(new Card(Int32.Parse(cardString[counter].Substring(1)), cardString[counter].Substring(0,1)));
+                        board.getQueue().getPlayerAt(i).addToHand(new Card(Int32.Parse(cardString[counter].Substring(1)), cardString[counter].Substring(0, 1)));
                         counter++;
                     }
                     counter = 0;
@@ -217,9 +219,9 @@ namespace Sevens
             }
             //for remaining players not on leaderboard
 
-             int[] sizeOfHands = new int[4];
-             sizeOfHands  = board.getSizeOfPlayersHands();   
-            
+            int[] sizeOfHands = new int[4];
+            sizeOfHands = board.getSizeOfPlayersHands();
+
             //CODE HERE TO ASSIGN POINTS VALUES APPROPRIATELY
         }
         public void updatePlayerScores()
@@ -303,7 +305,8 @@ namespace Sevens
         }
         public Boolean fileExists()
         {
-            if (File.Exists(externalTextFile)){
+            if (File.Exists(externalTextFile))
+            {
                 return true;
             }
             else

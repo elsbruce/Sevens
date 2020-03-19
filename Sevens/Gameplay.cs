@@ -32,14 +32,14 @@ namespace Sevens
             InitializeComponent();
             sevens = new Game();
             sevens.loadPrevious(whereToReadFrom);
-            setUp(sevens.getBoard());
-            resumeFromPreviousGame();
+            setUp(sevens.getBoard()); //creates all objects
+            resumeFromPreviousGame(); //sets up the board
             displayPlayersHand();
             update(sevens.getBoard());
             PlayGame();
         }
 
-        private void PlayGame()
+        private void PlayGame() //if the game is not over, loops through each player's turn, if game is over displays appropriate messages
         {
             if (sevens.isOver() == "N")
             {
@@ -51,15 +51,16 @@ namespace Sevens
                     b = sevens.nextMove();
                 }
             }
-            else {
+            else
+            {
                 MessageBox.Show("Player " + sevens.getLeaderboard()[0].ToString() + " won.");
                 for (int i = 0; i < sevens.getLeaderboard().Count; i++)
-                 {
+                {
                     if (sevens.getLeaderboard()[i] == 0)
                     {
-                        MessageBox.Show("You came in position " + (i+ 1));
+                        MessageBox.Show("You came in position " + (i + 1));
                     }
-                 }
+                }
 
 
                 if (sevens.getRoundsPlayed() < sevens.getNumberOfRounds())
@@ -78,13 +79,13 @@ namespace Sevens
                     returnToStart.Show();
                 }
             }
-                
-            }
-        
+
+        }
+
 
         private Boolean Turn(Board b)
         {
-       
+
             if (b == null)
             {
                 // if returns null then switch buttons on
@@ -202,14 +203,14 @@ namespace Sevens
                 for (int valueCounter = 1; valueCounter < 15; valueCounter++)
                 {
                     PictureBox temp = new PictureBox();
-                    temp.BackgroundImage = getImage("Sevens.images." + sevens.convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg");         
+                    temp.BackgroundImage = getImage("Sevens.images." + sevens.convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg");
                     temp.BackgroundImageLayout = ImageLayout.Zoom;
                     temp.Dock = DockStyle.Fill;
-                  //  temp.Name = (sevens.convertToSuit(suitCounter) + valueCounter.ToString());
+                    //  temp.Name = (sevens.convertToSuit(suitCounter) + valueCounter.ToString());
                     temp.Size = new Size(42, 68);
                     temp.Visible = false;
                     c[suitCounter, (valueCounter - 1)] = temp;
-                    tablePanel.Controls.Add(temp, (valueCounter-1), suitCounter);
+                    tablePanel.Controls.Add(temp, (valueCounter - 1), suitCounter);
                 }
             }
 
@@ -226,7 +227,7 @@ namespace Sevens
                 temp.Font = new Font("Arial", 18, FontStyle.Bold);
                 temp.ForeColor = Color.Black;
                 otherPlayers[(playerNumber - 1)] = temp;
-                tablePanel.Controls.Add(temp, 15, (playerNumber-1));
+                tablePanel.Controls.Add(temp, 15, (playerNumber - 1));
             }
 
             pauseButton.BackgroundImage = getImage("Sevens.images.pause.png");
@@ -271,7 +272,7 @@ namespace Sevens
         private void SkipTurn_Click(object sender, EventArgs e)
         {
             PlayGame();
-        
+
         }
 
         private void TablePanel_Paint(object sender, PaintEventArgs e)
@@ -327,11 +328,11 @@ namespace Sevens
         private void TextEntered_Click(object sender, EventArgs e)
         {
             int whereToSave;
-  
-            if (Int32.TryParse(tablePanel.GetControlFromPosition(1,1).Text, out whereToSave) && (whereToSave <= 5) && (whereToSave >= 1))
+
+            if (Int32.TryParse(tablePanel.GetControlFromPosition(1, 1).Text, out whereToSave) && (whereToSave <= 5) && (whereToSave >= 1))
             {
-                MessageBox.Show("ay");
                 sevens.Pause(whereToSave);
+                returnToStartMenu();
             }
             else
             {
@@ -342,14 +343,11 @@ namespace Sevens
 
         private Bitmap getImage(String path)
         {
-         
+
             if (Assembly.GetEntryAssembly().GetManifestResourceStream(path) == null)
             {
                 MessageBox.Show("Some of the necessary game files cannot be accessed, so the game cannot be run.");
-                StartMenu sm = new StartMenu();
-                this.Hide();
-                sm.Show();
-                //end
+                returnToStartMenu();
                 return null;
             }
             else
@@ -374,7 +372,7 @@ namespace Sevens
                 tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
             }
 
-            sevens.getBoard().getQueue().getHumanPlayer().sortCards(false); 
+            sevens.getBoard().getQueue().getHumanPlayer().sortCards(false);
             displayPlayersHand();
             sevens.getBoard().getQueue().currentPlayerMinusOne();
             PlayGame();
@@ -387,7 +385,7 @@ namespace Sevens
                 tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
             }
 
-            sevens.getBoard().getQueue().getHumanPlayer().sortCards(true); 
+            sevens.getBoard().getQueue().getHumanPlayer().sortCards(true);
             displayPlayersHand();
             sevens.getBoard().getQueue().currentPlayerMinusOne();
             PlayGame();
@@ -396,6 +394,13 @@ namespace Sevens
         private void Label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void returnToStartMenu()
+        {
+            StartMenu start = new StartMenu();
+            this.Hide();
+            start.Show();
         }
     }
 }
