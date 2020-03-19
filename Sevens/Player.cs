@@ -9,10 +9,12 @@ namespace Sevens
     abstract class Player
     {
         List<Card> listOfCards;
+        Boolean passToken;
 
         public Player()
         {
             listOfCards = new List<Card>();
+            passToken = false;
         }
 
         public void addToHand(Card newCard) //adds a card to the end of card queue
@@ -180,6 +182,16 @@ namespace Sevens
         public List<Card> getCards() //returns hand
         {
             return listOfCards;
+        }
+
+        public Boolean getPassToken()
+        {
+            return passToken;
+        }
+
+        public void setPassToken(Boolean input)
+        {
+            passToken = input;
         }
     }
 }

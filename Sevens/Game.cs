@@ -244,6 +244,17 @@ namespace Sevens
             }
         }
 
+        public void assignPassToken(int toWhichPlayer)
+        {
+            int whoHasPassToken = board.getQueue().whoHasPassToken();
+            if (whoHasPassToken != -1)
+            {
+                board.getQueue().getPlayerAt(whoHasPassToken).setPassToken(false);
+            }
+
+            board.getQueue().getPlayerAt(toWhichPlayer).setPassToken(true);
+        }
+
         public void setDifficulty(int input)
         {
             difficulty = input;

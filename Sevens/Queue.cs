@@ -122,5 +122,17 @@ namespace Sevens
         {
             currentplayer = input;
         }
+
+        public int whoHasPassToken() //returns the index of the player with the pass token, unless no one has the pass token, then returns -1
+        {
+            for (int i = 0; i < sizeOfQueue; i++)
+            {
+                if (getPlayerAt(i).getPassToken() == true)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
 }
