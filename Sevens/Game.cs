@@ -77,6 +77,8 @@ namespace Sevens
 
         public Board humanPlay(String indexOfCard)
         {
+            
+            if(indexOfCard==null) return board;
             Card cardToBePlayed = board.getQueue().getHumanPlayer().getCards()[(Convert.ToInt32(indexOfCard))];
 
             if (board.validMove(cardToBePlayed) == "y")
