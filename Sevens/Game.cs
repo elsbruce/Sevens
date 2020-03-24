@@ -77,6 +77,8 @@ namespace Sevens
 
         public Board humanPlay(String indexOfCard) //parsed the position of the card to be played in the player's hand, then adds the card to board if it is valid, 
         {
+            
+            if(indexOfCard==null) return board;
             Card cardToBePlayed = board.getQueue().getHumanPlayer().getCards()[(Convert.ToInt32(indexOfCard))];
 
             if (board.validMove(cardToBePlayed) == "y")
