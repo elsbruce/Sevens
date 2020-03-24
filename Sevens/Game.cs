@@ -28,7 +28,7 @@ namespace Sevens
             roundsPlayed = 0;
         }
 
-        public Board startGame()
+        public Board startGame() //creates new board, shuffles and deals cards
         {
             board = new Board(getDifficulty());
 
@@ -44,7 +44,7 @@ namespace Sevens
 
             return board;
         }
-        public Board firstMove() //repetition between here and play, combine into one method
+        public Board firstMove() //plays seven of diamonds
         {
             board.sevenOfDiamonds();
             return board;
@@ -75,7 +75,7 @@ namespace Sevens
             }
         }
 
-        public Board humanPlay(String indexOfCard)
+        public Board humanPlay(String indexOfCard) //parsed the position of the card to be played in the player's hand, then adds the card to board if it is valid, 
         {
             Card cardToBePlayed = board.getQueue().getHumanPlayer().getCards()[(Convert.ToInt32(indexOfCard))];
 
@@ -96,7 +96,7 @@ namespace Sevens
 
         }
 
-        public String isOver()
+        public String isOver() //checks whether board has all cards added to it, and whether the human player has no cards
         {
             if (board.checkEnd())
             {
@@ -114,7 +114,7 @@ namespace Sevens
             }
         }
 
-        public string convertToSuit(int suit)
+        public string convertToSuit(int suit) //takes an integer (from 0 to 3) converts from a number to its string equivalent
         {
             if (suit == 0)
             {
@@ -134,7 +134,7 @@ namespace Sevens
             }
         }
 
-        public void Pause(int whereToSave) //saves game state to external text file ( at position specified by the 
+        public void Pause(int whereToSave) //saves game state to external text file (at line specified by the int parsed to the method)
         {
             String[] text = new String[5];
             text = File.ReadAllLines(externalTextFile); //HERE
@@ -197,7 +197,7 @@ namespace Sevens
                 board.setAces(Array.ConvertAll(temp, element => bool.Parse(element)));
             }
         }
-        public void updatePlayerScores(String s)
+        public void updatePlayerScores(String s) //takes a string, such that the method is specific for human player, 
         {
             for (int i = 0; i < leaderboard.Count; i++)
             {

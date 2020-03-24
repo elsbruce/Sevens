@@ -67,6 +67,10 @@ namespace Sevens
                 {
                     sevens.setRoundsPlayed(sevens.getRoundsPlayed() + 1);
                     tablePanel.Controls.Clear();
+                    SortSuit.Show();
+                    sortValue.Show();
+                    pauseButton.Show();
+                    skipTurnButton.Show();
                     setUp(sevens.startGame());
                     update(sevens.firstMove());
                     displayPlayersHand();
@@ -114,7 +118,10 @@ namespace Sevens
         {
             Button s = (Button)sender;
             Board humanTurn = sevens.humanPlay(s.Name);
-
+            if (s.Name == "skipTurnButton") {
+                PlayGame();
+                }
+            else {
             if (humanTurn == null)
             {
                 MessageBox.Show("This is not a valid move.");
@@ -131,7 +138,7 @@ namespace Sevens
                 disablePlayerButtons();
                 PlayGame();
             }
-
+}
 
         }
         private void update(Board board)
