@@ -10,10 +10,11 @@ namespace Sevens
     {
        public Card[] deck;
        public int frontPointer;
+        public const int SIZEOFDECK = 52;
 
         public Deck() //creates deck with all cards
         {
-            deck = new Card[52]; 
+            deck = new Card[SIZEOFDECK]; 
             frontPointer = 0;
 
             int counter = 0;
@@ -32,11 +33,11 @@ namespace Sevens
             Card temp;
             Random random = new Random();
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < SIZEOFDECK; i++)
             {
 
-                int first = random.Next(52);
-                int second = random.Next(52);
+                int first = random.Next(SIZEOFDECK);
+                int second = random.Next(SIZEOFDECK);
                 temp = deck[first];
                 deck[first] = deck[second];
                 deck[second] = temp;
@@ -54,7 +55,7 @@ namespace Sevens
 
         public Boolean isEmpty() //if no cards are in deck (front of deck is at position 52- a position which doesn't exist), return true
         {
-            if (frontPointer >= 52)
+            if (frontPointer >= SIZEOFDECK)
             {
                 return true;
             }
