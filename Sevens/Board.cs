@@ -34,7 +34,7 @@ namespace Sevens
 
             for (int i = 0; i < NUMBEROFPLAYERS; i++)
             {
-                sizeOfPlayersHands[i] = queue.getQueue()[i].getCurrentSize();
+                sizeOfPlayersHands[i] = queue.GetQueue()[i].getCurrentSize();
             }
 
             return sizeOfPlayersHands;
@@ -97,7 +97,7 @@ namespace Sevens
             Boolean sevenFound;
             do
             {
-                sevenFound = queue.getNextPlayer().CheckSevenDiamonds();
+                sevenFound = queue.GetNextPlayer().CheckSevenDiamonds();
             } while (!sevenFound); 
 
             sevens[0] = true;
@@ -128,7 +128,7 @@ namespace Sevens
             {
                 board = board + max[i].ToString() + "/";
             }
-            foreach (Player p in getQueue().getQueue()) //if dummyplayers
+            foreach (Player p in getQueue().GetQueue()) //if dummyplayers
             {
                 foreach (String s in p.getStringArrayOfCards())
                 {
@@ -139,7 +139,7 @@ namespace Sevens
                 board = board + "~";
             }
 
-            board = board + getQueue().getCurrentPlayerIndex().ToString() + "~";
+            board = board + getQueue().GetCurrentPlayerIndex().ToString() + "~";
 
             for (int i = 0; i < 4; i++)
             {

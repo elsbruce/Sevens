@@ -35,9 +35,9 @@ namespace Sevens
             Deck deck = new Deck();
             deck.Shuffle();
 
-            while (!deck.isEmpty())
+            while (!deck.IsEmpty())
             {
-                board.getQueue().getNextPlayer().addToHand(deck.getNextCard());
+                board.getQueue().GetNextPlayer().addToHand(deck.GetNextCard());
                 //loops through players, in order to add a card to each player in the queue's hands in turn
 
             }
@@ -51,17 +51,17 @@ namespace Sevens
         }
         public Board nextMove() //gets the move from the next player in the queue, and adds it to the board (if possible)
         {
-            int playerFinished = board.getQueue().playerFinished();
+            int playerFinished = board.getQueue().PlayerFinished();
 
             if (playerFinished != -1)
             {
                 leaderboard.Add(playerFinished);
             }
-            Card cardToBePlayed = board.getQueue().getNextPlayer().retrieveCardToBePlayed(board);
+            Card cardToBePlayed = board.getQueue().GetNextPlayer().retrieveCardToBePlayed(board);
 
             if (board.validMove(cardToBePlayed).Equals("y"))
             {
-                board.Add(board.getQueue().getCurrentPlayer().Move());
+                board.Add(board.getQueue().GetCurrentPlayer().Move());
                 return board;
             }
             else if (board.validMove(cardToBePlayed).Equals("n"))
@@ -77,12 +77,12 @@ namespace Sevens
 
         public Board humanPlay(String indexOfCard) //parsed the position of the card to be played in the player's hand, then adds the card to board if it is valid, 
         {
-            Card cardToBePlayed = board.getQueue().getHumanPlayer().getCards()[(Convert.ToInt32(indexOfCard))];
+            Card cardToBePlayed = board.getQueue().GetHumanPlayer().getCards()[(Convert.ToInt32(indexOfCard))];
 
             if (board.validMove(cardToBePlayed) == "y")
             {
                 board.Add(cardToBePlayed);
-                board.getQueue().getHumanPlayer().removeCard(cardToBePlayed);
+                board.getQueue().GetHumanPlayer().removeCard(cardToBePlayed);
                 return board;
             }
             else if (board.validMove(cardToBePlayed) == "n")
@@ -103,7 +103,7 @@ namespace Sevens
                 updatePlayerScores();
                 return "Game over";
             }
-            else if (board.getQueue().getHumanPlayer().handEmpty())
+            else if (board.getQueue().GetHumanPlayer().handEmpty())
             {
                 updatePlayerScores("h");
                 return "Human wins";
@@ -181,13 +181,13 @@ namespace Sevens
 
                     while (counter < (cardString.Length - 1)) //-1 as final card is invalid, just created due to final /
                     {
-                        board.getQueue().getPlayerAt(i).addToHand(new Card(Int32.Parse(cardString[counter].Substring(1)), cardString[counter].Substring(0, 1)));
+                        board.getQueue().GetPlayerAt(i).addToHand(new Card(Int32.Parse(cardString[counter].Substring(1)), cardString[counter].Substring(0, 1)));
                         counter++;
                     }
                     counter = 0;
                 }
 
-                board.getQueue().setCurrentPlayerIndex(Int32.Parse(playerCards[4]));
+                board.getQueue().SetCurrentPlayerIndex(Int32.Parse(playerCards[4]));
                 String[] temp = new String[4];
                 temp = playerCards[5].Split('/');
                 Array.Resize(ref temp, 4);
@@ -248,13 +248,13 @@ namespace Sevens
 
         public void assignPassToken(int toWhichPlayer)
         {
-            int whoHasPassToken = board.getQueue().whoHasPassToken();
+            int whoHasPassToken = board.getQueue().WhoHasPassToken();
             if (whoHasPassToken != -1)
             {
-                board.getQueue().getPlayerAt(whoHasPassToken).setPassToken(false);
+                board.getQueue().GetPlayerAt(whoHasPassToken).setPassToken(false);
             }
 
-            board.getQueue().getPlayerAt(toWhichPlayer).setPassToken(true);
+            board.getQueue().GetPlayerAt(toWhichPlayer).setPassToken(true);
         }
 
         public void setDifficulty(int input)

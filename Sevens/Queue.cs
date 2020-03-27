@@ -5,93 +5,86 @@ namespace Sevens
     class Queue
     {
         private Player[] players;
-      //  private int head; //why have head and tail?
-     //   private int tail;
         private int currentplayer;
-        public int sizeOfQueue;
+        public const int SIZEOFQUEUE = 4;
 
+        //difficulty input - integer - stores the difficulty that the AI players are to be
+        //creates an array of players with the size of the constant "SIZEOFQUEUE", sets the first player in the array to be the human player, and creates the remaining players as AI players according to the difficulty input
         public Queue(int difficultyInput)
         {
-            sizeOfQueue = 4;
 
-            players = new Player[sizeOfQueue];
+            players = new Player[SIZEOFQUEUE];
             players[0] = new HumanPlayer(); //human player
 
             if (difficultyInput == 0)
             {
-                for (int x = 1; x < sizeOfQueue; x++)
+                for (int x = 1; x < SIZEOFQUEUE; x++)
                 {
                     players[x] = new EasyPlayer(); //add 3 Easy AI players
                 }
             }
             else if (difficultyInput == 1)
             {
-                for (int x = 1; x < sizeOfQueue; x++)
+                for (int x = 1; x < SIZEOFQUEUE; x++)
                 {
                     players[x] = new MediumPlayer(); //add 3 Medium AI players
                 }
             }
             else
             {
-                for (int x = 1; x < sizeOfQueue; x++)
+                for (int x = 1; x < SIZEOFQUEUE; x++)
                 {
                     players[x] = new DifficultPlayer(); //add 3 Difficult AI players
                 }
             }
 
-          //  head = 0;
-            currentplayer = 0;
-
+            SetCurrentPlayerIndex(0);
         }
 
-        public Player[] getQueue()
+
+        //returns Player at current player index
+        public Player GetCurrentPlayer()
         {
-            return players;
+            return GetPlayerAt(GetCurrentPlayerIndex());
         }
 
-        public Player getCurrentPlayer()
+
+        //increments currentPlayerIndex to the next Player in the circular queue, by adding one and calculating the modulus of this with the SIZEOFQUEUE constant integer
+        //returns the player at the currentPlayerIndex
+        public Player GetNextPlayer()
         {
-            return players[currentplayer];
+            SetCurrentPlayerIndex((GetCurrentPlayerIndex() + 1) % SIZEOFQUEUE);
+
+            return GetCurrentPlayer();
         }
 
-        public int getCurrentPlayerIndex()
+        //returns the player at position 0, as this player is always the humanPlayer
+        public Player GetHumanPlayer()
         {
-            return currentplayer;
-        }
-        
-        public Player getNextPlayer()
-        {
-            currentplayer = (currentplayer + 1) % sizeOfQueue;
-            
-            return players[currentplayer];
+            return GetPlayerAt(0);
         }
 
-        public Player getHumanPlayer(){
-            return getPlayerAt(0);
-        }
-
-        public Player getPlayerAt(int position)
+        //sets current player index to index - 1, but if current player index equals 0 then the current player index goes to the back of the queue (the size of the queue minus one)
+        public void CurrentPlayerMinusOne()
         {
-            return players[position];
-        }
-
-        public void currentPlayerMinusOne()
-        {
-            if (currentplayer == 0)
+            if (GetCurrentPlayerIndex() == 0)
             {
-                setCurrentPlayerIndex(sizeOfQueue - 1);
+                SetCurrentPlayerIndex(SIZEOFQUEUE - 1);
             }
             else
             {
-                setCurrentPlayerIndex(currentplayer - 1);
+                SetCurrentPlayerIndex(currentplayer - 1);
             }
         }
-      
-        public Boolean isEmpty() //returns true if all players are dummy players
+
+        //loops through each of the players in the queue, and if any of the players are not a dummy then returns false
+        //if all players are looped through without returning anything, then all players are dummys
+        //returns a Boolean, which is true if all players are dummys
+        public Boolean AllPlayersAreDummy()
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < SIZEOFQUEUE; i++)
             {
-                if (players[i] is DummyPlayer)
+                if (!(players[i] is DummyPlayer))
                 {
                     return false;
                 }
@@ -99,36 +92,53 @@ namespace Sevens
             return true;
         }
 
-
-        public int playerFinished() //replaces current player with a dummy player within the queue
+        //calls handEmpty on the current player, if it returns true then this player's position in the queue is replaced by a dummy player
+        //if handEmpty returned true, the position of the current player in the queue is returned as an integer, else -1 is returned
+        public int PlayerFinished()
         {
-            if (getCurrentPlayer().handEmpty())
+            if (GetCurrentPlayer().handEmpty())
             {
-                players[getCurrentPlayerIndex()] = new DummyPlayer();
-                Card bodge = new Card(7,0);
-                players[getCurrentPlayerIndex()].addToHand(bodge);
-                return getCurrentPlayerIndex();
+                players[GetCurrentPlayerIndex()] = new DummyPlayer();
+                Card bodge = new Card(7, 0);
+                players[GetCurrentPlayerIndex()].addToHand(bodge);
+                return GetCurrentPlayerIndex();
             }
 
             return -1;
         }
 
-
-        public void setCurrentPlayerIndex(int input)
+        //loops through each of the players, and calls getPassToken on each player
+        //returns an integer of the index of the player with the pass token, if a player has the pass token, else returns -1
+        public int WhoHasPassToken()
         {
-            currentplayer = input;
-        }
-
-        public int whoHasPassToken() //returns the index of the player with the pass token, unless no one has the pass token, then returns -1
-        {
-            for (int i = 0; i < sizeOfQueue; i++)
+            for (int i = 0; i < SIZEOFQUEUE; i++)
             {
-                if (getPlayerAt(i).getPassToken() == true)
+                if (GetPlayerAt(i).getPassToken() == true)
                 {
                     return i;
                 }
             }
             return -1;
+        }
+
+        public Player[] GetQueue()
+        {
+            return players;
+        }
+
+        public void SetCurrentPlayerIndex(int input)
+        {
+            currentplayer = input;
+        }
+
+        public int GetCurrentPlayerIndex()
+        {
+            return currentplayer;
+        }
+
+        public Player GetPlayerAt(int position)
+        {
+            return players[position];
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Sevens
             }
             else
             {
-                List<int> humanValues = board.getQueue().getHumanPlayer().cardsSuitCounts().OfType<int>().ToList();
+                List<int> humanValues = board.getQueue().GetHumanPlayer().cardsSuitCounts().OfType<int>().ToList();
 
                 
                 //finds suit of min value in human values, removes this min value from human values, if there is a card of this suit in valid moves, then returns this
@@ -105,13 +105,13 @@ namespace Sevens
         {
             Player temp = new DifficultPlayer();
 
-            temp = board.getQueue().getNextPlayer();
-            if (board.getQueue().getCurrentPlayer().GetType().ToString() == "HumanPlayer")
+            temp = board.getQueue().GetNextPlayer();
+            if (board.getQueue().GetCurrentPlayer().GetType().ToString() == "HumanPlayer")
             {
-                temp = board.getQueue().getNextPlayer();
-                board.getQueue().currentPlayerMinusOne();
+                temp = board.getQueue().GetNextPlayer();
+                board.getQueue().CurrentPlayerMinusOne();
             }
-            board.getQueue().currentPlayerMinusOne();
+            board.getQueue().CurrentPlayerMinusOne();
 
             return temp;
         }

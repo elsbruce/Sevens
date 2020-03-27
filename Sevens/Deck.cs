@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sevens
 {
@@ -10,14 +6,14 @@ namespace Sevens
     {
        public Card[] deck;
        public int frontPointer;
-        public const int SIZEOFDECK = 52;
+       public const int SIZEOFDECK = 52;
 
-        public Deck() //creates deck with all cards
+        public Deck() //creates deck with all cards (of each of the four suits, and with all values from 2 to 14)
         {
             deck = new Card[SIZEOFDECK]; 
             frontPointer = 0;
 
-            int counter = 0;
+            int counter = 0; 
 
             for (int suitCounter = 0; suitCounter < 4; suitCounter++)
             {
@@ -44,18 +40,17 @@ namespace Sevens
             }
         }
 
-        public Card getNextCard() //returns card from top of deck
+        public Card GetNextCard() //returns card from top of deck (first item in array), increments the front pointer to point at the next card in the deck
         {
-            int currentTop = frontPointer;
-
-            frontPointer++;
-            return deck[currentTop];
+            int currentTop = GetFrontPointer();
+            SetFrontPointer(GetFrontPointer()+1);
+            return GetDeck()[currentTop];
 
         }
 
-        public Boolean isEmpty() //if no cards are in deck (front of deck is at position 52- a position which doesn't exist), return true
+        public Boolean IsEmpty() //if no cards are in deck (front of deck is at position 52- a position which doesn't exist), return true
         {
-            if (frontPointer >= SIZEOFDECK)
+            if (GetFrontPointer() >= SIZEOFDECK)
             {
                 return true;
             }
@@ -63,6 +58,26 @@ namespace Sevens
             {
                 return false;
             }
+        }
+
+        public void SetFrontPointer(int input)
+        {
+            frontPointer = input;
+        }
+
+        public void SetDeck(Card[] input)
+        {
+            deck = input;
+        }
+
+        public int GetFrontPointer()
+        {
+            return frontPointer;
+        }
+
+        public Card[] GetDeck()
+        {
+            return deck;
         }
     }
 }
