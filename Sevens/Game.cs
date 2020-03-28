@@ -11,12 +11,13 @@ namespace Sevens
         private int numberOfRounds;
         private int difficulty;
         private Board board;
-        private String externalTextFile = @"D:\gameState.txt";
+        private String externalTextFile = @"C:\Users\elsb2\OneDrive\Documents\A-Level 1\gameState.txt";
         private int roundsPlayed;
 
         public Game()
         {
-
+            leaderboard = new List<int>();
+            playerScores = new int[] { 0, 0, 0, 0 };
         }
 
         public Game(int roundsInput, int difficultyInput)
@@ -139,7 +140,7 @@ namespace Sevens
             String[] text = new String[5];
             text = File.ReadAllLines(externalTextFile); //HERE
             text[whereToSave - 1] = getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved();
-            File.WriteAllLines(@"D:\Gamestate.txt", text);
+            File.WriteAllLines(externalTextFile, text);
         }
 
 
@@ -257,6 +258,23 @@ namespace Sevens
             board.getQueue().GetPlayerAt(toWhichPlayer).setPassToken(true);
         }
 
+
+
+        public void incrementPlayerScore(int index, int input)
+        {
+            playerScores[index] = playerScores[index] + input;
+        }
+        public Boolean fileExists()
+        {
+            if (File.Exists(externalTextFile))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public void setDifficulty(int input)
         {
             difficulty = input;
@@ -269,11 +287,6 @@ namespace Sevens
         public void setRoundsPlayed(int input)
         {
             roundsPlayed = input;
-        }
-
-        public void incrementPlayerScore(int index, int input)
-        {
-            playerScores[index] = playerScores[index] + input;
         }
         public List<int> getLeaderboard()
         {
@@ -303,16 +316,6 @@ namespace Sevens
         {
             return playerScores;
         }
-        public Boolean fileExists()
-        {
-            if (File.Exists(externalTextFile))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+
     }
 }

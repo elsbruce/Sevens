@@ -15,12 +15,17 @@ namespace Sevens
             passToken = false;
         }
 
-        public void addToHand(Card newCard) //adds a card to the end of card queue
+
+        //takes the Card to be added to the hand
+        //adds the card to the end of the listOfCards
+        public void addToHand(Card newCard)
         {
             listOfCards.Add(newCard);
         }
 
-        public Boolean CheckSevenDiamonds() //checks whether player's hand contains the 7 of diamonds
+        //returns a Boolean representing whether the player's hand contains the 7 of diamonds
+        //returns true if the seven of diamonds is in the player's list of cards, and false is the seven of diamonds is not in the player's list of cards
+        public Boolean CheckSevenDiamonds() 
         {
             foreach (Card card in listOfCards)
             {
@@ -34,15 +39,14 @@ namespace Sevens
             return false;
         }
 
-        public String[] getStringArrayOfCards() //returns a string of the user's cards
+        //returns a string array representation of the user's cards
+        //loops through each of the cards in the player's hand, and gets the string representation of each of the card's in the listOfCards and adds it to the string array
+        public String[] getStringArrayOfCards() 
         {
-            String[] stringCards = new String[listOfCards.Count];
-            int i = 0;
-
-            foreach (Card card in listOfCards)
+            String[] stringCards = new String[getCurrentSize()];
+            for (int i = 0; i < getCurrentSize(); i++)
             {
-                stringCards[i] = card.suitIntToString() + card.getValue().ToString();
-                i++;
+                stringCards[i] = getCards()[i].suitIntToString() + getCards()[i].getValue().ToString();
             }
 
             return stringCards;
@@ -64,7 +68,7 @@ namespace Sevens
 
         public virtual Boolean handEmpty()
         {
-            if (listOfCards.Count == 0)
+            if (getCurrentSize() == 0)
             {
                 return true;
             }
@@ -172,12 +176,14 @@ namespace Sevens
         {
             return (left.First().getSuit() <= right.First().getSuit());
         }
+
+        //returns an integer which is the length of the listOfCards
         public virtual int getCurrentSize()
         {
             return listOfCards.Count;
         }
 
-        public List<Card> getCards() //returns hand
+        public List<Card> getCards()
         {
             return listOfCards;
         }

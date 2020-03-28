@@ -22,8 +22,6 @@ namespace Sevens
 
             update(sevens.firstMove());
 
-          //  displayPlayersHand();
-
             PlayGame();
         }
 
@@ -34,7 +32,7 @@ namespace Sevens
             sevens.loadPrevious(whereToReadFrom);
             setUp(sevens.getBoard()); //creates all objects
             resumeFromPreviousGame(); //sets up the board
-            displayPlayersHand();
+         //   displayPlayersHand();
             update(sevens.getBoard());
             PlayGame();
         }
@@ -77,27 +75,28 @@ namespace Sevens
 
         }
 
-
+        //Turn takes a Board b, which stores the current state of the game (which cards have been placed, the cards held by each player and the queue of players)
+        //returns a Boolean which is true if it is a HumanPlayer's turn, and false if it is an AI player's turn
+        //Turn distinguishes between whether it is the turn of a human player or an AI player, and updates the GUI appropriately
+        //if it is a human player's turn then the buttons representing the human player's hands are switched on, as is the skip turn button
+        //if it is an AI player's turn, then displayAITurn and update are called, and then the background image of the current AI player is returned to the back of a card
         private Boolean Turn(Board b)
         {
 
             if (b == null)
             {
-                // if returns null then switch buttons on
+                // if returns null then switch buttons on for players turn - card buttons and skip turn buttons
                 for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().GetHumanPlayer().getCurrentSize(); cardNumber++)
                 {
                     playerHand[cardNumber].Enabled = true;
-                  //  playerHand[cardNumber].Click += playerHand_Click;
                 }
 
                 skipTurnButton.Enabled = true;
-                //get move
-                //then disable buttons
                 return true;
             }
             else
             {
-                displayAITurn(); //goes to this when current player index = 0
+                displayAITurn();
                 update(sevens.getBoard());
                 Refresh();
                 otherPlayers[(sevens.getBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.P" + (sevens.getBoard().getQueue().GetCurrentPlayerIndex()) + ".jpg");
@@ -105,6 +104,8 @@ namespace Sevens
             }
         }
 
+        //called when one of the player's cards are clicked, parsed an object "sender" which is a reference to the control/object that raised the event, and a parameter "e" which contains the event data
+        //
         private void playerHand_Click(object sender, EventArgs e)
         {
             Button s = (Button)sender;
@@ -206,7 +207,6 @@ namespace Sevens
                     temp.BackgroundImage = getImage("Sevens.images." + sevens.convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg");
                     temp.BackgroundImageLayout = ImageLayout.Zoom;
                     temp.Dock = DockStyle.Fill;
-                    //  temp.Name = (sevens.convertToSuit(suitCounter) + valueCounter.ToString());
                     temp.Size = new Size(42, 68);
                     temp.Visible = false;
                     c[suitCounter, (valueCounter - 1)] = temp;
@@ -235,11 +235,6 @@ namespace Sevens
             pauseButton.Text = ("");
 
             displayPlayersHand();
-
-            for (int i = 0; i < sevens.getBoard().getQueue().GetHumanPlayer().getCurrentSize(); i++) //creates an event handler for when a button representing one of the player's cards is clicked
-            {
-                playerHand[i].Click += playerHand_Click;
-            }
         }
 
         public void resumeFromPreviousGame()
@@ -265,6 +260,7 @@ namespace Sevens
                 temp.Name = cardNumber.ToString();
                 temp.Size = new Size(42, 68);
                 playerHand[cardNumber] = temp;
+                playerHand[cardNumber].Click += playerHand_Click;
                 tablePanel.Controls.Add(temp, cardNumber, 5);
             }
         }

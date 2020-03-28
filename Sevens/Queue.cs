@@ -99,8 +99,8 @@ namespace Sevens
             if (GetCurrentPlayer().handEmpty())
             {
                 players[GetCurrentPlayerIndex()] = new DummyPlayer();
-                Card bodge = new Card(7, 0);
-                players[GetCurrentPlayerIndex()].addToHand(bodge);
+                Card impossibleCard = new Card(7, 0);
+                players[GetCurrentPlayerIndex()].addToHand(impossibleCard);
                 return GetCurrentPlayerIndex();
             }
 
