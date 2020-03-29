@@ -13,14 +13,14 @@ namespace Sevens
 
         }
 
-        public override void determineCardToBePlayed(Board board)
+        public override void DetermineCardToBePlayed(Board board)
         {
             // 1 in 4 chance of returning random card, otherwise returns first of possible moves
 
             Random random = new Random();
             if (random.Next(0, 3) == 0)
             {
-                setCardToBePlayed(base.getCards().FirstOrDefault());
+                setCardToBePlayed(base.GetCards().FirstOrDefault());
             }
             else
             {
@@ -28,7 +28,7 @@ namespace Sevens
 
                 if (possibleMoves.Count == 0)
                 {
-                    setCardToBePlayed(base.getCards().FirstOrDefault());
+                    setCardToBePlayed(base.GetCards().FirstOrDefault());
                 }
                 else
                 {

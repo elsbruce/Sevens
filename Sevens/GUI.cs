@@ -74,7 +74,7 @@ namespace Sevens
         {
             Game sevensTemp = new Game();
 
-            if (!(sevensTemp.fileExists()))
+            if (!(sevensTemp.FileExists()))
             {
                 MessageBox.Show("This game cannot be saved to an external file");
 

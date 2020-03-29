@@ -18,7 +18,7 @@ namespace Sevens
 
         //takes the Card to be added to the hand
         //adds the card to the end of the listOfCards
-        public void addToHand(Card newCard)
+        public void AddToHand(Card newCard)
         {
             listOfCards.Add(newCard);
         }
@@ -31,7 +31,7 @@ namespace Sevens
             {
                 if (card.equalsSevenOfDiamonds())
                 {
-                    removeCard(card);
+                    RemoveCard(card);
                     return true;
                 }
             }
@@ -41,12 +41,12 @@ namespace Sevens
 
         //returns a string array representation of the user's cards
         //loops through each of the cards in the player's hand, and gets the string representation of each of the card's in the listOfCards and adds it to the string array
-        public String[] getStringArrayOfCards() 
+        public String[] GetStringArrayOfCards() 
         {
-            String[] stringCards = new String[getCurrentSize()];
-            for (int i = 0; i < getCurrentSize(); i++)
+            String[] stringCards = new String[GetCurrentSize()];
+            for (int i = 0; i < GetCurrentSize(); i++)
             {
-                stringCards[i] = getCards()[i].suitIntToString() + getCards()[i].getValue().ToString();
+                stringCards[i] = GetCards()[i].suitIntToString() + GetCards()[i].getValue().ToString();
             }
 
             return stringCards;
@@ -54,21 +54,21 @@ namespace Sevens
 
 
         public abstract Card Move();
-        public abstract Card retrieveCardToBePlayed(Board board);
+        public abstract Card RetrieveCardToBePlayed(Board board);
 
-        public void removeCard(Card cardToBeRemoved)
+        public void RemoveCard(Card cardToBeRemoved)
         {
             listOfCards.Remove(cardToBeRemoved);
         }
 
-        public void sortCards(Boolean bySuit)
+        public void SortCards(Boolean bySuit)
         {
             listOfCards = MergeSort(listOfCards, bySuit);
         }
 
-        public virtual Boolean handEmpty()
+        public virtual Boolean HandEmpty()
         {
-            if (getCurrentSize() == 0)
+            if (GetCurrentSize() == 0)
             {
                 return true;
             }
@@ -78,13 +78,13 @@ namespace Sevens
             }
         }
 
-        public int[] cardsSuitCounts()
+        public int[] CardsSuitCounts()
         {
             int[] cardCount = new int[4] { 0, 0, 0, 0 };
 
-            for (int i = 0; i < getCurrentSize(); i++)
+            for (int i = 0; i < GetCurrentSize(); i++)
             {
-                cardCount[getCards()[i].getSuit()]++;
+                cardCount[GetCards()[i].getSuit()]++;
             }
 
             return cardCount;
@@ -127,7 +127,7 @@ namespace Sevens
                 {
                     if (bySuit)
                     {
-                        if (compareBySuit(left, right))  //compares first two elements to see which has smaller value
+                        if (CompareBySuit(left, right))  //compares first two elements to see which has smaller value
                         {
                             mergedList.Add(left.First());
                             left.Remove(left.First());
@@ -140,7 +140,7 @@ namespace Sevens
                     }
                     else
                     {
-                        if (compareByValue(left, right))  //compares first two elements to see which has smaller value
+                        if (CompareByValue(left, right))  //compares first two elements to see which has smaller value
                         {
                             mergedList.Add(left.First());
                             left.Remove(left.First());
@@ -167,33 +167,33 @@ namespace Sevens
             return mergedList;
         }
 
-        public static Boolean compareByValue(List<Card> left, List<Card> right)
+        public static Boolean CompareByValue(List<Card> left, List<Card> right)
         {
             return (left.First().getValue() <= right.First().getValue());
         }
 
-        public static Boolean compareBySuit(List<Card> left, List<Card> right)
+        public static Boolean CompareBySuit(List<Card> left, List<Card> right)
         {
             return (left.First().getSuit() <= right.First().getSuit());
         }
 
         //returns an integer which is the length of the listOfCards
-        public virtual int getCurrentSize()
+        public virtual int GetCurrentSize()
         {
             return listOfCards.Count;
         }
 
-        public List<Card> getCards()
+        public List<Card> GetCards()
         {
             return listOfCards;
         }
 
-        public Boolean getPassToken()
+        public Boolean GetPassToken()
         {
             return passToken;
         }
 
-        public void setPassToken(Boolean input)
+        public void SetPassToken(Boolean input)
         {
             passToken = input;
         }

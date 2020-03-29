@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sevens
 {
+    //MediumPlayer class inherits from AIPlayer, overriding the DetermineCardToBePlayed class, and adding the CalculateBenefit and SameSide class which only exist within the MediumPlayer class
     class MediumPlayer : AIPlayer
     {
 
@@ -15,17 +14,17 @@ namespace Sevens
         }
 
 
-        public override void determineCardToBePlayed(Board board) //gets card which is of maximum benefit to the AI player
+        public override void DetermineCardToBePlayed(Board board) //gets card which is of maximum benefit to the AI player
         {
             List<Card> possibleMoves = getPossibleMoves(board);
             int[] moveScores = new int[possibleMoves.Count];
             int max = 0;
-            Card card = base.getCards().FirstOrDefault();
+            Card card = base.GetCards().FirstOrDefault();
 
 
                 for (int i = 0; i < possibleMoves.Count; i++) //loops through possible moves and finds score of each one
                 {
-                    moveScores[i] = calculateBenefit(possibleMoves.ElementAt(i));
+                    moveScores[i] = CalculateBenefit(possibleMoves.ElementAt(i));
 
 
                     if (moveScores[i] > max) //if score is the biggest of the possible moves so far, then update cardToReturn
@@ -39,13 +38,13 @@ namespace Sevens
             setCardToBePlayed(card);
          }
 
-        public int calculateBenefit(Card possibleMoveCard) //counter increments by one each time another card of the same suit and the same side of the seven is found in their hand
+        public int CalculateBenefit(Card possibleMoveCard) //counter increments by one each time another card of the same suit and the same side of the seven is found in their hand
         {
             int counter = 0;
 
-            for (int i = 0; i < base.getCurrentSize(); i++)
+            for (int i = 0; i < base.GetCurrentSize(); i++)
             {
-                if ((base.getCards()[i].getSuit() == possibleMoveCard.getSuit()) && sameSide(possibleMoveCard, base.getCards()[i]))
+                if ((base.GetCards()[i].getSuit() == possibleMoveCard.getSuit()) && SameSide(possibleMoveCard, base.GetCards()[i]))
                 {
                     counter++;
                 }
@@ -54,7 +53,7 @@ namespace Sevens
             return counter;
         }
 
-        public Boolean sameSide(Card possibleMoveCard, Card comparisonCard) //checks whether both cards are the same side of the seven
+        public Boolean SameSide(Card possibleMoveCard, Card comparisonCard) //checks whether both cards are the same side of the seven
         {
             if (((possibleMoveCard.getValue() < 7) && (comparisonCard.getValue() < 7)) || ((possibleMoveCard.getValue() > 7) && (comparisonCard.getValue() > 7)))
             {

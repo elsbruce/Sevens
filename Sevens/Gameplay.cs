@@ -18,9 +18,9 @@ namespace Sevens
             sevens = new Game(numberOfRounds, difficulty);
             InitializeComponent();
 
-            setUp(sevens.startGame());
+            setUp(sevens.StartGame());
 
-            update(sevens.firstMove());
+            update(sevens.FirstMove());
 
             PlayGame();
         }
@@ -29,39 +29,39 @@ namespace Sevens
         {
             InitializeComponent();
             sevens = new Game();
-            sevens.loadPrevious(whereToReadFrom);
-            setUp(sevens.getBoard()); //creates all objects
+            sevens.LoadPrevious(whereToReadFrom);
+            setUp(sevens.GetBoard()); //creates all objects
             resumeFromPreviousGame(); //sets up the board
          //   displayPlayersHand();
-            update(sevens.getBoard());
+            update(sevens.GetBoard());
             PlayGame();
         }
 
         private void PlayGame() //if the game is not over, loops through each player's turn, if game is over displays appropriate messages
         {
-            if (sevens.isOver() == "N")
+            if (sevens.IsOver() == "N")
             {
                 Board b;
-                b = sevens.nextMove();
+                b = sevens.NextMove();
 
                 while (!this.Turn(b))
                 {
-                    b = sevens.nextMove();
+                    b = sevens.NextMove();
                 }
             }
             else
             {
-                MessageBox.Show("Player " + sevens.getLeaderboard()[0].ToString() + " won.");
-                for (int i = 0; i < sevens.getLeaderboard().Count; i++)
+                MessageBox.Show("Player " + sevens.GetLeaderboard()[0].ToString() + " won.");
+                for (int i = 0; i < sevens.GetLeaderboard().Count; i++)
                 {
-                    if (sevens.getLeaderboard()[i] == 0)
+                    if (sevens.GetLeaderboard()[i] == 0)
                     {
                         MessageBox.Show("You came in position " + (i + 1));
                     }
                 }
 
 
-                if (sevens.getRoundsPlayed() < sevens.getNumberOfRounds())
+                if (sevens.GetRoundsPlayed() < sevens.GetNumberOfRounds())
                 {
                     restartGame();
                 }
@@ -86,7 +86,7 @@ namespace Sevens
             if (b == null)
             {
                 // if returns null then switch buttons on for players turn - card buttons and skip turn buttons
-                for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().GetHumanPlayer().getCurrentSize(); cardNumber++)
+                for (int cardNumber = 0; cardNumber < sevens.GetBoard().getQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
                 {
                     playerHand[cardNumber].Enabled = true;
                 }
@@ -97,9 +97,9 @@ namespace Sevens
             else
             {
                 displayAITurn();
-                update(sevens.getBoard());
+                update(sevens.GetBoard());
                 Refresh();
-                otherPlayers[(sevens.getBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.P" + (sevens.getBoard().getQueue().GetCurrentPlayerIndex()) + ".jpg");
+                otherPlayers[(sevens.GetBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.P" + (sevens.GetBoard().getQueue().GetCurrentPlayerIndex()) + ".jpg");
                 return false;
             }
         }
@@ -115,7 +115,7 @@ namespace Sevens
             }
 
             else {
-                Board humanTurn = sevens.humanPlay(s.Name);
+                Board humanTurn = sevens.HumanPlay(s.Name);
                 if (humanTurn == null)
                 {
                     MessageBox.Show("This is not a valid move.");
@@ -154,13 +154,13 @@ namespace Sevens
             //updates size of other player's hands
             for (int playerNumber = 1; playerNumber < 4; playerNumber++)
             {
-                if (sevens.getBoard().getQueue().GetPlayerAt(playerNumber).handEmpty())
+                if (sevens.GetBoard().getQueue().GetPlayerAt(playerNumber).HandEmpty())
                 {
                     otherPlayers[(playerNumber - 1)].Text = "finished";
                 }
                 else
                 {
-                    otherPlayers[(playerNumber - 1)].Text = sevens.getBoard().getSizeOfPlayersHands()[playerNumber].ToString();
+                    otherPlayers[(playerNumber - 1)].Text = sevens.GetBoard().getSizeOfPlayersHands()[playerNumber].ToString();
                 }
             }
         }
@@ -168,7 +168,7 @@ namespace Sevens
 
         public void displayAITurn() //displays a loading symbol on the player currently moving for a short amount of time
         {
-            otherPlayers[(sevens.getBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.loading.jpg");
+            otherPlayers[(sevens.GetBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.loading.jpg");
             int milliseconds = 500;
             Thread.Sleep(milliseconds);
 
@@ -176,16 +176,16 @@ namespace Sevens
 
         private void placeAce(int suit)
         {
-            if (sevens.getBoard().getMin()[suit] == 2)
+            if (sevens.GetBoard().getMin()[suit] == 2)
             {
                 cardPlaced(suit, 1);
 
-                if (sevens.getBoard().getMax()[suit] == 13)
+                if (sevens.GetBoard().getMax()[suit] == 13)
                 {
                     condenseSuit(suit);
                 }
             }
-            else if (sevens.getBoard().getMax()[suit] == 13)
+            else if (sevens.GetBoard().getMax()[suit] == 13)
             {
                 cardPlaced(suit, 14);
             }
@@ -204,7 +204,7 @@ namespace Sevens
                 for (int valueCounter = 1; valueCounter < 15; valueCounter++)
                 {
                     PictureBox temp = new PictureBox();
-                    temp.BackgroundImage = getImage("Sevens.images." + sevens.convertToSuit(suitCounter) + valueCounter.ToString() + ".jpg");
+                    temp.BackgroundImage = getImage("Sevens.images." + sevens.ConvertToSuit(suitCounter) + valueCounter.ToString() + ".jpg");
                     temp.BackgroundImageLayout = ImageLayout.Zoom;
                     temp.Dock = DockStyle.Fill;
                     temp.Size = new Size(42, 68);
@@ -241,7 +241,7 @@ namespace Sevens
         {
             for (int i = 0; i < 4; i++)
             {
-                for (int value = sevens.getBoard().getMin()[i]; value < sevens.getBoard().getMax()[i]; value++)
+                for (int value = sevens.GetBoard().getMin()[i]; value < sevens.GetBoard().getMax()[i]; value++)
                 {
                     cardPlaced(i, value);
                 }
@@ -251,10 +251,10 @@ namespace Sevens
         public void displayPlayersHand()
         {
             //displays user's hand
-            for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().GetHumanPlayer().getCurrentSize(); cardNumber++)
+            for (int cardNumber = 0; cardNumber < sevens.GetBoard().getQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
             {
                 Button temp = new Button();
-                temp.BackgroundImage = getImage("Sevens.images." + sevens.getBoard().getQueue().GetHumanPlayer().getStringArrayOfCards()[cardNumber] + ".jpg");
+                temp.BackgroundImage = getImage("Sevens.images." + sevens.GetBoard().getQueue().GetHumanPlayer().GetStringArrayOfCards()[cardNumber] + ".jpg");
                 temp.BackgroundImageLayout = ImageLayout.Zoom;
                 temp.Dock = DockStyle.Fill;
                 temp.Name = cardNumber.ToString();
@@ -267,7 +267,7 @@ namespace Sevens
 
         private void restartGame()
         {
-            sevens.setRoundsPlayed(sevens.getRoundsPlayed() + 1);
+            sevens.SetRoundsPlayed(sevens.GetRoundsPlayed() + 1);
             for (int suit = 0; suit < 4; suit++)
             {
                 for (int i = 0; i < 14; i++)
@@ -275,8 +275,8 @@ namespace Sevens
                     tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, suit));
                 }
             }
-            sevens.startGame();
-            update(sevens.firstMove());
+            sevens.StartGame();
+            update(sevens.FirstMove());
             displayPlayersHand();
             PlayGame();
         }
@@ -307,7 +307,7 @@ namespace Sevens
             }
 
             Button suitComplete = new Button();
-            suitComplete.BackgroundImage = getImage("Sevens.images." + sevens.convertToSuit(suit) + ".jpg");
+            suitComplete.BackgroundImage = getImage("Sevens.images." + sevens.ConvertToSuit(suit) + ".jpg");
             suitComplete.BackgroundImageLayout = ImageLayout.Zoom;
             suitComplete.Dock = DockStyle.Fill;
             suitComplete.Size = new Size(42, 68);
@@ -317,7 +317,7 @@ namespace Sevens
         private void PauseButton_Click(object sender, EventArgs e) //checks whether text file to be saved to exists, then clears tablelayoutpanel to allow the user to input a number for where the game is to be saved
         {
 
-            if (!(sevens.fileExists()))
+            if (!(sevens.FileExists()))
             {
                 MessageBox.Show("This game cannot be saved to an external file");
 
@@ -377,7 +377,7 @@ namespace Sevens
 
         private void disablePlayerButtons()
         {
-            for (int cardNumber = 0; cardNumber < sevens.getBoard().getQueue().GetHumanPlayer().getCurrentSize(); cardNumber++)
+            for (int cardNumber = 0; cardNumber < sevens.GetBoard().getQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
             {
                 playerHand[cardNumber].Enabled = false;
             }
@@ -391,9 +391,9 @@ namespace Sevens
                 tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
             }
 
-            sevens.getBoard().getQueue().GetHumanPlayer().sortCards(false);
+            sevens.GetBoard().getQueue().GetHumanPlayer().SortCards(false);
             displayPlayersHand();
-            sevens.getBoard().getQueue().CurrentPlayerMinusOne();
+            sevens.GetBoard().getQueue().CurrentPlayerMinusOne();
             PlayGame();
         }
 
@@ -404,9 +404,9 @@ namespace Sevens
                 tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
             }
 
-            sevens.getBoard().getQueue().GetHumanPlayer().sortCards(true);
+            sevens.GetBoard().getQueue().GetHumanPlayer().SortCards(true);
             displayPlayersHand();
-            sevens.getBoard().getQueue().CurrentPlayerMinusOne();
+            sevens.GetBoard().getQueue().CurrentPlayerMinusOne();
             PlayGame();
         }
 

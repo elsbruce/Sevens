@@ -10,7 +10,7 @@ namespace Sevens
             return null;
         }
 
-        public override Card retrieveCardToBePlayed(Board board)
+        public override Card RetrieveCardToBePlayed(Board board)
         {
             return null;
         }

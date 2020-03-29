@@ -29,28 +29,28 @@ namespace Sevens
             roundsPlayed = 0;
         }
 
-        public Board startGame() //creates new board, shuffles and deals cards
+        public Board StartGame() //creates new board, shuffles and deals cards
         {
-            board = new Board(getDifficulty());
+            board = new Board(GetDifficulty());
 
             Deck deck = new Deck();
             deck.Shuffle();
 
             while (!deck.IsEmpty())
             {
-                board.getQueue().GetNextPlayer().addToHand(deck.GetNextCard());
+                board.getQueue().GetNextPlayer().AddToHand(deck.GetNextCard());
                 //loops through players, in order to add a card to each player in the queue's hands in turn
 
             }
 
             return board;
         }
-        public Board firstMove() //plays seven of diamonds
+        public Board FirstMove() //plays seven of diamonds
         {
             board.sevenOfDiamonds();
             return board;
         }
-        public Board nextMove() //gets the move from the next player in the queue, and adds it to the board (if possible)
+        public Board NextMove() //gets the move from the next player in the queue, and adds it to the board (if possible)
         {
             int playerFinished = board.getQueue().PlayerFinished();
 
@@ -58,7 +58,7 @@ namespace Sevens
             {
                 leaderboard.Add(playerFinished);
             }
-            Card cardToBePlayed = board.getQueue().GetNextPlayer().retrieveCardToBePlayed(board);
+            Card cardToBePlayed = board.getQueue().GetNextPlayer().RetrieveCardToBePlayed(board);
 
             if (board.validMove(cardToBePlayed).Equals("y"))
             {
@@ -76,14 +76,14 @@ namespace Sevens
             }
         }
 
-        public Board humanPlay(String indexOfCard) //parsed the position of the card to be played in the player's hand, then adds the card to board if it is valid, 
+        public Board HumanPlay(String indexOfCard) //parsed the position of the card to be played in the player's hand, then adds the card to board if it is valid, 
         {
-            Card cardToBePlayed = board.getQueue().GetHumanPlayer().getCards()[(Convert.ToInt32(indexOfCard))];
+            Card cardToBePlayed = board.getQueue().GetHumanPlayer().GetCards()[(Convert.ToInt32(indexOfCard))];
 
             if (board.validMove(cardToBePlayed) == "y")
             {
                 board.Add(cardToBePlayed);
-                board.getQueue().GetHumanPlayer().removeCard(cardToBePlayed);
+                board.getQueue().GetHumanPlayer().RemoveCard(cardToBePlayed);
                 return board;
             }
             else if (board.validMove(cardToBePlayed) == "n")
@@ -97,16 +97,16 @@ namespace Sevens
 
         }
 
-        public String isOver() //checks whether board has all cards added to it, and whether the human player has no cards
+        public String IsOver() //checks whether board has all cards added to it, and whether the human player has no cards
         {
             if (board.checkEnd())
             {
-                updatePlayerScores();
+                UpdatePlayerScores();
                 return "Game over";
             }
-            else if (board.getQueue().GetHumanPlayer().handEmpty())
+            else if (board.getQueue().GetHumanPlayer().HandEmpty())
             {
-                updatePlayerScores("h");
+                UpdatePlayerScores("h");
                 return "Human wins";
             }
             else
@@ -115,7 +115,7 @@ namespace Sevens
             }
         }
 
-        public string convertToSuit(int suit) //takes an integer (from 0 to 3) converts from a number to its string equivalent
+        public string ConvertToSuit(int suit) //takes an integer (from 0 to 3) converts from a number to its string equivalent
         {
             if (suit == 0)
             {
@@ -139,12 +139,12 @@ namespace Sevens
         {
             String[] text = new String[5];
             text = File.ReadAllLines(externalTextFile); 
-            text[whereToSave - 1] = getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved() + getLeaderboard().Count.ToString() + string.Join(", ", getLeaderboard());
+            text[whereToSave - 1] = GetNumberOfRounds().ToString() + GetDifficulty().ToString() + board.toBeSaved() + GetLeaderboard().Count.ToString() + string.Join(", ", GetLeaderboard());
             File.WriteAllLines(externalTextFile, text);
         }
 
 
-        public void loadPrevious(int whichGame) //reads in game state from a previous game from textfile and sets up a new game to have all the values and states of the previous game
+        public void LoadPrevious(int whichGame) //reads in game state from a previous game from textfile and sets up a new game to have all the values and states of the previous game
         {
             String[] text;
 
@@ -154,9 +154,9 @@ namespace Sevens
                 text = File.ReadAllLines(externalTextFile);
 
 
-                setRounds(Int32.Parse(text[whichGame].Substring(0, 1)));
-                setDifficulty(Int32.Parse(text[whichGame].Substring(1, 1)));
-                board = new Board(getDifficulty());
+                SetRounds(Int32.Parse(text[whichGame].Substring(0, 1)));
+                SetDifficulty(Int32.Parse(text[whichGame].Substring(1, 1)));
+                board = new Board(GetDifficulty());
 
                 text[whichGame] = text[whichGame].Remove(0, 2);
                 String[] minsAndMaxes = new String[8];
@@ -182,7 +182,7 @@ namespace Sevens
 
                     while (counter < (cardString.Length - 1)) //-1 as final card is invalid, just created due to final /
                     {
-                        board.getQueue().GetPlayerAt(i).addToHand(new Card(Int32.Parse(cardString[counter].Substring(1)), cardString[counter].Substring(0, 1)));
+                        board.getQueue().GetPlayerAt(i).AddToHand(new Card(Int32.Parse(cardString[counter].Substring(1)), cardString[counter].Substring(0, 1)));
                         counter++;
                     }
                     counter = 0;
@@ -198,7 +198,7 @@ namespace Sevens
                 board.setAces(Array.ConvertAll(temp, element => bool.Parse(element)));
             }
         }
-        public void updatePlayerScores(String s) //takes a string, such that the method is specific for human player, 
+        public void UpdatePlayerScores(String s) //takes a string, such that the method is specific for human player, 
         {
             for (int i = 0; i < leaderboard.Count; i++)
             {
@@ -206,15 +206,15 @@ namespace Sevens
 
                 if (i == 0)
                 {
-                    incrementPlayerScore(whichPlayer, 5);
+                    IncrementPlayerScore(whichPlayer, 5);
                 }
                 else if (i == 1)
                 {
-                    incrementPlayerScore(whichPlayer, 3);
+                    IncrementPlayerScore(whichPlayer, 3);
                 }
                 else if (i == 2)
                 {
-                    incrementPlayerScore(whichPlayer, 1);
+                    IncrementPlayerScore(whichPlayer, 1);
                 }
 
             }
@@ -225,7 +225,7 @@ namespace Sevens
 
             //CODE HERE TO ASSIGN POINTS VALUES APPROPRIATELY
         }
-        public void updatePlayerScores()
+        public void UpdatePlayerScores()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -233,86 +233,80 @@ namespace Sevens
 
                 if (position == 0)
                 {
-                    incrementPlayerScore(i, 5);
+                    IncrementPlayerScore(i, 5);
                 }
                 else if (position == 1)
                 {
-                    incrementPlayerScore(i, 3);
+                    IncrementPlayerScore(i, 3);
                 }
                 else if (position == 2)
                 {
-                    incrementPlayerScore(i, 1);
+                    IncrementPlayerScore(i, 1);
                 }
 
             }
         }
 
-        public void assignPassToken(int toWhichPlayer)
+        public void AssignPassToken(int toWhichPlayer)
         {
             int whoHasPassToken = board.getQueue().WhoHasPassToken();
             if (whoHasPassToken != -1)
             {
-                board.getQueue().GetPlayerAt(whoHasPassToken).setPassToken(false);
+                board.getQueue().GetPlayerAt(whoHasPassToken).SetPassToken(false);
             }
 
-            board.getQueue().GetPlayerAt(toWhichPlayer).setPassToken(true);
+            board.getQueue().GetPlayerAt(toWhichPlayer).SetPassToken(true);
         }
 
 
 
-        public void incrementPlayerScore(int index, int input)
+        public void IncrementPlayerScore(int index, int input)
         {
             playerScores[index] = playerScores[index] + input;
         }
-        public Boolean fileExists()
+        public Boolean FileExists()
         {
-            if (File.Exists(externalTextFile))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (File.Exists(externalTextFile));
+           
         }
-        public void setDifficulty(int input)
+        public void SetDifficulty(int input)
         {
             difficulty = input;
         }
-        public void setRounds(int input)
+        public void SetRounds(int input)
         {
             numberOfRounds = input;
         }
 
-        public void setRoundsPlayed(int input)
+        public void SetRoundsPlayed(int input)
         {
             roundsPlayed = input;
         }
-        public List<int> getLeaderboard()
+        public List<int> GetLeaderboard()
         {
             return leaderboard;
         }
-        public Board getBoard()
+        public Board GetBoard()
         {
             return board;
         }
 
-        public int getDifficulty()
+        public int GetDifficulty()
         {
             return difficulty;
         }
 
-        public int getNumberOfRounds()
+        public int GetNumberOfRounds()
         {
             return numberOfRounds;
         }
 
-        public int getRoundsPlayed()
+        public int GetRoundsPlayed()
         {
             return roundsPlayed;
         }
 
-        public int[] getPlayerScores()
+        public int[] GetPlayerScores()
         {
             return playerScores;
         }

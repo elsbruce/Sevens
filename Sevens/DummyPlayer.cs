@@ -13,7 +13,7 @@ namespace Sevens
 
         }
 
-        public override Card retrieveCardToBePlayed(Board board)
+        public override Card RetrieveCardToBePlayed(Board board)
         {
             Card dummyCard = new Card(7, 0);
             return dummyCard;
@@ -24,12 +24,12 @@ namespace Sevens
             return new Card(7,0);
         }
 
-       public override Boolean handEmpty()
+       public override Boolean HandEmpty()
         {
             return true;
         }
 
-        public override int getCurrentSize()
+        public override int GetCurrentSize()
         {
             return 0;
         }

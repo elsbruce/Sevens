@@ -12,7 +12,7 @@ namespace Sevens
         }
         public override Card Move()
         {
-            removeCard(getCardToBePlayed());
+            RemoveCard(getCardToBePlayed());
             return getCardToBePlayed();
         }
 
@@ -25,22 +25,22 @@ namespace Sevens
             return cardToBePlayed;
         }
 
-        public override Card retrieveCardToBePlayed(Board board)
+        public override Card RetrieveCardToBePlayed(Board board)
         {
-            determineCardToBePlayed(board);
+            DetermineCardToBePlayed(board);
             return getCardToBePlayed();
         }
 
-        public abstract void determineCardToBePlayed(Board board);
+        public abstract void DetermineCardToBePlayed(Board board);
         protected List<Card> getPossibleMoves(Board board)
         {
             List<Card> possibleMoves = new List<Card>();
 
-            for (int i = 0; i < getCurrentSize(); i++)
+            for (int i = 0; i < GetCurrentSize(); i++)
             {
-                if (board.validMove(base.getCards()[i]) == "y")
+                if (board.validMove(base.GetCards()[i]) == "y")
                 {
-                    possibleMoves.Add(base.getCards()[i]);
+                    possibleMoves.Add(base.GetCards()[i]);
                 }
             }
 

@@ -34,7 +34,7 @@ namespace Sevens
 
             for (int i = 0; i < NUMBEROFPLAYERS; i++)
             {
-                sizeOfPlayersHands[i] = queue.GetQueue()[i].getCurrentSize();
+                sizeOfPlayersHands[i] = queue.GetQueue()[i].GetCurrentSize();
             }
 
             return sizeOfPlayersHands;
@@ -130,7 +130,7 @@ namespace Sevens
             }
             foreach (Player p in getQueue().GetQueue()) //if dummyplayers
             {
-                foreach (String s in p.getStringArrayOfCards())
+                foreach (String s in p.GetStringArrayOfCards())
                 {
 
                     board = board + s + "/";

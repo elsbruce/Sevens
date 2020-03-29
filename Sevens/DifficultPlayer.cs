@@ -13,7 +13,7 @@ namespace Sevens
 
         }
 
-        public override void determineCardToBePlayed(Board board)
+        public override void DetermineCardToBePlayed(Board board)
         {
             //AI players gang up
             //counts cards of each suit in human player, then plays card of that suit
@@ -22,11 +22,11 @@ namespace Sevens
 
             if (possibleMoves.Count == 0)
             {
-                setCardToBePlayed(base.getCards().FirstOrDefault());
+                setCardToBePlayed(base.GetCards().FirstOrDefault());
             }
             else
             {
-                List<int> humanValues = board.getQueue().GetHumanPlayer().cardsSuitCounts().OfType<int>().ToList();
+                List<int> humanValues = board.getQueue().GetHumanPlayer().CardsSuitCounts().OfType<int>().ToList();
 
                 //finds suit of min value in human values, removes this min value from human values, if there is a card of this suit in valid moves, then returns this
                 //loops through 4 times, to go through each of the 4 suits in order of how beneficial they are to the human player- but loop is broken when a card of the suit being searched for is found
@@ -75,9 +75,9 @@ namespace Sevens
         {
             int counter = 0;
 
-            for (int i = 0; i < player.getCurrentSize(); i++)
+            for (int i = 0; i < player.GetCurrentSize(); i++)
             {
-                if ((player.getCards()[i].getSuit() == possibleMoveCard.getSuit()) && SameSide(possibleMoveCard, player.getCards()[i]))
+                if ((player.GetCards()[i].getSuit() == possibleMoveCard.getSuit()) && SameSide(possibleMoveCard, player.GetCards()[i]))
                 {
                     counter++;
                 }

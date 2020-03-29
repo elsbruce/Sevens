@@ -96,11 +96,11 @@ namespace Sevens
         //if handEmpty returned true, the position of the current player in the queue is returned as an integer, else -1 is returned
         public int PlayerFinished()
         {
-            if (GetCurrentPlayer().handEmpty())
+            if (GetCurrentPlayer().HandEmpty())
             {
                 players[GetCurrentPlayerIndex()] = new DummyPlayer();
                 Card impossibleCard = new Card(7, 0);
-                players[GetCurrentPlayerIndex()].addToHand(impossibleCard);
+                players[GetCurrentPlayerIndex()].AddToHand(impossibleCard);
                 return GetCurrentPlayerIndex();
             }
 
@@ -113,7 +113,7 @@ namespace Sevens
         {
             for (int i = 0; i < SIZEOFQUEUE; i++)
             {
-                if (GetPlayerAt(i).getPassToken() == true)
+                if (GetPlayerAt(i).GetPassToken() == true)
                 {
                     return i;
                 }
