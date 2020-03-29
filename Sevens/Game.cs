@@ -138,8 +138,8 @@ namespace Sevens
         public void Pause(int whereToSave) //saves game state to external text file (at line specified by the int parsed to the method)
         {
             String[] text = new String[5];
-            text = File.ReadAllLines(externalTextFile); //HERE
-            text[whereToSave - 1] = getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved();
+            text = File.ReadAllLines(externalTextFile); 
+            text[whereToSave - 1] = getNumberOfRounds().ToString() + getDifficulty().ToString() + board.toBeSaved() + getLeaderboard().Count.ToString() + string.Join(", ", getLeaderboard());
             File.WriteAllLines(externalTextFile, text);
         }
 

@@ -25,7 +25,7 @@ namespace Sevens
 
                 for (int i = 0; i < possibleMoves.Count; i++) //loops through possible moves and finds score of each one
                 {
-                    moveScores[i] = Count(possibleMoves.ElementAt(i));
+                    moveScores[i] = calculateBenefit(possibleMoves.ElementAt(i));
 
 
                     if (moveScores[i] > max) //if score is the biggest of the possible moves so far, then update cardToReturn
@@ -39,7 +39,7 @@ namespace Sevens
             setCardToBePlayed(card);
          }
 
-        public int Count(Card possibleMoveCard) //counter increments by one each time another card of the same suit and the same side of the seven is found in their hand
+        public int calculateBenefit(Card possibleMoveCard) //counter increments by one each time another card of the same suit and the same side of the seven is found in their hand
         {
             int counter = 0;
 
