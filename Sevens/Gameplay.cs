@@ -11,7 +11,7 @@ namespace Sevens
         Button[] playerHand = new Button[13];
         Label[] otherPlayers = new Label[3];
         Game sevens;
-
+        PictureBox passToken = new PictureBox();
 
         public Gameplay(int numberOfRounds, int difficulty)
         {
@@ -163,6 +163,11 @@ namespace Sevens
                     otherPlayers[(playerNumber - 1)].Text = sevens.GetBoard().getSizeOfPlayersHands()[playerNumber].ToString();
                 }
             }
+
+            //assign pass token
+
+       //     otherPlayers[0].Image = getImage("Sevens.images.passToken.jpg");
+            
         }
 
 
@@ -230,9 +235,17 @@ namespace Sevens
                 tablePanel.Controls.Add(temp, 15, (playerNumber - 1));
             }
 
+            //create pause button
             pauseButton.BackgroundImage = getImage("Sevens.images.pause.png");
             pauseButton.BackgroundImageLayout = ImageLayout.Zoom;
             pauseButton.Text = ("");
+
+            //create pass token
+            passToken.BackgroundImage = getImage("Sevens.images.passToken.jpg");
+            passToken.BackgroundImageLayout = ImageLayout.Zoom;
+            passToken.Dock = DockStyle.Fill;
+            passToken.Size = new Size(30, 50); //doesn't work
+            tablePanel.Controls.Add(passToken, 13, sevens.GetBoard().getQueue().WhoHasPassToken());
 
             displayPlayersHand();
         }
@@ -290,6 +303,7 @@ namespace Sevens
 
         private void SkipTurn_Click(object sender, EventArgs e)
         {
+            sevens.AssignPassToken(0);
             PlayGame();
 
         }
@@ -351,7 +365,7 @@ namespace Sevens
             if (Int32.TryParse(tablePanel.GetControlFromPosition(1, 1).Text, out whereToSave) && (whereToSave <= 5) && (whereToSave >= 1))
             {
                 sevens.Pause(whereToSave);
-                returnToStartMenu();
+                ReturnToStartMenu();
             }
             else
             {
@@ -366,7 +380,7 @@ namespace Sevens
             if (Assembly.GetEntryAssembly().GetManifestResourceStream(path) == null)
             {
                 MessageBox.Show("Some of the necessary game files cannot be accessed, so the game cannot be run.");
-                returnToStartMenu();
+                ReturnToStartMenu();
                 return null;
             }
             else
@@ -415,7 +429,7 @@ namespace Sevens
 
         }
 
-        private void returnToStartMenu()
+        private void ReturnToStartMenu()
         {
             StartMenu start = new StartMenu();
             this.Hide();

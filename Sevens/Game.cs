@@ -67,7 +67,7 @@ namespace Sevens
             }
             else if (board.validMove(cardToBePlayed).Equals("n"))
             {
-
+                AssignPassToken(board.getQueue().GetCurrentPlayerIndex());
                 return board;
             }
             else

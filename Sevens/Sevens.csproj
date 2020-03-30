@@ -194,5 +194,8 @@
   <ItemGroup>
     <EmbeddedResource Include="images\pause.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="images\passToken.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
