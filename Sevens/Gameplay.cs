@@ -18,9 +18,9 @@ namespace Sevens
             sevens = new Game(numberOfRounds, difficulty);
             InitializeComponent();
 
-            setUp(sevens.StartGame());
+            SetUp(sevens.StartGame());
 
-            update(sevens.FirstMove());
+            Update(sevens.FirstMove());
 
             PlayGame();
         }
@@ -30,10 +30,10 @@ namespace Sevens
             InitializeComponent();
             sevens = new Game();
             sevens.LoadPrevious(whereToReadFrom);
-            setUp(sevens.GetBoard()); //creates all objects
-            resumeFromPreviousGame(); //sets up the board
-         //   displayPlayersHand();
-            update(sevens.GetBoard());
+            SetUp(sevens.GetBoard()); //creates all objects
+            ResumeFromPreviousGame(); //sets up the board
+                                      //   displayPlayersHand();
+            Update(sevens.GetBoard());
             PlayGame();
         }
 
@@ -63,7 +63,7 @@ namespace Sevens
 
                 if (sevens.GetRoundsPlayed() < sevens.GetNumberOfRounds())
                 {
-                    restartGame();
+                    RestartGame();
                 }
                 else
                 {
@@ -96,8 +96,8 @@ namespace Sevens
             }
             else
             {
-                displayAITurn();
-                update(sevens.GetBoard());
+                DisplayAITurn();
+                Update(sevens.GetBoard());
                 Refresh();
                 otherPlayers[(sevens.GetBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.P" + (sevens.GetBoard().getQueue().GetCurrentPlayerIndex()) + ".jpg");
                 return false;
@@ -109,45 +109,43 @@ namespace Sevens
         private void playerHand_Click(object sender, EventArgs e)
         {
             Button s = (Button)sender;
-            if (s.Name == "skipTurnButton" || s.Name == "")
+            //if (s.Name == "skipTurnButton" || s.Name == "")
+            //{
+            //    PlayGame();
+            //}
+
+                Board humanTurn = sevens.HumanPlay(s.Name);
+            if (humanTurn == null)
             {
+                MessageBox.Show("This is not a valid move.");
+                Turn(null);
+            }
+            else
+            {
+                Update(humanTurn);
+                for (int i = 0; i < 13; i++)
+                {
+                    tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
+                }
+                DisplayPlayersHand();
+                disablePlayerButtons();
                 PlayGame();
             }
-
-            else {
-                Board humanTurn = sevens.HumanPlay(s.Name);
-                if (humanTurn == null)
-                {
-                    MessageBox.Show("This is not a valid move.");
-                    Turn(null);
-                }
-                else
-                {
-                    update(humanTurn);
-                    for (int i = 0; i < 13; i++)
-                    {
-                        tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
-                    }
-                    displayPlayersHand();
-                    disablePlayerButtons();
-                    PlayGame();
-            }
-}
-
         }
-        private void update(Board board)
+
+        private void Update(Board board)
         {
             //updates board
             for (int suit = 0; suit < 4; suit++)
             {
                 if (board.getSevens()[suit] == true) //if the seven has been placed, then show other things
                 {
-                    cardPlaced(suit, board.getMin()[suit]);
-                    cardPlaced(suit, board.getMax()[suit]);
+                    CardPlaced(suit, board.getMin()[suit]);
+                    CardPlaced(suit, board.getMax()[suit]);
                 }
                 if (board.getAces()[suit] == true)
                 {
-                    placeAce(suit);
+                    PlaceAce(suit);
                 }
             }
 
@@ -171,7 +169,7 @@ namespace Sevens
         }
 
 
-        public void displayAITurn() //displays a loading symbol on the player currently moving for a short amount of time
+        public void DisplayAITurn() //displays a loading symbol on the player currently moving for a short amount of time
         {
             otherPlayers[(sevens.GetBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = getImage("Sevens.images.loading.jpg");
             int milliseconds = 500;
@@ -179,11 +177,11 @@ namespace Sevens
 
         }
 
-        private void placeAce(int suit)
+        private void PlaceAce(int suit)
         {
             if (sevens.GetBoard().getMin()[suit] == 2)
             {
-                cardPlaced(suit, 1);
+                CardPlaced(suit, 1);
 
                 if (sevens.GetBoard().getMax()[suit] == 13)
                 {
@@ -192,16 +190,16 @@ namespace Sevens
             }
             else if (sevens.GetBoard().getMax()[suit] == 13)
             {
-                cardPlaced(suit, 14);
+                CardPlaced(suit, 14);
             }
         }
 
 
-        private void cardPlaced(int suitCounter, int valueCounter)
+        private void CardPlaced(int suitCounter, int valueCounter)
         {
             c[suitCounter, (valueCounter - 1)].Visible = true;
         }
-        private void setUp(Board board)
+        private void SetUp(Board board)
         {
             //creates board of cards which are all hidden
             for (int suitCounter = 0; suitCounter < 4; suitCounter++)
@@ -247,21 +245,21 @@ namespace Sevens
             passToken.Size = new Size(30, 50); //doesn't work
             tablePanel.Controls.Add(passToken, 13, sevens.GetBoard().getQueue().WhoHasPassToken());
 
-            displayPlayersHand();
+            DisplayPlayersHand();
         }
 
-        public void resumeFromPreviousGame()
+        public void ResumeFromPreviousGame()
         {
             for (int i = 0; i < 4; i++)
             {
                 for (int value = sevens.GetBoard().getMin()[i]; value < sevens.GetBoard().getMax()[i]; value++)
                 {
-                    cardPlaced(i, value);
+                    CardPlaced(i, value);
                 }
             }
         }
 
-        public void displayPlayersHand()
+        public void DisplayPlayersHand()
         {
             //displays user's hand
             for (int cardNumber = 0; cardNumber < sevens.GetBoard().getQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
@@ -278,7 +276,7 @@ namespace Sevens
             }
         }
 
-        private void restartGame()
+        private void RestartGame()
         {
             sevens.SetRoundsPlayed(sevens.GetRoundsPlayed() + 1);
             for (int suit = 0; suit < 4; suit++)
@@ -289,8 +287,8 @@ namespace Sevens
                 }
             }
             sevens.StartGame();
-            update(sevens.FirstMove());
-            displayPlayersHand();
+            Update(sevens.FirstMove());
+            DisplayPlayersHand();
             PlayGame();
         }
 
@@ -406,7 +404,7 @@ namespace Sevens
             }
 
             sevens.GetBoard().getQueue().GetHumanPlayer().SortCards(false);
-            displayPlayersHand();
+            DisplayPlayersHand();
             sevens.GetBoard().getQueue().CurrentPlayerMinusOne();
             PlayGame();
         }
@@ -419,7 +417,7 @@ namespace Sevens
             }
 
             sevens.GetBoard().getQueue().GetHumanPlayer().SortCards(true);
-            displayPlayersHand();
+            DisplayPlayersHand();
             sevens.GetBoard().getQueue().CurrentPlayerMinusOne();
             PlayGame();
         }
