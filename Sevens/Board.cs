@@ -206,5 +206,16 @@ namespace Sevens
 
             }
         }
+
+        public Boolean SuitComplete(int whichSuit)
+        {
+            if ((getMin()[whichSuit] == 2) && (getMax()[whichSuit] == 13) && (getAces()[whichSuit] == true)){
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

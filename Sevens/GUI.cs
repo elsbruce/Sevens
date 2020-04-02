@@ -87,6 +87,7 @@ namespace Sevens
 
                 Label messageToUser = new Label();
                 messageToUser.Text = "Please input the number, between 1 and 5, where you would like to read the game from:";
+                messageToUser.Font = new Font("Arial", 16);
                 messageToUser.Dock = DockStyle.Fill;
                 menu1.Controls.Add(messageToUser, 1, 0);
 

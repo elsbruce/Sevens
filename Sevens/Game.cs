@@ -269,6 +269,11 @@ namespace Sevens
             return (File.Exists(externalTextFile));
            
         }
+
+        public void setBoard(Board input)
+        {
+            board = input;
+        }
         public void SetDifficulty(int input)
         {
             difficulty = input;

@@ -73,6 +73,12 @@
     <Compile Include="Instructions.Designer.cs">
       <DependentUpon>Instructions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Leaderboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Leaderboard.Designer.cs">
+      <DependentUpon>Leaderboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="MediumPlayer.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
