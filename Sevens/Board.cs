@@ -28,7 +28,7 @@ namespace Sevens
 
 
 
-        public int[] getSizeOfPlayersHands()
+        public int[] GetSizeOfPlayersHands()
         {
             int[] sizeOfPlayersHands = new int[NUMBEROFPLAYERS];
 
@@ -62,7 +62,7 @@ namespace Sevens
         }
 
 
-        public String validMove(Card card)
+        public String ValidMove(Card card)
         {
             //returns 2 if move is one less than cards already played in that suit, or if card to be played is a seven, 1 if move is not null but is not valid, and 0 if move is null
 
@@ -92,7 +92,7 @@ namespace Sevens
             }
 
         }
-        public void sevenOfDiamonds()
+        public void SevenOfDiamonds()
         {
             Boolean sevenFound;
             do
@@ -103,7 +103,7 @@ namespace Sevens
             sevens[0] = true;
         }
 
-        public Boolean checkEnd()
+        public Boolean CheckEnd()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -116,7 +116,7 @@ namespace Sevens
 
         }
 
-        public String toBeSaved()
+        public String ToBeSaved()
         {
             String board = "";
 
@@ -128,7 +128,7 @@ namespace Sevens
             {
                 board = board + max[i].ToString() + "/";
             }
-            foreach (Player p in getQueue().GetQueue()) //if dummyplayers
+            foreach (Player p in GetQueue().GetQueue()) //if dummyplayers
             {
                 foreach (String s in p.GetStringArrayOfCards())
                 {
@@ -139,67 +139,67 @@ namespace Sevens
                 board = board + "~";
             }
 
-            board = board + getQueue().GetCurrentPlayerIndex().ToString() + "~";
+            board = board + GetQueue().GetCurrentPlayerIndex().ToString() + "~";
 
             for (int i = 0; i < 4; i++)
             {
-                board = board + getSevens()[i].ToString() + "/";
+                board = board + GetSevens()[i].ToString() + "/";
             }
 
             board = board + "~";
             for (int i = 0; i < 4; i++)
             {
-                board = board + getAces()[i].ToString() + "/";
+                board = board + GetAces()[i].ToString() + "/";
             }
             return board;
         }
-        public Queue getQueue()
+        public Queue GetQueue()
         {
             return queue;
         }
-        public int[] getMin()
+        public int[] GetMin()
         {
             return min;
         }
 
-        public int[] getMax()
+        public int[] GetMax()
         {
             return max;
         }
 
 
-        public Boolean[] getSevens()
+        public Boolean[] GetSevens()
         {
             return sevens;
         }
 
-        public int getNUMBEROFPLAYERS()
+        public int GetNUMBEROFPLAYERS()
         {
             return NUMBEROFPLAYERS;
         }
 
-        public Boolean[] getAces()
+        public Boolean[] GetAces()
         {
             return aces;
         }
 
-        public void setMin(int[] input)
+        public void SetMin(int[] input)
         {
             this.min = input;
         }
-        public void setMax(int[] input)
+        public void SetMax(int[] input)
         {
             this.max = input;
         }
-        public void setSevens(Boolean[] input)
+        public void SetSevens(Boolean[] input)
         {
             this.sevens = input;
         }
-        public void setAces(Boolean[] input)
+        public void SetAces(Boolean[] input)
         {
             this.aces = input;
         }
-        public void setQueue(Player[] input) //do
+        public void SetQueue(Player[] input) //do
         {
             for (int i = 0; i < NUMBEROFPLAYERS; i++)
             {
@@ -209,7 +209,7 @@ namespace Sevens
 
         public Boolean SuitComplete(int whichSuit)
         {
-            if ((getMin()[whichSuit] == 2) && (getMax()[whichSuit] == 13) && (getAces()[whichSuit] == true)){
+            if ((GetMin()[whichSuit] == 2) && (GetMax()[whichSuit] == 13) && (GetAces()[whichSuit] == true)){
                 return true;
             }
             else

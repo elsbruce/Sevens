@@ -6,8 +6,8 @@ namespace Sevens
 {
     abstract class Player
     {
-        List<Card> listOfCards;
-        Boolean passToken;
+        private List<Card> listOfCards;
+        private Boolean passToken;
 
         public Player()
         {

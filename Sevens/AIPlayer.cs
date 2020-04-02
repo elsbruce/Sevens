@@ -38,7 +38,7 @@ namespace Sevens
 
             for (int i = 0; i < GetCurrentSize(); i++)
             {
-                if (board.validMove(base.GetCards()[i]) == "y")
+                if (board.ValidMove(base.GetCards()[i]) == "y")
                 {
                     possibleMoves.Add(base.GetCards()[i]);
                 }

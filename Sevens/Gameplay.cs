@@ -7,11 +7,11 @@ namespace Sevens
 {
     public partial class Gameplay : Form
     {
-        PictureBox[,] c = new PictureBox[4, 14];
-        Button[] playerHand = new Button[13];
-        Label[] otherPlayers = new Label[3];
-        Game sevens;
-        PictureBox passToken = new PictureBox();
+        private PictureBox[,] c = new PictureBox[4, 14];
+        private Button[] playerHand = new Button[13];
+        private Label[] otherPlayers = new Label[3];
+        private Game sevens;
+        private PictureBox passToken = new PictureBox();
 
         public Gameplay(int numberOfRounds, int difficulty)
         {
@@ -86,7 +86,7 @@ namespace Sevens
             if (b == null)
             {
                 // if returns null then switch buttons on for players turn - card buttons and skip turn buttons
-                for (int cardNumber = 0; cardNumber < sevens.GetBoard().getQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
+                for (int cardNumber = 0; cardNumber < sevens.GetBoard().GetQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
                 {
                     playerHand[cardNumber].Enabled = true;
                 }
@@ -99,7 +99,7 @@ namespace Sevens
                 DisplayAITurn();
                 Update(sevens.GetBoard());
                 Refresh();
-                otherPlayers[(sevens.GetBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = GetImage("Sevens.images.P" + (sevens.GetBoard().getQueue().GetCurrentPlayerIndex()) + ".jpg");
+                otherPlayers[(sevens.GetBoard().GetQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = GetImage("Sevens.images.P" + (sevens.GetBoard().GetQueue().GetCurrentPlayerIndex()) + ".jpg");
                 return false;
             }
         }
@@ -144,12 +144,12 @@ namespace Sevens
                 }
                 else
                 {
-                    if (board.getSevens()[suit] == true) //if the seven has been placed, then show other things
+                    if (board.GetSevens()[suit] == true) //if the seven has been placed, then show other things
                     {
-                        CardPlaced(suit, board.getMin()[suit]);
-                        CardPlaced(suit, board.getMax()[suit]);
+                        CardPlaced(suit, board.GetMin()[suit]);
+                        CardPlaced(suit, board.GetMax()[suit]);
                     }
-                    if (board.getAces()[suit] == true)
+                    if (board.GetAces()[suit] == true)
                     {
                         PlaceAce(suit);
                     }
@@ -159,25 +159,44 @@ namespace Sevens
             //updates size of other player's hands
             for (int playerNumber = 1; playerNumber < 4; playerNumber++)
             {
-                if (sevens.GetBoard().getQueue().GetPlayerAt(playerNumber).HandEmpty())
+                if (sevens.GetBoard().GetQueue().GetPlayerAt(playerNumber).HandEmpty())
                 {
                     otherPlayers[(playerNumber - 1)].Text = "finished";
                 }
                 else
                 {
-                    otherPlayers[(playerNumber - 1)].Text = sevens.GetBoard().getSizeOfPlayersHands()[playerNumber].ToString();
+                    otherPlayers[(playerNumber - 1)].Text = sevens.GetBoard().GetSizeOfPlayersHands()[playerNumber].ToString();
                 }
             }
 
-            //assign pass token
-            //     otherPlayers[0].Image = getImage("Sevens.images.passToken.jpg");
+            AssignPassToken();
 
+        }
+
+        public void AssignPassToken()
+        {
+            int playerWithPassToken = sevens.GetBoard().GetQueue().WhoHasPassToken();
+            
+            if (playerWithPassToken == -1)
+            {
+                passToken.Visible = false;
+            }
+            else if (playerWithPassToken == 0)
+            {
+                tablePanel.Controls.Add(passToken, 13, 5);
+                passToken.Visible = true;
+            }
+            else
+            {
+                tablePanel.Controls.Add(passToken, 13, (playerWithPassToken - 1));
+                passToken.Visible = true;
+            }
         }
 
 
         public void DisplayAITurn() //displays a loading symbol on the player currently moving for a short amount of time
         {
-            otherPlayers[(sevens.GetBoard().getQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = GetImage("Sevens.images.loading.jpg");
+            otherPlayers[(sevens.GetBoard().GetQueue().GetCurrentPlayerIndex() - 1)].BackgroundImage = GetImage("Sevens.images.loading.jpg");
             int milliseconds = 500;
             Thread.Sleep(milliseconds);
 
@@ -185,12 +204,12 @@ namespace Sevens
 
         private void PlaceAce(int suit) //if both
         {
-            if (sevens.GetBoard().getMin()[suit] == 2) //if minimumm equals 2, then play ace low
+            if (sevens.GetBoard().GetMin()[suit] == 2) //if minimumm equals 2, then play ace low
             {
                 CardPlaced(suit, 1);
 
             }
-            else if (sevens.GetBoard().getMax()[suit] == 13) //if maximum equals 13, then play ace high
+            else if (sevens.GetBoard().GetMax()[suit] == 13) //if maximum equals 13, then play ace high
             {
                 CardPlaced(suit, 14);
             }
@@ -215,7 +234,7 @@ namespace Sevens
                 temp.Dock = DockStyle.Fill;
                 temp.Name = "Player" + playerNumber;
                 temp.Size = new Size(42, 68);
-                temp.Text = board.getSizeOfPlayersHands()[playerNumber].ToString();
+                temp.Text = board.GetSizeOfPlayersHands()[playerNumber].ToString();
                 temp.Font = new Font("Arial", 18, FontStyle.Bold);
                 temp.ForeColor = Color.Black;
                 otherPlayers[(playerNumber - 1)] = temp;
@@ -230,10 +249,8 @@ namespace Sevens
             //create pass token
             passToken.BackgroundImage = GetImage("Sevens.images.passToken.jpg");
             passToken.BackgroundImageLayout = ImageLayout.Zoom;
-          //  passToken.Dock = DockStyle.Fill;
-           this passToken.Size = new Size(30, 50); //doesn't work
-            tablePanel.Controls.Add(passToken, 13, sevens.GetBoard().getQueue().WhoHasPassToken());
-
+            passToken.Size = new Size(30, 50);
+            passToken.Dock = DockStyle.Right;
             DisplayPlayersHand();
         }
 
@@ -241,7 +258,7 @@ namespace Sevens
         {
             for (int i = 0; i < 4; i++)
             {
-                for (int value = sevens.GetBoard().getMin()[i]; value < sevens.GetBoard().getMax()[i]; value++)
+                for (int value = sevens.GetBoard().GetMin()[i]; value < sevens.GetBoard().GetMax()[i]; value++)
                 {
                     CardPlaced(i, value);
                 }
@@ -251,10 +268,10 @@ namespace Sevens
         public void DisplayPlayersHand()
         {
             //displays user's hand
-            for (int cardNumber = 0; cardNumber < sevens.GetBoard().getQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
+            for (int cardNumber = 0; cardNumber < sevens.GetBoard().GetQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
             {
                 Button temp = new Button();
-                temp.BackgroundImage = GetImage("Sevens.images." + sevens.GetBoard().getQueue().GetHumanPlayer().GetStringArrayOfCards()[cardNumber] + ".jpg");
+                temp.BackgroundImage = GetImage("Sevens.images." + sevens.GetBoard().GetQueue().GetHumanPlayer().GetStringArrayOfCards()[cardNumber] + ".jpg");
                 temp.BackgroundImageLayout = ImageLayout.Zoom;
                 temp.Dock = DockStyle.Fill;
                 temp.Name = cardNumber.ToString();
@@ -376,7 +393,7 @@ namespace Sevens
 
         private void DisablePlayerButtons()
         {
-            for (int cardNumber = 0; cardNumber < sevens.GetBoard().getQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
+            for (int cardNumber = 0; cardNumber < sevens.GetBoard().GetQueue().GetHumanPlayer().GetCurrentSize(); cardNumber++)
             {
                 playerHand[cardNumber].Enabled = false;
             }
@@ -390,9 +407,9 @@ namespace Sevens
                 tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
             }
 
-            sevens.GetBoard().getQueue().GetHumanPlayer().SortCards(false);
+            sevens.GetBoard().GetQueue().GetHumanPlayer().SortCards(false);
             DisplayPlayersHand();
-            sevens.GetBoard().getQueue().CurrentPlayerMinusOne();
+            sevens.GetBoard().GetQueue().CurrentPlayerMinusOne();
             PlayGame();
         }
 
@@ -403,9 +420,9 @@ namespace Sevens
                 tablePanel.Controls.Remove(tablePanel.GetControlFromPosition(i, 5));
             }
 
-            sevens.GetBoard().getQueue().GetHumanPlayer().SortCards(true);
+            sevens.GetBoard().GetQueue().GetHumanPlayer().SortCards(true);
             DisplayPlayersHand();
-            sevens.GetBoard().getQueue().CurrentPlayerMinusOne();
+            sevens.GetBoard().GetQueue().CurrentPlayerMinusOne();
             PlayGame();
         }
 
