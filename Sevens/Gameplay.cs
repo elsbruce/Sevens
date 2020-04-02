@@ -230,8 +230,8 @@ namespace Sevens
             //create pass token
             passToken.BackgroundImage = GetImage("Sevens.images.passToken.jpg");
             passToken.BackgroundImageLayout = ImageLayout.Zoom;
-            passToken.Dock = DockStyle.Fill;
-            passToken.Size = new Size(30, 50); //doesn't work
+          //  passToken.Dock = DockStyle.Fill;
+           this passToken.Size = new Size(30, 50); //doesn't work
             tablePanel.Controls.Add(passToken, 13, sevens.GetBoard().getQueue().WhoHasPassToken());
 
             DisplayPlayersHand();
